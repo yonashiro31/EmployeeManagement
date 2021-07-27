@@ -1,8 +1,136 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model EmployeeManagement.Models.ErrorViewModel
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@*フォーム生成*@
+@using (Html.BeginForm(
+"Home",
+"Index",
+FormMethod.Post
+))
+{
+}
+@*ラベル生成*@
+<p>
+    ラベル生成
+    @Html.LabelFor(model => model.Title)
+</p>
+
+<p>
+    テキストボックス
+    @*テキストボックス生成*@
+    @Html.TextBoxFor(
+     model => model.Title,
+     new { size = 15, maxlength = 18 }
+     )
+</p>
+
+<p>
+    forなしテキストボックス
+    @*forなしテキストボックス生成*@
+    @Html.TextBox(
+    "aaaa"
+     )
+</p>
+
+<p>
+    パスワードボックス
+    @*パスワードボックス生成*@
+    @Html.PasswordFor(
+     model => model.Password,
+     new { size = 10, maxlength = 20 }
+     )
+</p>
+
+<p>
+    テキストエリア
+    @*テキストエリア生成*@
+    @Html.TextAreaFor(
+     model => model.Title,
+    10,
+    70,
+    new { @class = "area" }
+     )
+</p>
+
+@*チェックボックス生成*@
+<p>
+    チェックボックス
+    @Html.CheckBoxFor(
+     model => model.Cd,
+     new { tabindex = 3 }
+              )
+</p>
+
+@*ラジオボタン生成*@
+<p>
+    ラジオボタン
+    @Html.RadioButtonFor(
+     model => model.Publish,
+     "テスト",
+     new { tabindex = 3 }
+              )
+
+    @Html.RadioButtonFor(
+    model => model.Publish,
+    "テスト2",
+    new { tabindex = 3 }
+             )
+</p>
+
+@*選択ボックス生成*@
+<p>
+    選択ボックス
+    @Html.DropDownListFor(
+        model => model.Publish,
+        new SelectListItem[]{
+            new SelectListItem(){Value="翔泳社",Text="翔泳社"},
+            new SelectListItem(){Value="技術論評社",Text="技術論評社"},
+            new SelectListItem(){Value="秀和システム",Text="秀和システム"},
+        },
+        "選択してください",
+        new { @class = "list" }
+        )
+</p>
+
+@*リストボックス生成*@
+<p>
+    リストボックス
+    @Html.ListBoxFor(
+        model => model.Publish,
+        new SelectListItem[]{
+            new SelectListItem(){Value="翔泳社",Text="翔泳社"},
+            new SelectListItem(){Value="技術論評社",Text="技術論評社"},
+            new SelectListItem(){Value="秀和システム",Text="秀和システム"},
+        },
+        new { size = 5 }
+        )
+</p>
+
+@*隠しフィールド生成*@
+<p>
+    隠しフィールド生成
+    @Html.HiddenFor(
+      model => model.Title,
+      new { }
+      )
+
+</p>
+
+@*ハイパーリンク生成*@
+<p>
+    ハイパーリンク生成
+    @Html.RouteLink(
+    "リンク",
+    "Home",
+    "Index",
+    new {id=Model }
+      )
+
+</p>
+
+
