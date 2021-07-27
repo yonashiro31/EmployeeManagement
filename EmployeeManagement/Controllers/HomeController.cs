@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
