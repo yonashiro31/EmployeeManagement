@@ -24,6 +24,11 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //TODO DI‚ÉŽg‚¤ƒNƒ‰ƒX‚ð’Ç‰Á
+            //Logic
+
+            //DataAccess
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +55,7 @@ namespace EmployeeManagement
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=SCRN0001}/{action=Index}/{id?}");
             });
         }
     }

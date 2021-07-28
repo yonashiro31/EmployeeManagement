@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="BusinessLogicDto\" />
+    <Folder Include="BusinessLogic\Interface\" />
+    <Folder Include="Controllers\SCRN0003\" />
+    <Folder Include="Controllers\SCRN0004\" />
+    <Folder Include="DataAccess\" />
+    <Folder Include="Helper\Interface\" />
+  </ItemGroup>
+
 </Project>
