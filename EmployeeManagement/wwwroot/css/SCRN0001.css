@@ -1,15 +1,29 @@
 ﻿@charset "UTF-8";
-p {
-    font-size: 40px;
-    text-align: center;
-}
+
 body {
-    
-}
-button {
-    font-size: larger;
     text-align: center;
+    background-color: aliceblue;
 }
 p1 {
-    text-align: center;
+    font-size: 40px;
+   
+}
+
+p2{
+    background-color:orangered
+}
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 250px;
+    font-size: 24px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: darkgray;
+}
+
+p3 {
+    margin-right:200px;
+    font-size: 24px;
+    
 }

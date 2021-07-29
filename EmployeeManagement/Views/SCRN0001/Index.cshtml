@@ -1,32 +1,39 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@* @model *@
+
 @{
+    Layout = "";
 }
 <head>
     <link rel="stylesheet" href="./css/SCRN0001.css">
 
 
-    
+
 </head>
 <title>社員管理システム</title>
 <body>
-    <p>社員管理システム</p>
+    <p1>社員管理システム</p1>
+    <br>
+    <p2>
+        @*エラーメッセージ（ラベル）*@
+        @* @Html.LabelFor(Model=>Model.) *@
+    </p2>
+    @*社員登録ボタン*@
     @using (Html.BeginForm("Index", "SCRN0002", FormMethod.Post))
     {
         <button>社員登録</button>
     }
 
     <br>
-
-
     <br>
-
-    <p1>社員ID</p1>
+    @*社員照会、更新テキストボックス、ボタン*@
+    <p3 class="block">社員ID</p3>
     @using (Html.BeginForm("Index", "SCRN0003", FormMethod.Post))
     {
 
-        <p1> @Html.TextBox("employeeID", "", new { size = 15, maxlength = 18 }) </p1>
+        @Html.TextBox("EmployeeId", "", new { size = 31, maxlength = 8 })
 
         <br>
         <button>社員照会・更新</button>
