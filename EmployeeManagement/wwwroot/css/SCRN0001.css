@@ -1,17 +1,20 @@
 ﻿@charset "UTF-8";
 
+/*背景設定*/
 body {
     text-align: center;
     background-color: aliceblue;
 }
+/*社員管理システム文字設定*/
 p1 {
     font-size: 40px;
    
 }
-
-p2{
+/*エラー表示背景設定*/
+div{
     background-color:orangered
 }
+/*ボタン設定*/
 button {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -21,7 +24,7 @@ button {
     padding-left: 30px;
     background-color: darkgray;
 }
-
+/*社員ID表示設定*/
 p3 {
     margin-right:200px;
     font-size: 24px;

@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@* @model *@
+@model EmployeeManagement.ViewModel.SCRN0001ViewModel;
 
 @{
     Layout = "";
@@ -16,23 +16,24 @@
 <body>
     <p1>社員管理システム</p1>
     <br>
-    <p2>
+    <div>
         @*エラーメッセージ（ラベル）*@
-        @* @Html.LabelFor(Model=>Model.) *@
-    </p2>
+        @foreach (var displayItem in Model.ErrorMessageList)
+        {
+            @Html.Label(displayItem.DisplayForMessage) ; <br />
+        }
+    </div>
     @*社員登録ボタン*@
     @using (Html.BeginForm("Index", "SCRN0002", FormMethod.Post))
     {
         <button>社員登録</button>
     }
-
     <br>
     <br>
     @*社員照会、更新テキストボックス、ボタン*@
     <p3 class="block">社員ID</p3>
     @using (Html.BeginForm("Index", "SCRN0003", FormMethod.Post))
     {
-
         @Html.TextBox("EmployeeId", "", new { size = 31, maxlength = 8 })
 
         <br>

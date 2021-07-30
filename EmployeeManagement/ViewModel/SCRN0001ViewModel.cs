@@ -1,4 +1,4 @@
-﻿using EmployeeManagement.Model;
+﻿using EmployeeManagement.EmployeeManagement.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,19 +6,37 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.ViewModel
 {
+    /// <summary>
+    /// Viewに表示するデータを設定するクラス
+    /// </summary>
+    /// <remarks>
+    /// Viewに表示するデータを設定する
+    /// </remarks>
     public class SCRN0001ViewModel
     {
 
-        //暫定的にｊ
-
-        ErrorMessageModel j = new ErrorMessageModel();
-
-        public string Message
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <remarks>
+        /// 各プロパティの初期値を設定する。
+        /// </remarks>
+        public SCRN0001ViewModel()
         {
-            set { this.Message = j.errorMessage[1]; }
-            get { return this.Message; }
+            ErrorMessageList = new List<ErrorMessageModel>();
+            EmployeeID = string.Empty;
         }
-
+        /// <summary>エラーメッセージリストの取得と設定</summary>
+        /// <remarks>エラーメッセージリストの取得と設定</remarks>
+        /// <value>エラーメッセージリスト</value>
+        public IList<ErrorMessageModel> ErrorMessageList { get; set; }
+        /// <summary>社員IDの取得と設定</summary>
+        /// <remarks>社員IDの取得と設定</remarks>
+        /// <value>社員ID</value>
+        public string EmployeeID { get; set; }
     }
 }
+
+
+
 

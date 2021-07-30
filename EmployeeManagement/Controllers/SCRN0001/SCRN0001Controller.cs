@@ -7,27 +7,28 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers.SCRN0001
 {
+    /// <summary>
+    ///画面制御を行うクラス
+    /// </summary>
+    ///<remarks>
+    ///IEV0001Helperから必要な処理を受け取りViewに返す
+    /// </remarks>
     public class SCRN0001Controller : Controller
     {
-
-        //社員更新画面（SCRN0003）表示時、エラーが設定されていた場合は受け取る
-       
-
         /// <summary>
         ///画面制御
         /// </summary>
-    ///<remarks>
-    ///画面制御を行う
-    /// </remarks>
-    [Route("")]
-    [Route("/employee/menu")]
-    [HttpGet]
-    public IActionResult Index()
+        ///<remarks>
+        ///IEV0001Helperから必要な処理を受け取りViewに返す
+        /// </remarks>   
+        [Route("")]
+        [Route("/employee/menu")]
+        [HttpGet]
+        public IActionResult Index()
         {
-            
             EV0001Helper instanceEV0001Helper = new EV0001Helper();
-            instanceEV0001Helper.Init();
-            return View();
+            var MessageToHtml = instanceEV0001Helper.Init();
+            return View(MessageToHtml);
         }
 
     }
