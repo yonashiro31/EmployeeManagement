@@ -1,8 +1,5 @@
 ﻿using EmployeeManagement.EmployeeManagement.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.ViewModel
 {
@@ -14,7 +11,6 @@ namespace EmployeeManagement.ViewModel
     /// </remarks>
     public class SCRN0001ViewModel
     {
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -26,10 +22,12 @@ namespace EmployeeManagement.ViewModel
             ErrorMessageList = new List<ErrorMessageModel>();
             EmployeeID = string.Empty;
         }
+
         /// <summary>エラーメッセージリストの取得と設定</summary>
         /// <remarks>エラーメッセージリストの取得と設定</remarks>
         /// <value>エラーメッセージリスト</value>
         public IList<ErrorMessageModel> ErrorMessageList { get; set; }
+
         /// <summary>社員IDの取得と設定</summary>
         /// <remarks>社員IDの取得と設定</remarks>
         /// <value>社員ID</value>

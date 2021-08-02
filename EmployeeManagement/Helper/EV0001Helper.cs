@@ -1,32 +1,24 @@
-﻿using EmployeeManagement.Helper.Interface;
-using EmployeeManagement.Judge;
-using EmployeeManagement.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿using EmployeeManagement.ViewModel;
 namespace EmployeeManagement.Helper
 {
     /// <summary>
-    /// インターフェースクラス
+    /// SCRN0001Controllerを補助するクラス
     /// </summary>
     /// <remarks>
-    /// EV0001Helperのインターフェース
+    /// SCRN0001Controllerを補助するクラス
     /// </remarks>
     public class EV0001Helper : IEV0001Helper
     {
         /// <summary>
-        /// インターフェースクラス
+        /// SCRN0001ViewModelのデータを渡すメソッド
         /// </summary>
         /// <remarks>
-        /// EV0001Helperのインターフェース
+        /// SCRN0001ViewModelのデータを渡すメソッド
         /// </remarks>
         public SCRN0001ViewModel Init()
         {
-            SCRN0001ViewModel SCRN1ViewModelinstance = new SCRN0001ViewModel();
-            return SCRN1ViewModelinstance;
+            SCRN0001ViewModel Scrn0001ViewModelinstance = new SCRN0001ViewModel();
+            return Scrn0001ViewModelinstance;
         }
-
     }
 }

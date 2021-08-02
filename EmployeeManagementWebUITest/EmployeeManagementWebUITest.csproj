@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="ReportGenerator" Version="4.8.12" />
+    <PackageReference Include="ReportGenerator.Core" Version="4.8.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,10 +24,7 @@
 
   <ItemGroup>
     <Folder Include="BusinessLogicTest\" />
-    <Folder Include="ControllerTest\" />
     <Folder Include="DataAccessTest\" />
-    <Folder Include="ViewModelTest\" />
-    <Folder Include="HelperTest\" />
   </ItemGroup>
 
 </Project>

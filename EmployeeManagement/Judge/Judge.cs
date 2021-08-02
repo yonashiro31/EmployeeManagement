@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeeManagement.Judge
+﻿namespace EmployeeManagement.Judge
 {
     /// <summary>
     /// 入力値の判定を行う
