@@ -1,10 +1,10 @@
 ﻿namespace EmployeeManagement.EmployeeManagement.Model
 {
     /// <summary>
-    /// エラーメッセージとidの取得と設定を行う
+    /// データの取得と設定
     /// </summary>
     /// <remarks>
-    /// Viewmodelに渡す
+    /// データをViewmodelに渡す
     /// </remarks>    
     public class ErrorMessageModel  
     {

@@ -23,6 +23,7 @@ namespace EmployeeManagement
 
 
             //TODO DI‚ÉŽg‚¤ƒNƒ‰ƒX‚ð’Ç‰Á
+            //helper
             services.AddTransient<IEV0001Helper,EV0001Helper>();
             //Logic
 

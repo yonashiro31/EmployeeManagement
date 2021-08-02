@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.ViewModel;
+
 namespace EmployeeManagement.Helper
 {
     /// <summary>
@@ -17,8 +18,8 @@ namespace EmployeeManagement.Helper
         /// </remarks>
         public SCRN0001ViewModel Init()
         {
-            SCRN0001ViewModel Scrn0001ViewModelinstance = new SCRN0001ViewModel();
-            return Scrn0001ViewModelinstance;
+            SCRN0001ViewModel scrn0001ViewModelinstance = new SCRN0001ViewModel();
+            return scrn0001ViewModelinstance;
         }
     }
 }

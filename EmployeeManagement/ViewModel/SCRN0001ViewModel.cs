@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace EmployeeManagement.ViewModel
 {
     /// <summary>
-    /// Viewに表示するデータを設定するクラス
+    /// 表示データ設定クラス
     /// </summary>
     /// <remarks>
     /// Viewに表示するデータを設定する
@@ -23,18 +23,14 @@ namespace EmployeeManagement.ViewModel
             EmployeeID = string.Empty;
         }
 
-        /// <summary>エラーメッセージリストの取得と設定</summary>
+        /// <summary>リストプロパティ</summary>
         /// <remarks>エラーメッセージリストの取得と設定</remarks>
         /// <value>エラーメッセージリスト</value>
         public IList<ErrorMessageModel> ErrorMessageList { get; set; }
 
-        /// <summary>社員IDの取得と設定</summary>
+        /// <summary>社員IDプロパティ</summary>
         /// <remarks>社員IDの取得と設定</remarks>
         /// <value>社員ID</value>
         public string EmployeeID { get; set; }
     }
 }
-
-
-
-

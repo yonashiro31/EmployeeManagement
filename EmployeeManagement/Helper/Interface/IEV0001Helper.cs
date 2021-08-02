@@ -12,10 +12,10 @@ namespace EmployeeManagement.Helper
     {
 
         /// <summary>
-        /// SCRN0001ViewModelのデータを渡すメソッド
+        /// 社員管理メニュー画面で利用するメソッド
         /// </summary>
         /// <remarks>
-        /// SCRN0001ViewModelのデータを渡すメソッド
+        /// SCRN0001ViewModelのデータを渡す
         /// </remarks>
         public SCRN0001ViewModel Init();
     }
