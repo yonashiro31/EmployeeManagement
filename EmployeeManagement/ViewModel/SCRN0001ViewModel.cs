@@ -1,5 +1,4 @@
-﻿using EmployeeManagement.EmployeeManagement.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace EmployeeManagement.ViewModel
 {

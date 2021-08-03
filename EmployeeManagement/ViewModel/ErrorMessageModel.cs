@@ -1,4 +1,4 @@
-﻿namespace EmployeeManagement.EmployeeManagement.Model
+﻿namespace EmployeeManagement.ViewModel
 {
     /// <summary>
     /// データの取得と設定
