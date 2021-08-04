@@ -18,11 +18,13 @@ namespace EmployeeManagementWebUITest.HelperTest
         /// IDの初期化と出力内容が正しいかテストを行う
         /// </remarks>
         [Test]
-        public void MenuTest()
+        public void InitTest()
         {
             //テストクラス、メソッドの呼び出し
             EV0001Helper testInstance = new EV0001Helper();
+
             var actResult = testInstance.Init();
+            
             //テストの実行
             Assert.AreEqual(string.Empty, actResult.EmployeeID);
             CollectionAssert.IsEmpty(actResult.ErrorMessageList);

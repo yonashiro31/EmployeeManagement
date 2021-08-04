@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using EmployeeManagement.Controllers.SCRN0001;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -18,17 +17,17 @@ namespace EmployeeManagementWebUITest.ControllerTest
     public class SCRN0001ControllerTest
     {
         /// <summary>
-        /// 初期表示テストクラス
+        /// テストメソッド
         /// </summary>
         /// <remarks>
-        /// メニュー画面表示時の処理をテストを行う
+        /// メニュー画面表示時、出力が空になっているか検証する
         /// </remarks>
         [Test]
-        public void SCRN0001Test()
+        public void IndexTest()
         {
-            var viewMock = new SCRN0001Mock
+            var helperMockData = new SCRN0001HelperMock
             {
-                SCRN0001ViewModelMock = new SCRN0001ViewModel()
+                ViewModel = new SCRN0001ViewModel()
                 {
                     EmployeeID = string.Empty,
                     ErrorMessageList = new List<ErrorMessageModel>(),
@@ -36,7 +35,7 @@ namespace EmployeeManagementWebUITest.ControllerTest
             };
 
             // テストメソッド呼び出し
-            var testInstance = new SCRN0001Controller(viewMock);
+            var testInstance = new SCRN0001Controller(helperMockData);
             var actResult = testInstance.Index();
 
             var actResultViewModel = (ViewResult)actResult;
