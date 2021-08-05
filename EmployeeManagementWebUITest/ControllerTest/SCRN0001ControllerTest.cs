@@ -25,7 +25,7 @@ namespace EmployeeManagementWebUITest.ControllerTest
         [Test]
         public void IndexTest()
         {
-            var helperMockData = new SCRN0001HelperMock
+            var helperMock = new SCRN0001HelperMock
             {
                 ViewModel = new SCRN0001ViewModel()
                 {
@@ -35,7 +35,7 @@ namespace EmployeeManagementWebUITest.ControllerTest
             };
 
             // テストメソッド呼び出し
-            var testInstance = new SCRN0001Controller(helperMockData);
+            var testInstance = new SCRN0001Controller(helperMock);
             var actResult = testInstance.Index();
 
             var actResultViewModel = (ViewResult)actResult;

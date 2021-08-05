@@ -11,8 +11,8 @@ namespace EmployeeManagement.Controllers.SCRN0001
     /// </remarks>
     public class SCRN0001Controller : Controller
     {
-        ///<summary>社員管理メニュー画面のヘルパー</summary>
-        ///<remarks>社員管理メニュー画面のヘルパー</remarks>
+        /// <summary>社員管理メニュー画面のヘルパー</summary>
+        /// <remarks>社員管理メニュー画面のヘルパー</remarks>
         private readonly IEV0001Helper _ev0001Helper = null;
 
         /// <summary>

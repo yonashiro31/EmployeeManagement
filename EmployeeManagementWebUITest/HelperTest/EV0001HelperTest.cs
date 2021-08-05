@@ -9,6 +9,7 @@ namespace EmployeeManagementWebUITest.HelperTest
     /// <remarks>
     /// IDの初期化と出力内容が正しいかテストを行う
     /// </remarks>
+    [TestFixture]
     public class EV0001HelperTest
     {
         /// <summary>
@@ -20,12 +21,12 @@ namespace EmployeeManagementWebUITest.HelperTest
         [Test]
         public void InitTest()
         {
-            //テストクラス、メソッドの呼び出し
-            EV0001Helper testInstance = new EV0001Helper();
+            // テストクラス、メソッドの呼び出し
+            EV0001Helper testTarget = new EV0001Helper();
 
-            var actResult = testInstance.Init();
+            var actResult = testTarget.Init();
             
-            //テストの実行
+            // テストの実行
             Assert.AreEqual(string.Empty, actResult.EmployeeID);
             CollectionAssert.IsEmpty(actResult.ErrorMessageList);
         }

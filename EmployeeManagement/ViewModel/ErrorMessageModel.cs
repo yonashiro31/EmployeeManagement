@@ -8,14 +8,14 @@
     /// </remarks>    
     public class ErrorMessageModel  
     {
-        ///<summary>メッセージidの取得と設定</summary>    
-        ///<remarks>メッセージidの取得と設定</remarks>
-        ///<value>メッセージid</value>
+        /// <summary>メッセージidの取得と設定</summary>    
+        /// <remarks>メッセージidの取得と設定</remarks>
+        /// <value>メッセージid</value>
         public string MessageID { get; set; }
 
-        ///<summary>メッセージの取得と設定</summary>   
-        ///<remarks>メッセージの取得と設定</remarks>
-        ///<value>表示メッセージ</value>
+        /// <summary>メッセージの取得と設定</summary>   
+        /// <remarks>メッセージの取得と設定</remarks>
+        /// <value>表示メッセージ</value>
         public string DisplayForMessage { get; set; }
     }
 }
