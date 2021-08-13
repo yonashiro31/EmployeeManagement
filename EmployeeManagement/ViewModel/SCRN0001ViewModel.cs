@@ -31,5 +31,5 @@ namespace EmployeeManagement.ViewModel
         /// <remarks>社員IDの取得と設定</remarks>
         /// <value>社員ID</value>
         public string EmployeeID { get; set; }
-    }
+    }   
 }

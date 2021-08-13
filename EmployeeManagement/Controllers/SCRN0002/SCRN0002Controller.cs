@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmployeeManagement.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,13 @@ namespace EmployeeManagement.Controllers.SCRN0002
 {
     public class SCRN0002Controller : Controller
     {
-        [Route("entry")]
+        [Route("employee/entry")]
         [HttpPost]
         public IActionResult Index()
         {
-            return View();
+            SCRN0002ViewModel test = new SCRN0002ViewModel();
+                 
+            return View(test);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace EmployeeManagement.Controllers.SCRN0001
         /// コンストラクタ
         /// </summary>    
         /// <remarks>
-        /// 社員メ管理ニュー画面のDI実施
+        /// 社員管理システムメニュー画面のDI実施
         /// </remarks>
         /// <param name="ev0001Helper">社員メニュー画面のHelper</param>
         public SCRN0001Controller(IEV0001Helper ev0001Helper)

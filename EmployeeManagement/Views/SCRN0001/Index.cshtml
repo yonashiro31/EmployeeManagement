@@ -34,8 +34,7 @@
     <p3 class="block">社員ID</p3>
     @using (Html.BeginForm("Index", "SCRN0003", FormMethod.Post))
     {
-        @Html.TextBox("EmployeeId", "", new { size = 31, maxlength = 8 })
-
+        @Html.TextBoxFor(model => model.EmployeeID , new { size = 31, maxlength = 8 });
         <br>
         <button>社員照会・更新</button>
     }
