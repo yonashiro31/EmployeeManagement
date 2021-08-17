@@ -1,4 +1,7 @@
-﻿namespace EmployeeManagement.Judge
+﻿using EmployeeManagement.ViewModel;
+using System;
+
+namespace EmployeeManagement.Judge
 {
     /// <summary>
     /// 入力値の判定を行う
@@ -6,7 +9,7 @@
     /// <remarks>
     /// 入力値の判定を行う
     /// </remarks>
-    public class valueJudge
+    public class ValueJudge
     {
         /// <summary>
         /// 入力値の判定を行う
@@ -14,15 +17,29 @@
         /// <remarks>
         /// 入力値の判定を行う
         /// </remarks>
-        public static string enteredValueJudge(string val)
+        
+        public SCRN0002ViewModel Judge(SCRN0002ViewModel sCRN0002ViewModel)
         {
-            //真偽を返す方がよい
-            if(val == string.Empty) {
-                return "error";
+            try
+            {
+                
+                
+                
+                return null;
+
+
+
+
             }
-            return "notError";
-            
+            catch (ArgumentNullException)
+            {
+
+                return null;
+            }
         }
 
+
     }
+
+
 }

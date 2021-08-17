@@ -10,7 +10,9 @@ namespace EmployeeManagement.ViewModel
         public SCRN0002ViewModel()
         {
             ErrorMessageList = new List<ErrorMessageModel>();
-            EmployeeID = string.Empty;
+
+
+
         }
         public string EmployeeID { set; get; }
         public IList<ErrorMessageModel> ErrorMessageList { get; set; }
@@ -19,7 +21,11 @@ namespace EmployeeManagement.ViewModel
         public string EmployeeName { get; set; }
         public string Gender { get; set; }
         public string BirthDay { get; set; }
-        public bool ForeignNationality { get; set; }
+        public bool ForeignNationality
+        {
+            get { return this.ForeignNationality; }
+            set { this.ForeignNationality = false; }
+        }
         public string BaseSalary { get; set; }
     }
 }
