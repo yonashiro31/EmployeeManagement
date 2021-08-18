@@ -22,8 +22,7 @@ namespace EmployeeManagement.Judge
         {
             try
             {
-                
-                
+                 // ToDO try使いすぎない方がよい   
                 
                 return null;
 
