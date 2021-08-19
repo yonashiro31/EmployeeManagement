@@ -4,7 +4,7 @@ using System;
 namespace EmployeeManagement.Judge
 {
     /// <summary>
-    /// 入力値の判定を行う
+    /// 入力値の判定を行うクラス
     /// </summary>
     /// <remarks>
     /// 入力値の判定を行う
@@ -15,30 +15,19 @@ namespace EmployeeManagement.Judge
         /// 入力値の判定を行う
         /// </summary>
         /// <remarks>
-        /// 入力値の判定を行う
-        /// </remarks>
-
-        public SCRN0002ViewModel Judge(SCRN0002ViewModel sCRN0002ViewModel)
+        /// 入力値が未入力かどうか判定する
+        /// </remarks> 
+        /// <param name="checkedValue">入力した値</param>
+        public bool Judge(string checkedValue)
         {
-            if (sCRN0002ViewModel.EmployeeID == string.Empty){
-                ErrorMessageModel errorMessageModel = new ErrorMessageModel();
-
-                // 受け渡しはよそでHelperとか
-                errorMessageModel.DisplayForMessage = ErrorMessages.Message1;
-
+            if (!string.IsNullOrEmpty(checkedValue))
+            {
+                return true;
             }
-                return null;
-
-
-
-
-           
-                
-            
+            else
+            {
+                return false;
+            }
         }
-
-
     }
-
-
 }

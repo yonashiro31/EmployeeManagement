@@ -10,8 +10,6 @@ namespace EmployeeManagement.ViewModel
         public SCRN0002ViewModel()
         {
             ErrorMessageList = new List<ErrorMessageModel>();
-
-
         }
         public string EmployeeID { set; get; }
         public IList<ErrorMessageModel> ErrorMessageList { get; set; }

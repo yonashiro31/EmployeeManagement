@@ -34,9 +34,8 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpPost]
         public IActionResult Index()
         {
-            var messageToHtml = _ev0002Helper.methodmei();
-
-
+            var messageToHtml = _ev0002Helper.Init();
+            messageToHtml.Gender = "男";
             return View(messageToHtml);
         }
 
@@ -46,23 +45,20 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <returns></returns>
         [Route("employee/entry/excute")]
         [HttpPost]
-        public IActionResult Excute(string EmployeeID)
+        public IActionResult Excute(SCRN0002ViewModel sCRN0002ViewModel)
         {
-            var messageToHtml = _ev0002Helper.methodmei();
-            ErrorMessageModel errorMessageModel = new ErrorMessageModel();
-
-            messageToHtml.EmployeeID = EmployeeID;
-            errorMessageModel.DisplayForMessage = ErrorMessages.Message1;
-
+            var messageToHtml = _ev0002Helper.Entry(sCRN0002ViewModel);        
             return View("Index",messageToHtml);
         }
 
+        /// <summary>
+        /// 戻るボタン押下時メソッド
+        /// </summary>
+        /// <returns></returns>
         [Route("employee/entry/Back")]
         [HttpGet]
         public IActionResult Back()
         {
-            var messageToHtml = _ev0002Helper.methodmei();
-
 
             return View();
         }

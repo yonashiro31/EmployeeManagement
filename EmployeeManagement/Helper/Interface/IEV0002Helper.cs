@@ -10,18 +10,25 @@ namespace EmployeeManagement.Helper
     /// EV0001Helperインターフェース
     /// </summary>
     /// <remarks>
-    /// 
+    /// Controllerの補助を行う
     /// </remarks>
     public interface IEV0002Helper
     {
         /// <summary>
-        /// メソッド
+        /// 初期表示メソッド
         /// </summary>
         /// <remarks>
-        /// 
-        /// 
-        /// 
+        /// 初期表示メソッド
         /// </remarks>
-        public SCRN0002ViewModel methodmei();
+        public SCRN0002ViewModel Init();
+
+        /// <summary>
+        /// 新規登録メソッド
+        /// </summary>
+        /// <param name="entry">新規登録時情報</param>
+        /// <returns>
+        /// 新規登録メソッド
+        /// </returns>
+        public SCRN0002ViewModel Entry(SCRN0002ViewModel entry);
     }
 }
