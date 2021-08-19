@@ -12,7 +12,6 @@ namespace EmployeeManagement.ViewModel
             ErrorMessageList = new List<ErrorMessageModel>();
 
 
-
         }
         public string EmployeeID { set; get; }
         public IList<ErrorMessageModel> ErrorMessageList { get; set; }
@@ -21,11 +20,7 @@ namespace EmployeeManagement.ViewModel
         public string EmployeeName { get; set; }
         public string Gender { get; set; }
         public string BirthDay { get; set; }
-        public bool ForeignNationality
-        {
-            get { return this.ForeignNationality; }
-            set { this.ForeignNationality = false; }
-        }
+        public bool ForeignNationality { get; set; }   
         public string BaseSalary { get; set; }
     }
 }

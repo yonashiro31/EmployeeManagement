@@ -26,14 +26,46 @@ namespace EmployeeManagement.Controllers.SCRN0002
             _ev0002Helper = ev0001Helper;
         }
 
+        /// <summary>
+        /// 画面表示時メソッド
+        /// </summary>
+        /// <returns></returns>
         [Route("employee/entry")]
         [HttpPost]
         public IActionResult Index()
         {
             var messageToHtml = _ev0002Helper.methodmei();
-          
-                 
+
+
             return View(messageToHtml);
         }
+
+        /// <summary>
+        /// 登録時メソッド
+        /// </summary>
+        /// <returns></returns>
+        [Route("employee/entry/excute")]
+        [HttpPost]
+        public IActionResult Excute(string EmployeeID)
+        {
+            var messageToHtml = _ev0002Helper.methodmei();
+            ErrorMessageModel errorMessageModel = new ErrorMessageModel();
+
+            messageToHtml.EmployeeID = EmployeeID;
+            errorMessageModel.DisplayForMessage = ErrorMessages.Message1;
+
+            return View("Index",messageToHtml);
+        }
+
+        [Route("employee/entry/Back")]
+        [HttpGet]
+        public IActionResult Back()
+        {
+            var messageToHtml = _ev0002Helper.methodmei();
+
+
+            return View();
+        }
+
     }
 }

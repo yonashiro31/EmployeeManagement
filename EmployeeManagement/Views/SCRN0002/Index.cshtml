@@ -22,12 +22,12 @@
         @*エラーメッセージ（ラベル）*@
         @foreach (var displayItem in Model.ErrorMessageList)
         {
-            @Html.Label(displayItem.DisplayForMessage) ; <br />
+            @Html.Label(displayItem.DisplayForMessage) <br />
         }
     </div>
     @*社員ID入力欄*@
     社員ID
-    @Html.TextBoxFor(model => model.EmployeeID, new { size = 31, maxlength = 8 })
+
     @*社員登録ボタン*@
 
     <br>
@@ -71,26 +71,25 @@
     <br>
     外国籍
     @Html.CheckBoxFor(
-    model => model.ForeignNationality,
-    "外国籍"
+    model => model.ForeignNationality
     )
     <br>
     日付
     @Html.TextBoxFor(model => model.BirthDay, "{0:dd/MM/yyyy}", new { @class = "width-xx" })
     <br>
     基本給料
-    @Html.TextBoxFor(model => model.BaseSalary, new { size = 31, minlength = 1,maxlength = 8 })
+    @Html.TextBoxFor(model => model.BaseSalary, new { size = 31, minlength = 1, maxlength = 8 })
     <br>
 
     メモ
     @Html.TextBoxFor(model => model.EmployeeID, new { size = 31, maxlength = 8 })
     <br>
+
+
     @*新規登録ボタン*@
-    <p3 class="block">社員ID</p3>
-    @using (Html.BeginForm("Index", "SCRN0003", FormMethod.Post))
+    @using (Html.BeginForm("Excute", "SCRN0002", FormMethod.Post))
     {
         @Html.TextBoxFor(model => model.EmployeeID, new { size = 31, maxlength = 8 })
-        <br>
         <button>新規登録</button>
     }
     @* TODO 戻った後css適応されない*@

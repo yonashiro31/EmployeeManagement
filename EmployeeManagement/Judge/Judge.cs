@@ -17,24 +17,24 @@ namespace EmployeeManagement.Judge
         /// <remarks>
         /// 入力値の判定を行う
         /// </remarks>
-        
+
         public SCRN0002ViewModel Judge(SCRN0002ViewModel sCRN0002ViewModel)
         {
-            try
-            {
-                 // ToDO try使いすぎない方がよい   
+            if (sCRN0002ViewModel.EmployeeID == string.Empty){
+                ErrorMessageModel errorMessageModel = new ErrorMessageModel();
+
+                // 受け渡しはよそでHelperとか
+                errorMessageModel.DisplayForMessage = ErrorMessages.Message1;
+
+            }
+                return null;
+
+
+
+
+           
                 
-                return null;
-
-
-
-
-            }
-            catch (ArgumentNullException)
-            {
-
-                return null;
-            }
+            
         }
 
 
