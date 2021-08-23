@@ -27,6 +27,7 @@
         @using (Html.BeginForm("Excute", "SCRN0002", FormMethod.Post))
         {
             @Html.TextBoxFor(model => model.EmployeeID, new { size = 31, maxlength = 8 })
+
             <br>
             @*部署*@
             <td>部署</td>
@@ -61,13 +62,12 @@ new SelectListItem(){Value="a3",Text="aaa"}
             @Html.RadioButtonFor(
 
             model => model.Gender,
-            "男",
-            true
+            1
             )
             <td>女</td>
             @Html.RadioButtonFor(
             model => model.Gender,
-            "女"
+            2
             )
             <br>
             <td>外国籍</td>
@@ -77,9 +77,9 @@ new SelectListItem(){Value="a3",Text="aaa"}
             <br>
             <td>生年月日</td>
             @Html.TextBoxFor(model => model.BirthDay, "{0:dd/MM/yyyy}", new
-            {
-                @class = "width-xx"
-            })
+       {
+           @class = "width-xx" , type = "datetime" 
+       })
             <br>
 
             <td>基本給</td>

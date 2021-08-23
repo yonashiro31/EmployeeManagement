@@ -35,7 +35,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         public IActionResult Index()
         {
             var messageToHtml = _ev0002Helper.Init();
-            messageToHtml.Gender = "男";
+            messageToHtml.Gender = 1;
             return View(messageToHtml);
         }
 
