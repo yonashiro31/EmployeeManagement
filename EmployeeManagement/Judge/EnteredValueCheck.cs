@@ -18,7 +18,7 @@ namespace EmployeeManagement.Judge
         /// 入力値が未入力かどうか判定する
         /// </remarks> 
         /// <param name="checkedValue">入力した値</param>
-        public bool EnteredNullJudge(EntryJudgeListModel checkedValue)
+        public bool EnteredNullJudge(string checkedValue)
         {
             if (null == checkedValue)
             {

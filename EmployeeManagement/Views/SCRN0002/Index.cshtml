@@ -76,9 +76,9 @@ new SelectListItem(){Value="a3",Text="aaa"}
             )
             <br>
             <td>生年月日</td>
-            @Html.TextBoxFor(model => model.BirthDay, "{0:dd/MM/yyyy}", new
+            @Html.TextBoxFor(model => model.BirthDay, "{0:yyyy/MM/dd}", new
        {
-           @class = "width-xx" , type = "datetime" 
+           @class = "width-xx" , type = "string" 
        })
             <br>
 

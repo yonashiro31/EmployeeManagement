@@ -35,13 +35,16 @@ namespace EmployeeManagement.Helper
         public SCRN0002ViewModel Entry(SCRN0002ViewModel value)
         {
              NullValueCheckSet(value);
-            EntryJudgeListModel entryNullJudgeList = new EntryJudgeListModel();
-            var judgeList = new List<EntryJudgeListModel>();
-            // for (int i = 0; i < judgeList.Count; i++)
+            EntryJudgeListModel entryNullJudgeValues = new EntryJudgeListModel();
+            // ToDoループ回数は変更
+           // for (int i = 0; i < entryNullJudgeValues.NullValue.Length; i++)
             
-            (var checkResult, var errorMessageList) = EnteredValueCheck(entryNullJudgeList);
-            
-            if (!checkResult)
+
+                (var checkResult, var errorMessageList) = EnteredValueCheck(entryNullJudgeValues);
+
+
+                if (!checkResult)
+                 
             {
                 return new SCRN0002ViewModel()
                 {
@@ -59,34 +62,16 @@ namespace EmployeeManagement.Helper
         public EntryJudgeListModel NullValueCheckSet(SCRN0002ViewModel request)
         {
             var judgeList = new List<EntryJudgeListModel>();
-            EntryJudgeListModel a = new EntryJudgeListModel();
+            EntryJudgeListModel entryJudgeListModel = new EntryJudgeListModel();
             List<EntryJudgeListModel> entryJudgeListModels = new List<EntryJudgeListModel>();
-            judgeList.Add(
-                  new EntryJudgeListModel()
-                  {
-                    EmployeeID = request.EmployeeID                                                                          
-                  });
-            judgeList.Add(
-                  new EntryJudgeListModel()
-                  {
-                      AffiliationCd = request.AffiliationCd
-                  });
-            judgeList.Add(
-                  new EntryJudgeListModel()
-                  {
-                      PositionCd = request.PositionCd,
-                  });
-            judgeList.Add(
-                  new EntryJudgeListModel()
-                  {
-                      EmployeeName = request.EmployeeName,
-                  });
-            judgeList.Add(
-                 new EntryJudgeListModel()
-                 {
-                     BaseSalary = request.BaseSalary
-                 });
-            return a;
+
+            entryJudgeListModel.NullCheckValue[0] = entryJudgeListModel.EmployeeID;
+            entryJudgeListModel.NullCheckValue[1] = entryJudgeListModel.AffiliationCd;
+            entryJudgeListModel.NullCheckValue[2] = entryJudgeListModel.PositionCd;
+            entryJudgeListModel.NullCheckValue[3] = entryJudgeListModel.EmployeeName;
+            entryJudgeListModel.NullCheckValue[4] = entryJudgeListModel.BaseSalary;
+
+            return entryJudgeListModel;
         }
 
         /// <summary>
@@ -119,9 +104,10 @@ namespace EmployeeManagement.Helper
             var checkResult = true;
             var errorMessageList = new List<ErrorMessageModel>();
             ErrorMessage errorMessage = new ErrorMessage();
+
             var judgeList = new List<EntryJudgeListModel>();
             // 社員IDの入力値チェック
-            if (!judge.EnteredNullJudge(request.NullCheckList[0]))
+            if (!judge.EnteredNullJudge(request.NullCheckValue[0]))
             {
                 checkResult = false;
                 errorMessageList.Add(
@@ -132,7 +118,7 @@ namespace EmployeeManagement.Helper
                     });
             }
             // 氏名の入力チェック
-            if (!judge.EnteredNullJudge(judgeList[3]))
+            if (!judge.EnteredNullJudge(request.NullCheckValue[3]))
             {
                 checkResult = false;
                 errorMessageList.Add(
@@ -145,7 +131,7 @@ namespace EmployeeManagement.Helper
             // 
            
 
-            if (!judge.EnteredNullJudge(judgeList[4]))
+            if (!judge.EnteredNullJudge(request.NullCheckValue[4]))
             {
                 checkResult = false;
                 errorMessageList.Add(
