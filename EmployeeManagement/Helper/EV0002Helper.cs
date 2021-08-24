@@ -1,6 +1,5 @@
 ﻿using EmployeeManagement.Judge;
 using EmployeeManagement.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,24 +33,23 @@ namespace EmployeeManagement.Helper
         /// </returns>
         public SCRN0002ViewModel Entry(SCRN0002ViewModel value)
         {
-             NullValueCheckSet(value);
-            EntryJudgeListModel entryNullJudgeValues = new EntryJudgeListModel();
+
+
             // ToDoループ回数は変更
-           // for (int i = 0; i < entryNullJudgeValues.NullValue.Length; i++)
+            //
+
+
+            EntryJudgeListModel entryJudgeListModel = NullValueCheckSet(value);
             
 
-                (var checkResult, var errorMessageList) = EnteredValueCheck(entryNullJudgeValues);
+            var errorMessageList = EnteredValueCheck(entryJudgeListModel);
 
 
-                if (!checkResult)
-                 
+
+            return new SCRN0002ViewModel()
             {
-                return new SCRN0002ViewModel()
-                {
-                    ErrorMessageList = errorMessageList,
-                };
-            }
-            return new SCRN0002ViewModel();
+                ErrorMessageList = errorMessageList,
+            };
         }
 
         /// <summary>
@@ -61,17 +59,15 @@ namespace EmployeeManagement.Helper
         /// <returns>未入力判定する値をlistに格納する</returns>
         public EntryJudgeListModel NullValueCheckSet(SCRN0002ViewModel request)
         {
-            var judgeList = new List<EntryJudgeListModel>();
-            EntryJudgeListModel entryJudgeListModel = new EntryJudgeListModel();
-            List<EntryJudgeListModel> entryJudgeListModels = new List<EntryJudgeListModel>();
+            EntryJudgeListModel entryJudgeListModels = new EntryJudgeListModel();
 
-            entryJudgeListModel.NullCheckValue[0] = entryJudgeListModel.EmployeeID;
-            entryJudgeListModel.NullCheckValue[1] = entryJudgeListModel.AffiliationCd;
-            entryJudgeListModel.NullCheckValue[2] = entryJudgeListModel.PositionCd;
-            entryJudgeListModel.NullCheckValue[3] = entryJudgeListModel.EmployeeName;
-            entryJudgeListModel.NullCheckValue[4] = entryJudgeListModel.BaseSalary;
+           entryJudgeListModels.JudgeList.Add(request.EmployeeID);
+            entryJudgeListModels.JudgeList.Add(request.AffiliationCd);
+           entryJudgeListModels.JudgeList.Add(request.PositionCd);
+           entryJudgeListModels.JudgeList.Add(request.EmployeeName);
+           entryJudgeListModels.JudgeList.Add(request.BaseSalary);
 
-            return entryJudgeListModel;
+            return entryJudgeListModels;
         }
 
         /// <summary>
@@ -97,51 +93,28 @@ namespace EmployeeManagement.Helper
         }
 
         //
-        private (bool, List<ErrorMessageModel>) EnteredValueCheck(EntryJudgeListModel request)
+        private List<ErrorMessageModel>  EnteredValueCheck(EntryJudgeListModel s)
         {
             var list = new EntryJudgeListModel();   
             ValueJudge judge = new ValueJudge();
-            var checkResult = true;
             var errorMessageList = new List<ErrorMessageModel>();
             ErrorMessage errorMessage = new ErrorMessage();
+            var judgedValues = s.JudgeList.Select(s => judge.EnteredNullJudge(s));
 
-            var judgeList = new List<EntryJudgeListModel>();
-            // 社員IDの入力値チェック
-            if (!judge.EnteredNullJudge(request.NullCheckValue[0]))
+            foreach (var i in judgedValues)
             {
-                checkResult = false;
-                errorMessageList.Add(
-                    new ErrorMessageModel()
-                    {
-                        MessageID = "COMMSG0001",
-                        DisplayForMessage = ErrorMessage.IdMessage + ErrorMessage.NullMessage,
-                    });
+                // 社員IDの入力値チェック
+                if (i == false)
+                {
+                    errorMessageList.Add(
+                        new ErrorMessageModel()
+                        {
+                            MessageID = "COMMSG0001",
+                            DisplayForMessage = ErrorMessage.IdMessage + ErrorMessage.NullMessage,
+                        });
+                }
             }
-            // 氏名の入力チェック
-            if (!judge.EnteredNullJudge(request.NullCheckValue[3]))
-            {
-                checkResult = false;
-                errorMessageList.Add(
-                    new ErrorMessageModel()
-                    {
-                        MessageID = "",
-                        DisplayForMessage = ErrorMessage.NameMessage　+　ErrorMessage.NullMessage,
-                    });
-            }
-            // 
-           
-
-            if (!judge.EnteredNullJudge(request.NullCheckValue[4]))
-            {
-                checkResult = false;
-                errorMessageList.Add(
-                    new ErrorMessageModel()
-                    {
-                        MessageID = "Err2",
-                        DisplayForMessage = ErrorMessage.BaseSalaryMessage + ErrorMessage.NullMessage,
-                    });
-            }
-            return (checkResult, errorMessageList);
+            return errorMessageList;
         }
     }
 }

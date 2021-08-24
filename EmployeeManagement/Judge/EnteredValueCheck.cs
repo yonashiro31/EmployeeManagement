@@ -16,17 +16,17 @@ namespace EmployeeManagement.Judge
         /// </summary>
         /// <remarks>
         /// 入力値が未入力かどうか判定する
-        /// </remarks> 
+        /// </remarks>
         /// <param name="checkedValue">入力した値</param>
         public bool EnteredNullJudge(string checkedValue)
         {
-            if (null == checkedValue)
+            if (checkedValue == string.Empty)
             {
                 return true;
             }
             else
             {
-                return false;
+                 return false;
             }
         }
 

@@ -7,24 +7,18 @@ namespace EmployeeManagement.ViewModel
 {
     public class EntryJudgeListModel
     {
-        public string[] NullCheckValue;
+
         public EntryJudgeListModel()
-        {
-            NullCheckValue = new string[5];
-            NullCheckValue[0] = "";
-            NullCheckValue[1] = "";
-            NullCheckValue[2] = "";
-            NullCheckValue[3] = "";
-            NullCheckValue[4] = "";
-        }
-        public string[] NullValue
-        {
-         
-            get
             {
-                return NullCheckValue;
+            JudgeList = new List<string>();
             }
-        }
+
+        public List<string> JudgeList { get; set; }
+
+     
+
+
+        public string Employees { get; set; }
         public string EmployeeID { get; set; }
         public string AffiliationCd { get; set; }
         public string PositionCd { get; set; }
