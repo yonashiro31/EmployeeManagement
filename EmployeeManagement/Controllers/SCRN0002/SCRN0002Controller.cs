@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers.SCRN0002
 {
+    /// <summary>
+    /// コントローラークラス
+    /// </summary>
+    /// <remarks>
+    /// 登録画面のController
+    /// </remarks>
     public class SCRN0002Controller : Controller
     {
         /// <summary>社員管理登録画面のヘルパー</summary>
@@ -29,7 +35,9 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <summary>
         /// 画面表示時メソッド
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 画面表示に必要なデータを渡す
+        /// </returns>
         [Route("employee/entry")]
         [HttpPost]
         public IActionResult Index()
@@ -42,7 +50,9 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <summary>
         /// 登録時メソッド
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 登録時必要な情報をViewに渡す
+        /// </returns>
         [Route("employee/entry/excute")]
         [HttpPost]
         public IActionResult Excute(SCRN0002ViewModel sCRN0002ViewModel)
@@ -54,14 +64,14 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <summary>
         /// 戻るボタン押下時メソッド
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 戻るボタン押下時の必要処理
+        /// </returns>
         [Route("employee/entry/Back")]
         [HttpGet]
         public IActionResult Back()
         {
-
             return View();
         }
-
     }
 }

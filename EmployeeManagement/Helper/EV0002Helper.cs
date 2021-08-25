@@ -17,7 +17,9 @@ namespace EmployeeManagement.Helper
         /// <summary>
         /// 初期表示時メソッド
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 初期表示時に実行する処理
+        /// </returns>
         public SCRN0002ViewModel Init()
         {
             ErrorMessageModel errorMessageModel = new ErrorMessageModel();
@@ -33,18 +35,9 @@ namespace EmployeeManagement.Helper
         /// </returns>
         public SCRN0002ViewModel Entry(SCRN0002ViewModel value)
         {
-
-
-            // ToDoループ回数は変更
-            //
-
-
             EntryJudgeListModel entryJudgeListModel = NullValueCheckSet(value);
-            
 
             var errorMessageList = EnteredValueCheck(entryJudgeListModel);
-
-
 
             return new SCRN0002ViewModel()
             {
@@ -60,12 +53,12 @@ namespace EmployeeManagement.Helper
         public EntryJudgeListModel NullValueCheckSet(SCRN0002ViewModel request)
         {
             EntryJudgeListModel entryJudgeListModels = new EntryJudgeListModel();
-
-           entryJudgeListModels.JudgeList.Add(request.EmployeeID);
-            entryJudgeListModels.JudgeList.Add(request.AffiliationCd);
-           entryJudgeListModels.JudgeList.Add(request.PositionCd);
-           entryJudgeListModels.JudgeList.Add(request.EmployeeName);
-           entryJudgeListModels.JudgeList.Add(request.BaseSalary);
+            // ToDo部署なども追加
+            entryJudgeListModels.NullJudgeList.Add(request.EmployeeID);
+            entryJudgeListModels.NullJudgeList.Add(request.AffiliationCd);
+            entryJudgeListModels.NullJudgeList.Add(request.PositionCd);
+            entryJudgeListModels.NullJudgeList.Add(request.EmployeeName);
+            entryJudgeListModels.NullJudgeList.Add(request.BaseSalary);
 
             return entryJudgeListModels;
         }
@@ -92,15 +85,20 @@ namespace EmployeeManagement.Helper
             return judgeList;
         }
 
-        //
-        private List<ErrorMessageModel>  EnteredValueCheck(EntryJudgeListModel s)
+        /// <summary>
+        /// 入力判定時単項目チェックを呼び出すメソッド
+        /// </summary>
+        /// <param name="entryJudgeListModel">未入力チェック対象</param>
+        /// <returns></returns>
+        private List<ErrorMessageModel> EnteredValueCheck(EntryJudgeListModel entryJudgeListModel)
         {
-            var list = new EntryJudgeListModel();   
-            ValueJudge judge = new ValueJudge();
+            var list = new EntryJudgeListModel();
+            ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<ErrorMessageModel>();
-            ErrorMessage errorMessage = new ErrorMessage();
-            var judgedValues = s.JudgeList.Select(s => judge.EnteredNullJudge(s));
-
+            ErrorMessages errorMessage = new ErrorMessages();
+            var judgedValues = entryJudgeListModel.NullJudgeList.Select(s => valueJudge.EnteredNullJudge(s));
+            ErrorMessages errorMessages = new ErrorMessages();
+            int countNum = 0;
             foreach (var i in judgedValues)
             {
                 // 社員IDの入力値チェック
@@ -110,9 +108,41 @@ namespace EmployeeManagement.Helper
                         new ErrorMessageModel()
                         {
                             MessageID = "COMMSG0001",
-                            DisplayForMessage = ErrorMessage.IdMessage + ErrorMessage.NullMessage,
+                            DisplayForMessage = errorMessages.itemNameMessageList[countNum] + errorMessages.instructionMessageList[0],
                         });
                 }
+                countNum++;
+            }
+            return errorMessageList;
+        }
+
+        /// <summary>
+        /// 桁数判定単項目チェックを呼び出すメソッド
+        /// </summary>
+        /// <param name="entryJudgeListModel">未入力チェック対象</param>
+        /// <returns></returns>
+        private List<ErrorMessageModel> LengthValueCheck(EntryJudgeListModel entryJudgeListModel)
+        {
+            var list = new EntryJudgeListModel();
+            ValueJudge valueJudge = new ValueJudge();
+            var errorMessageList = new List<ErrorMessageModel>();
+            ErrorMessages errorMessage = new ErrorMessages();
+            var judgedValues = entryJudgeListModel.NullJudgeList.Select(s => valueJudge.EnteredNullJudge(s));
+            ErrorMessages errorMessages = new ErrorMessages();
+            int countNum = 0;
+            foreach (var i in judgedValues)
+            {
+                // 社員IDの入力値チェック
+                if (i == false)
+                {
+                    errorMessageList.Add(
+                        new ErrorMessageModel()
+                        {
+                            MessageID = "COMMSG0001",
+                            DisplayForMessage = errorMessages.itemNameMessageList[countNum] + errorMessages.instructionMessageList[0],
+                        });
+                }
+                countNum++;
             }
             return errorMessageList;
         }

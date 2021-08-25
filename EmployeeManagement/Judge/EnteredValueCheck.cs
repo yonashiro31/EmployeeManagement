@@ -20,7 +20,7 @@ namespace EmployeeManagement.Judge
         /// <param name="checkedValue">入力した値</param>
         public bool EnteredNullJudge(string checkedValue)
         {
-            if (checkedValue == string.Empty)
+            if (!string.IsNullOrEmpty(checkedValue))
             {
                 return true;
             }
@@ -30,7 +30,7 @@ namespace EmployeeManagement.Judge
             }
         }
 
-        // 引数に追加してしまう
+        // 桁数は引数に入れてしまう
         public bool EnteredValueLengthJudge(string checkedValue,int digit)
         {
             if (checkedValue.Length == digit)

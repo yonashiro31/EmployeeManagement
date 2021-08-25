@@ -5,18 +5,21 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.ViewModel
 {
+    /// <summary>
+    /// 単項目チェック時に使用するリスト
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
     public class EntryJudgeListModel
     {
 
         public EntryJudgeListModel()
             {
-            JudgeList = new List<string>();
+            NullJudgeList = new List<string>();
             }
 
-        public List<string> JudgeList { get; set; }
-
-     
-
+        public List<string> NullJudgeList { get; set; }  
 
         public string Employees { get; set; }
         public string EmployeeID { get; set; }
