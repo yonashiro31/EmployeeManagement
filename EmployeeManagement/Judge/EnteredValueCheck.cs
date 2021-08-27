@@ -33,6 +33,13 @@ namespace EmployeeManagement.Judge
         // 桁数は引数に入れてしまう
         public bool EnteredValueLengthJudge(string checkedValue,int digit)
         {
+            
+            if (string.IsNullOrEmpty(checkedValue))
+            {
+                return true;
+            }
+            // ここで未入力の引数を受け取ると例外発生するため、
+            // 上のコードで未入力時は処理が発生しないようにする
             if (checkedValue.Length == digit)
             {
                 return true;
