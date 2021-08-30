@@ -33,13 +33,11 @@
             <td>部署</td>
             @Html.DropDownListFor(
 
-    Model => Model.AffiliationCd,
-    new SelectListItem[]
-       {
-            new SelectListItem(){Value="AffiliationCd1",Text="部署"},
-            new SelectListItem(){Value="aaa",Text="部署2"},
-            new SelectListItem(){Value="aaa",Text="部署3"}
-    }
+    foreach (var item in Model.AffiriationList)
+            {
+                @Html.DisplayFor(modelItem => item.AffiriationNm)
+            }
+    
     )
             <br>
             @*役職*@

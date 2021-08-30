@@ -37,5 +37,8 @@ namespace EmployeeManagement.ViewModel
         public const string BaseSalaryMessage = "基本給料";
         public const string NullMessage =  "は必須です";
         public const string LengthMessage = "は指定桁数で入力してください。";
+        public const string EmpIdDuplication = "既に登録済みの社員IDです。";
+        public const string MastaCorrelation = "マスタに存在しない";
+        public const string MastaCorrelation2 = "を指定しています。";
     }
 }

@@ -20,7 +20,7 @@ namespace EmployeeManagement.Helper
         /// <remarks>
         /// 初期表示メソッド
         /// </remarks>
-        public SCRN0002ViewModel Init();
+        public SCRN0002RequestModel Init();
 
         /// <summary>
         /// 新規登録メソッド

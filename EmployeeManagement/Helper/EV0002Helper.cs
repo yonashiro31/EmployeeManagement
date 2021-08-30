@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Judge;
+using EmployeeManagement.Session;
 using EmployeeManagement.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,14 @@ namespace EmployeeManagement.Helper
         /// <returns>
         /// 初期表示時に実行する処理
         /// </returns>
-        public SCRN0002ViewModel Init()
+        public SCRN0002RequestModel Init()
         {
-            ErrorMessageModel errorMessageModel = new ErrorMessageModel();
-            SCRN0002ViewModel SCRN0002ViewModelInstance = new SCRN0002ViewModel();
-            return SCRN0002ViewModelInstance;
+            SCRN0002RequestModel sCRN0002InitModel = new SCRN0002RequestModel(); 
+            SCRN0002ViewModel sCRN0002ViewModel = new SCRN0002ViewModel();
+
+            sCRN0002ViewModel.AffiriationList = sCRN0002InitModel.AffiriationList;
+            sCRN0002ViewModel.PositionList = sCRN0002InitModel.PositionList;
+            return sCRN0002InitModel;
         }
 
         /// <summary>

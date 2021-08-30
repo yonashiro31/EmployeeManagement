@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace EmployeeManagement.Judge
 {
@@ -52,22 +53,54 @@ namespace EmployeeManagement.Judge
         }
 
         /// <summary>
-        /// 入力した日付の判定を行う
+        /// 入力部署相関チェック
         /// </summary>
-        /// <remarks>
-        /// 入力値が未入力かどうか判定する
-        /// </remarks> 
-        /// <param name="checkedValue">入力した値</param>
-        public bool DateTimeJudge(DateTime checkedValue)
+        /// <param name="Cd"></param>
+        /// <param name="nm"></param>
+        /// <returns></returns>
+        public bool AfiriattionCorrelation(string Cd, string nm)
         {
-            if (checkedValue == null)
+            // SQL文で結果を格納し
+            if (Cd == "検索結果" && nm == "検索結果")
             {
                 return true;
             }
-            else
+            else　
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 入力役職
+        /// </summary>
+        /// <param name="Cd"></param>
+        /// <param name="Nm"></param>
+        /// <returns></returns>
+        public bool PositionCorrelation(string Cd, string Nm)
+        {
+            if (Cd == "test" && Nm == "test")
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 社員Idの相関チェック
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public bool EmployeeCorrelationCheck(string Id)
+        {
+            // SQL文で検索結果と
+            if (Id == "検索結果")
+            {
+                return false;
+            }
+            return true;
         }
         /// <summary>
         /// 入力値の種別を判別するメソッド
@@ -81,8 +114,6 @@ namespace EmployeeManagement.Judge
             bool result = true;
             switch (min, max)
             {
-               
-
                 case (8, 8):
                     errorMessages.itemNameMessageList.Add(ErrorMessages.IdMessage);
                     break;
@@ -100,7 +131,6 @@ namespace EmployeeManagement.Judge
                     break;
             }
             return (errorMessages.itemNameMessageList,result);
-
         }
     }
 }
