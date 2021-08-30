@@ -71,11 +71,12 @@ namespace EmployeeManagement.Helper
             // ToDo部署なども追加
             var test = new List<LengthJudgeListModel>
             {
-            new LengthJudgeListModel(request.EmployeeID,8),
-            new LengthJudgeListModel(request.AffiliationCd,8),
-            new LengthJudgeListModel(request.PositionCd,8),
-            new LengthJudgeListModel(request.EmployeeName,8),
-            new LengthJudgeListModel(request.BaseSalary,8)
+            new LengthJudgeListModel(request.EmployeeID,1,8),
+            new LengthJudgeListModel(request.AffiliationCd,6,6),
+            new LengthJudgeListModel(request.PositionCd,4,4),
+            new LengthJudgeListModel(request.EmployeeName,1,32),
+            new LengthJudgeListModel(request.BirthDay,9,9),
+            new LengthJudgeListModel(request.BaseSalary,1,8)
         };
 
             return test;
@@ -121,24 +122,28 @@ namespace EmployeeManagement.Helper
             var errorMessageList = new List<ErrorMessageModel>();
             ErrorMessages errorMessage = new ErrorMessages();
 
-            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.Judgedigit));
+            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MinJudgedigit, item.MaxJudgedigit));
             ErrorMessages errorMessages = new ErrorMessages();
             int countNum = 0;
             foreach (var i in judgeResult)
             {
+                (List<string> valueResult, bool valueResultBool) = valueJudge.ValueCheck(checkTargetList[countNum].MinJudgedigit, checkTargetList[countNum].MaxJudgedigit);
                 // 社員IDの入力値チェック
-                if (i == false)
+                if (i == false && valueResultBool == true)
                 {
+
                     errorMessageList.Add(
                         new ErrorMessageModel()
                         {
                             MessageID = "COMMSG0001",
-                            DisplayForMessage = errorMessages.itemNameMessageList[countNum] + errorMessages.instructionMessageList[1],
+                            DisplayForMessage = valueResult + errorMessages.instructionMessageList[1]
+
                         });
                 }
                 countNum++;
             }
             return errorMessageList;
         }
+
     }
 }

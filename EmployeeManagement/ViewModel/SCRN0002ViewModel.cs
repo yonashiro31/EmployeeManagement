@@ -29,7 +29,7 @@ namespace EmployeeManagement.ViewModel
         public string PositionCd { get; set; }
         public string EmployeeName { get; set; }
         public int Gender { get; set; }
-        public DateTime BirthDay { get; set; }
+        public string BirthDay { get; set; }
         public bool ForeignNationality { get; set; }
         public string BaseSalary { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.ViewModel;
 using System;
+using System.Collections.Generic;
 
 namespace EmployeeManagement.Judge
 {
@@ -26,27 +27,28 @@ namespace EmployeeManagement.Judge
             }
             else
             {
-                 return false;
+                return false;
             }
         }
 
         // 桁数は引数に入れてしまう
-        public bool EnteredValueLengthJudge(string checkedValue,int digit)
+        public bool EnteredValueLengthJudge(string targetValue, int MinDigit, int maxDigit)
         {
-            
-            if (string.IsNullOrEmpty(checkedValue))
+
+            if (string.IsNullOrEmpty(targetValue))
             {
                 return true;
             }
             // ここで未入力の引数を受け取ると例外発生するため、
             // 上のコードで未入力時は処理が発生しないようにする
-            if (checkedValue.Length == digit)
+            if (targetValue.Length >= MinDigit && targetValue.Length <= maxDigit)
             {
                 return true;
             }
-            else {
+            else
+            {
                 return false;
-            }         
+            }
         }
 
         /// <summary>
@@ -66,17 +68,39 @@ namespace EmployeeManagement.Judge
             {
                 return false;
             }
-        }      
-        public bool NumJudge(decimal checkedValue)
+        }
+        /// <summary>
+        /// 入力値の種別を判別するメソッド
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public (List<string>, bool) ValueCheck(int min, int max)
         {
-            if (checkedValue == 0)
+            ErrorMessages errorMessages = new ErrorMessages();
+            bool result = true;
+            switch (min, max)
             {
-                return true;
+               
+
+                case (8, 8):
+                    errorMessages.itemNameMessageList.Add(ErrorMessages.IdMessage);
+                    break;
+                case (1, 32):
+                    errorMessages.itemNameMessageList.Add(ErrorMessages.NameMessage);
+                    break;
+                case (9, 9):
+                    errorMessages.itemNameMessageList.Add(ErrorMessages.BirthDayMessage);
+                    break;
+                case (1, 8):
+                    errorMessages.itemNameMessageList.Add(ErrorMessages.BaseSalaryMessage);
+
+                    break;
+                default: result = false;
+                    break;
             }
-            else
-            {
-                return false;
-            }
+            return (errorMessages.itemNameMessageList,result);
+
         }
     }
 }

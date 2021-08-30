@@ -19,7 +19,7 @@ namespace EmployeeManagement.ViewModel
             itemNameMessageList.Add(IdMessage);
             itemNameMessageList.Add(NameMessage);
             itemNameMessageList.Add(BirthDayMessage);
-            itemNameMessageList.Add(BaseSalaryMessage);
+            itemNameMessageList.Add(BirthDayMessage);
             itemNameMessageList.Add(BaseSalaryMessage);
 
             instructionMessageList = new List<string>();

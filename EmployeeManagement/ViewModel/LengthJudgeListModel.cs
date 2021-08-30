@@ -19,13 +19,15 @@ namespace EmployeeManagement.ViewModel
         /// <remarks>
         /// 
         /// </remarks>
-        public LengthJudgeListModel(string employeeDate,int judgedigit)
+        public LengthJudgeListModel(string employeeDate, int minJudgeDigit,int maxJudgedigit)
         {      
             EmployeeDate = employeeDate;
-            Judgedigit = judgedigit;
+            MinJudgedigit = minJudgeDigit;
+            MaxJudgedigit = maxJudgedigit;
         }
 
         public string EmployeeDate { get; set; }
-        public int Judgedigit { get; set; }
+        public int MinJudgedigit { get; set; }
+        public int MaxJudgedigit { get; set; }
     }
 }
