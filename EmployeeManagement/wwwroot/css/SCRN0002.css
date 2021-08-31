@@ -4,11 +4,15 @@
 /*背景設定*/
 body {
     text-align: center;
-    background-color: aliceblue;
+   
+}
+label {
+    
+    background-color: darkgray;
 }
 /*エラー表示背景設定*/
 div {
-    background-color: orangered
+   
 }
 /*ボタン設定*/
 button {

@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Helper;
+using EmployeeManagement.Session.Interface;
 using EmployeeManagement.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +21,8 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <remarks>社員管理登録画面のヘルパー</remarks>
         private readonly IEV0002Helper _ev0002Helper = null;
 
+        private readonly IDateAccess _dateaccess = null;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>    
@@ -27,9 +30,10 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// 社員管理システムメニュー画面のDI実施
         /// </remarks>
         /// <param name="ev0001Helper">社員メニュー画面のHelper</param>
-        public SCRN0002Controller(IEV0002Helper ev0001Helper)
+        public SCRN0002Controller(IEV0002Helper ev0001Helper,IDateAccess dateAccess)
         {
             _ev0002Helper = ev0001Helper;
+            _dateaccess = dateAccess;
         }
 
         /// <summary>
@@ -42,6 +46,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpPost]
         public IActionResult Index()
         {
+            // var aaa = _dateaccess.DateSelect(); SQL取得
             var messageToHtml = _ev0002Helper.Init();
             return View(messageToHtml);
         }
@@ -70,7 +75,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpGet]
         public IActionResult Back()
         {
-            return View();
+            return RedirectToAction("Index", "SCRN0001");
         }
     }
 }

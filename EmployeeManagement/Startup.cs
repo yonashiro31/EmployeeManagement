@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using EmployeeManagement.Session.Interface;
+using EmployeeManagement.Session;
 
 namespace EmployeeManagement
 {
@@ -26,9 +28,12 @@ namespace EmployeeManagement
             //helper
             services.AddTransient<IEV0001Helper,EV0001Helper>();
             services.AddTransient<IEV0002Helper, EV0002Helper>();
+
             //Logic
 
             //DataAccessservice
+            services.AddTransient<IDateAccess, DateAccess>();
+
             services.AddControllersWithViews();
 
         }

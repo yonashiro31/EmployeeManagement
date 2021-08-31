@@ -21,15 +21,26 @@ namespace EmployeeManagement.Helper
         /// <returns>
         /// 初期表示時に実行する処理
         /// </returns>
-        public SCRN0002RequestModel Init()
+        public SCRN0002ViewModel Init()
         {
-            SCRN0002RequestModel sCRN0002InitModel = new SCRN0002RequestModel(); 
-            SCRN0002ViewModel sCRN0002ViewModel = new SCRN0002ViewModel();
+            ErrorMessageModel errorMessageModel = new ErrorMessageModel();
+            SCRN0002ViewModel SCRN0002ViewModelInstance = new SCRN0002ViewModel();
 
-            sCRN0002ViewModel.AffiriationList = sCRN0002InitModel.AffiriationList;
-            sCRN0002ViewModel.PositionList = sCRN0002InitModel.PositionList;
-            return sCRN0002InitModel;
+            SCRN0002ViewModelInstance.AffiriationList = new List<AffiriationInfo>()
+            {
+                new AffiriationInfo(){ AffiriationNm = "部署名", AffiriationCd = "部署コード" },
+                new AffiriationInfo(){ AffiriationNm = "部署名", AffiriationCd = "部署コード" },
+            };
+
+            SCRN0002ViewModelInstance.PositionList = new List<PositionInfo>()
+            {
+                new PositionInfo(){ PositionNm = "役職名", PositionCd = "部署コード" },
+                new PositionInfo(){ PositionNm = "部署名", PositionCd = "部署コード" },
+            };
+
+            return SCRN0002ViewModelInstance;
         }
+
 
         /// <summary>
         /// 新規登録時メソッド

@@ -7,11 +7,6 @@ namespace EmployeeManagement.Session
 {
     public class PositionInfo
     {
-        public PositionInfo(string positionCd, string positionNm)
-        {
-            PositionCd = positionCd;
-            PositionNm = positionNm;
-        }
         public string PositionCd { get; set; }
         public string PositionNm { get; set; }
     }
