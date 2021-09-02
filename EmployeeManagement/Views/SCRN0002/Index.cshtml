@@ -13,18 +13,21 @@
 </head>
 <p1>新規社員登録</p1>
 <div>
+    @*エラーメッセージ（ラベル）*@
     <label>
+        aaaa
         @foreach (var displayItem in Model.ErrorMessageList)
         {
             @Html.Label(displayItem.DisplayForMessage) <br />
         }
     </label>
 
+    @*社員ID入力欄*@
     <table>
 
         @*エラーメッセージ（ラベル）*@
         <tbody>
-           
+
             @*社員ID入力欄*@
             <tr>
                 <td>社員ID</td>
@@ -103,12 +106,12 @@
             </tr>
             @*新規登録ボタン*@
             <button> 新規登録 </button>
-           
+            }
+            <br>
             @* TODO 戻った後css適応されない*@
             @using (Html.BeginForm("Back", "SCRN0002", FormMethod.Get))
             {
                 <button>戻る</button>
             }
-        </tbody>
-    </table>
+
 </div>

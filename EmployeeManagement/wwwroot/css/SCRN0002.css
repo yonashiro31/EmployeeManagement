@@ -9,7 +9,9 @@ body {
 div {
     text-align: center;
 }
-
+label{
+    background-color :orangered;
+}
 table {
     border: 4px solid #ddd;
     margin: auto;
