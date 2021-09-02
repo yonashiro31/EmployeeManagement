@@ -20,7 +20,7 @@ namespace EmployeeManagement.Session
             repository.Open();
 
             // ②SQLの生成
-            string selectquery = "SELECT management_cd, management_nm FROM employee_db.m_affiliation ";
+            var selectquery = @"SELECT affiliation_cd, management_cd, management_nm FROM employee_db.m_affiliation ";
             SqlCommand selectcommand = new SqlCommand(selectquery);
             // ③SQLのパラメータ設定
             SqlDataReader reader = selectcommand.ExecuteReader();

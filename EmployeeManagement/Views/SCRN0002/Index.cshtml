@@ -13,75 +13,102 @@
 </head>
 <p1>新規社員登録</p1>
 <div>
-    <box>
-    @*エラーメッセージ（ラベル）*@
-        <label>
-            @foreach (var displayItem in Model.ErrorMessageList)
+    <label>
+        @foreach (var displayItem in Model.ErrorMessageList)
+        {
+            @Html.Label(displayItem.DisplayForMessage) <br />
+        }
+    </label>
+
+    <table>
+
+        @*エラーメッセージ（ラベル）*@
+        <tbody>
+           
+            @*社員ID入力欄*@
+            <tr>
+                <td>社員ID</td>
+                @using (Html.BeginForm("Excute", "SCRN0002", FormMethod.Post))
+                {
+                    <td> @Html.TextBoxFor(model => model.EmployeeID, new { size = 31, maxlength = 8 })</td>
+                }
+            </tr>
+            @*部署*@
+            <tr>
+                <td>部署</td>
+                <td>
+                    @Html.DropDownListFor(
+        Model => Model.AffiliationCd,
+         new SelectList(Model.AffiriationList, "AffiriationCd", "AffiriationNm"))
+                </td>
+            </tr>
+
+            <tr>
+                @*役職*@
+                <td>役職</td>
+                <td>
+                    @Html.DropDownListFor(
+    Model => Model.PositionCd,
+    new SelectList(Model.PositionList, "PositionCd", "PositionNm"))
+                </td>
+            </tr>
+
+            <tr>
+                <td>氏名</td>
+                <td>
+                    @Html.TextBoxFor(model => model.EmployeeName, new { size = 31, maxlength = 32 })
+                </td>
+
+                <td>性別</td>
+
+                <td>男</td>
+                <td>
+                    @Html.RadioButtonFor(
+                    model => model.Gender,
+                    1
+                    )
+                </td>
+                <td>女</td>
+                <td>
+                    @Html.RadioButtonFor(
+                model => model.Gender,
+                2
+                )
+                </td>
+
+                <td>外国籍</td>
+                <td>
+                    @Html.CheckBoxFor(
+                    model => model.ForeignNationality
+                    )
+                </td>
+            </tr>
+
+            <tr>
+                <td>生年月日</td>
+                <td>
+                    @Html.TextBoxFor(model => model.BirthDay, "{0:yyyy/MM/dd}", new
+           {
+               @class = "width-xx",
+                    type = "string"
+           })
+                </td>
+            </tr>
+
+            <tr>
+                <td>基本給</td>
+                <td>
+                    @Html.TextBoxFor(model => model.BaseSalary, new { size = 31, minlength = 1, maxlength = 8 })
+                </td>
+            </tr>
+            @*新規登録ボタン*@
+            <button> 新規登録 </button>
+           
+            @* TODO 戻った後css適応されない*@
+            @using (Html.BeginForm("Back", "SCRN0002", FormMethod.Get))
             {
-                @Html.Label(displayItem.DisplayForMessage) <br />
+                <button>戻る</button>
             }
-        </label>
-    <br>
-    @*社員ID入力欄*@
-    <td>社員ID</td>
-    @using (Html.BeginForm("Excute", "SCRN0002", FormMethod.Post))
-    {
-        @Html.TextBoxFor(model => model.EmployeeID, new { size = 31, maxlength = 8 })
-        <br>
-        @*部署*@
-        <td>部署</td>
-        @Html.DropDownListFor(
-Model => Model.AffiliationCd,
- new SelectList(Model.AffiriationList, "AffiriationCd", "AffiriationNm"))
-
-
-        @*@Html.DropDownListFor(x => x.AffiliationCd, Model.AffiriationList as IEnumerable<SelectListItem>, "Please Select") *@
-        <br>
-        @*役職*@
-        <td>役職</td> @Html.DropDownListFor(
-Model => Model.PositionCd,
-new SelectList(Model.PositionList, "PositionCd", "PositionNm"))
-
-        <br>
-        <td>氏名</td>
-        @Html.TextBoxFor(model => model.EmployeeName, new { size = 31, maxlength = 32 })
-        <br>
-        <td>性別</td>
-        <br>
-        <td>男</td>
-        @Html.RadioButtonFor(
-        model => model.Gender,
-        1
-        )
-        <td>女</td>
-        @Html.RadioButtonFor(
-        model => model.Gender,
-        2
-        )
-        <br>
-        <td>外国籍</td>
-        @Html.CheckBoxFor(
-        model => model.ForeignNationality
-        )
-        <br>
-        <td>生年月日</td>
-        @Html.TextBoxFor(model => model.BirthDay, "{0:yyyy/MM/dd}", new
-   {
-       @class = "width-xx",
-            type = "string"
-   })
-        <br>
-        <td>基本給</td>
-        @Html.TextBoxFor(model => model.BaseSalary, new { size = 31, minlength = 1, maxlength = 8 })
-        <br>
-        @*新規登録ボタン*@
-        <button> 新規登録 </button>
-    }
-    <br>
-    @* TODO 戻った後css適応されない*@
-    @using (Html.BeginForm("Back", "SCRN0002", FormMethod.Get))
-    {
-        <button>戻る</button>
-    }
-        </box>
+        </tbody>
+    </table>
 </div>

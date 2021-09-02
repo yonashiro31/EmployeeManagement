@@ -46,7 +46,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpPost]
         public IActionResult Index()
         {
-            // var aaa = _dateaccess.DateSelect(); SQL取得
+            //var aaa = _dateaccess.DateSelect(); 
             var messageToHtml = _ev0002Helper.Init();
             return View(messageToHtml);
         }

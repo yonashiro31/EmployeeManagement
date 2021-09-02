@@ -6,14 +6,17 @@ body {
     text-align: center;
    
 }
-label {
-    
-    background-color: darkgray;
-}
-/*エラー表示背景設定*/
 div {
-   
+    text-align: center;
 }
+
+table {
+    border: 4px solid #ddd;
+    margin: auto;
+}
+
+/*エラー表示背景設定*/
+
 /*ボタン設定*/
 button {
     margin-top: 20px;
