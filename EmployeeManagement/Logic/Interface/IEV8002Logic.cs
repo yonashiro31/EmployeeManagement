@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Session.Interface
 {
-    public interface IEV8003Logic
+    public interface IEV8002Logic
     {
-        public List<PositionDO> FindAll();
+        public List<AffiliationDAO> FindAll();
     }
 }

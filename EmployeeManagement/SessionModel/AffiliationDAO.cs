@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.SessionModel
 {
-    public class PositionDO
+    public class AffiliationDAO
     {
-        public List<PositionDO> List { get; set; }
-        public string PositionCd { get; set; }
+        public List<AffiliationDAO> List { get; set; }
+        public string AffiliationCd { get; set; }
         public string ManagementCd { get; set; }
         public string BrunchCd { get; set; }
         public string GroupCd { get; set; }
@@ -16,6 +16,6 @@ namespace EmployeeManagement.SessionModel
         public string BrunchNm { get; set; }
         public string GroupNm { get; set; }
         public string ManagementEmployeeId { get; set; }
-        public string PositionNm { get; set; }
+        public string AffiliationNm { get; set; }
     }
 }

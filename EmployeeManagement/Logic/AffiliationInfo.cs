@@ -7,8 +7,6 @@ namespace EmployeeManagement.Session
 {
     public class AffiLiationInfo
     {
-   
-
         public string AffiliationCd { get; set; }
         public string AffiliationNm { get; set; }   
     }

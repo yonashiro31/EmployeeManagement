@@ -22,7 +22,7 @@ namespace EmployeeManagement.Session
         /// <summary>
         /// 
         /// </summary>
-        public List<PositionDO> FindAll()
+        public List<PositionDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
 
@@ -37,27 +37,23 @@ namespace EmployeeManagement.Session
             SqlCommand selectcommand = new SqlCommand(selectquery);
 
             var selectResult = repository.ExcuteQuery(selectquery);
-            var cdList = new List<PositionDO>();
+            var PositionList = new List<PositionDAO>();
             // ToDo　修正箇所 
             while (selectResult.Read())
             {
-                cdList.Add(new PositionDO()
+                PositionList.Add(new PositionDAO()
                 {
                     PositionCd = selectResult[0].ToString(),
-                    ManagementCd = selectResult[1].ToString(),
-                    BrunchCd = selectResult[2].ToString(),
-                    GroupCd = selectResult[3].ToString(),
-                    ManagementNm = selectResult[4].ToString(),
-                    BrunchNm = selectResult[5].ToString(),
-                    GroupNm = selectResult[6].ToString(),
-                    ManagementEmployeeId = selectResult[7].ToString(),
+                    GradeCd = selectResult[1].ToString(),
+                    RankCd = selectResult[2].ToString(),
+                    PositionNm = selectResult[3].ToString(),
                 });
             }
 
             selectResult.Close();
 
             repository.Clone();
-            return cdList;
+            return PositionList;
         }
     }
 }

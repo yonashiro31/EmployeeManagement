@@ -22,12 +22,12 @@ namespace EmployeeManagement.ViewModel
         /// </remarks>
         public SCRN0002ViewModel()
         {
-            ErrorMessageList = new List<ErrorMessageModel>();
+            ErrorMessageList = new List<DisplayDinoteErrMessage>();
             AffiliationList = new List<AffiLiationInfo>();
             PositionList = new List<PositionInfo>();
         }
         public string EmployeeID { set; get; }
-        public IList<ErrorMessageModel> ErrorMessageList { get; set; }   
+        public IList<DisplayDinoteErrMessage> ErrorMessageList { get; set; }   
         public IList<AffiLiationInfo> AffiliationList { get; set; }
         public IList<PositionInfo> PositionList { get; set; }
         public string AffiliationCd { get; set; }

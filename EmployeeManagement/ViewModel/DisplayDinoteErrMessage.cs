@@ -6,7 +6,7 @@
     /// <remarks>
     /// データをViewmodelに渡す
     /// </remarks>    
-    public class ErrorMessageModel  
+    public class DisplayDinoteErrMessage  
     {
         /// <summary>メッセージidの取得と設定</summary>    
         /// <remarks>メッセージidの取得と設定</remarks>

@@ -134,21 +134,19 @@ namespace EmployeeManagement.Judge
             return (errorMessages.itemNameMessageList,result);
         }
 
-        public string AffiliationNmCheck(List<AffiliationDO> affiliation)
+        public string AffiliationNmCheck(AffiliationDAO affiliation)
         {
-            foreach (var i in affiliation)
-            {
-                if (i.GroupCd != "00")
+                if (affiliation.BrunchCd != "00")
                 {
-                    return i.GroupNm;
+                    return affiliation.BrunchNm;
                 }
-                if (i.BrunchCd != "00")
+                if (affiliation.GroupCd != "00")
                 {
-                    return i.BrunchNm;
+                    return affiliation.GroupNm;
                 }
-                return i.ManagementEmployeeId;
+                else { 
+                return affiliation.ManagementNm;
             }
-            return affiliation[0].ManagementEmployeeId;
         }
 
     }

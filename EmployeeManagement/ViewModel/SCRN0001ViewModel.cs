@@ -18,14 +18,14 @@ namespace EmployeeManagement.ViewModel
         /// </remarks>
         public SCRN0001ViewModel()
         {
-            ErrorMessageList = new List<ErrorMessageModel>();
+            ErrorMessageList = new List<DisplayDinoteErrMessage>();
             EmployeeID = string.Empty;
         }
 
         /// <summary>リストプロパティ</summary>
         /// <remarks>エラーメッセージリストの取得と設定</remarks>
         /// <value>エラーメッセージリスト</value>
-        public IList<ErrorMessageModel> ErrorMessageList { get; set; }
+        public IList<DisplayDinoteErrMessage> ErrorMessageList { get; set; }
 
         /// <summary>社員IDプロパティ</summary>
         /// <remarks>社員IDの取得と設定</remarks>

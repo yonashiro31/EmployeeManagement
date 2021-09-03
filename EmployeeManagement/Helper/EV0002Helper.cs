@@ -32,7 +32,7 @@ namespace EmployeeManagement.Helper
         /// </returns>
         public SCRN0002ViewModel Init()
         {
-            ErrorMessageModel errorMessageModel = new ErrorMessageModel();
+            DisplayDinoteErrMessage errorMessageModel = new DisplayDinoteErrMessage();
             SCRN0002ViewModel sCRN002ViewModel = new SCRN0002ViewModel();
             var AffiliationValues = _ev8002Logic.FindAll();
 
@@ -46,7 +46,7 @@ namespace EmployeeManagement.Helper
             sCRN002ViewModel.PositionList = PositionValues.Select(item => new PositionInfo
             {
                 PositionCd = item.PositionCd,
-                PositionNm = item.ManagementNm,
+                PositionNm = item.PositionNm,
             }).ToList();
 
             return sCRN002ViewModel;
@@ -113,10 +113,10 @@ namespace EmployeeManagement.Helper
         /// </summary>
         /// <param name="entryJudgeListModel">未入力チェック対象</param>
         /// <returns></returns>
-        private List<ErrorMessageModel> EnteredValueNullCheck(List<NullJudgeListModel> entryJudgeListModel)
+        private List<DisplayDinoteErrMessage> EnteredValueNullCheck(List<NullJudgeListModel> entryJudgeListModel)
         {
             ValueJudge valueJudge = new ValueJudge();
-            var errorMessageList = new List<ErrorMessageModel>();
+            var errorMessageList = new List<DisplayDinoteErrMessage>();
             var judgeResult = entryJudgeListModel.Select(item => valueJudge.EnteredNullJudge(item.EmployeeDate));
             ErrorMessages errorMessages = new ErrorMessages();
             int countNum = 0;
@@ -126,7 +126,7 @@ namespace EmployeeManagement.Helper
                 if (i == false)
                 {
                     errorMessageList.Add(
-                        new ErrorMessageModel()
+                        new DisplayDinoteErrMessage()
                         {
                             MessageID = "COMMSG0001",
                             DisplayForMessage = errorMessages.itemNameMessageList[countNum] + errorMessages.instructionMessageList[0],
@@ -142,10 +142,10 @@ namespace EmployeeManagement.Helper
         /// </summary>
         /// <param name="checkTargetList">未入力チェック対象</param>
         /// <returns></returns>
-        private List<ErrorMessageModel> EnteredValueLengthCheck(List<LengthJudgeListModel> checkTargetList)
+        private List<DisplayDinoteErrMessage> EnteredValueLengthCheck(List<LengthJudgeListModel> checkTargetList)
         {
             ValueJudge valueJudge = new ValueJudge();
-            var errorMessageList = new List<ErrorMessageModel>();
+            var errorMessageList = new List<DisplayDinoteErrMessage>();
             ErrorMessages errorMessage = new ErrorMessages();
 
             var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MinJudgedigit, item.MaxJudgedigit));
@@ -159,7 +159,7 @@ namespace EmployeeManagement.Helper
                 {
 
                     errorMessageList.Add(
-                        new ErrorMessageModel()
+                        new DisplayDinoteErrMessage()
                         {
                             MessageID = "COMMSG0001",
                             DisplayForMessage = valueResult + errorMessages.instructionMessageList[1]

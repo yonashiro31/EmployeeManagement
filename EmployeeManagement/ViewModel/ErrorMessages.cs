@@ -26,7 +26,7 @@ namespace EmployeeManagement.ViewModel
             instructionMessageList.Add(NullMessage);
             instructionMessageList.Add(LengthMessage);
         }
-        ErrorMessageModel errorMessage = new ErrorMessageModel();
+        DisplayDinoteErrMessage errorMessage = new DisplayDinoteErrMessage();
         
         public string Message ;
         public List<string> itemNameMessageList { get; set; }

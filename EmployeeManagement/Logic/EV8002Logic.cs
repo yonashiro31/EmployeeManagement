@@ -23,7 +23,7 @@ namespace EmployeeManagement.Session
         /// <summary>
         /// 
         /// </summary>
-        public List<AffiliationDO> FindAll()
+        public List<AffiliationDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
             ValueJudge valueJudge = new ValueJudge();
@@ -37,11 +37,11 @@ namespace EmployeeManagement.Session
             SqlCommand selectcommand = new SqlCommand(selectquery);
 
             var selectResult = repository.ExcuteQuery(selectquery); 
-            var cdList = new List<AffiliationDO>();
+            var AffiliationList = new List<AffiliationDAO>();
             // ToDo　修正箇所 
             while (selectResult.Read())
             {
-                cdList.Add(new AffiliationDO()
+                AffiliationList.Add(new AffiliationDAO()
                 {
                     AffiliationCd = selectResult[0].ToString(),
                     ManagementCd = selectResult[1].ToString(),
@@ -53,15 +53,13 @@ namespace EmployeeManagement.Session
                     ManagementEmployeeId = selectResult[7].ToString(),
                     AffiliationNm = selectResult[8].ToString(),
                 });
-
-              cdList.Add{
-                    valueJudge.AffiliationNmCheck(cdList);
-                }
             }
             selectResult.Close();
-           
             repository.Clone();
-            return cdList;
+
+            AffiliationList.ForEach(item => item.AffiliationNm = valueJudge.AffiliationNmCheck(item));
+                    
+            return AffiliationList;
         }
     }
 }
