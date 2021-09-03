@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.ViewModel;
+﻿using EmployeeManagement.SessionModel;
+using EmployeeManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -132,5 +133,23 @@ namespace EmployeeManagement.Judge
             }
             return (errorMessages.itemNameMessageList,result);
         }
+
+        public string AffiliationNmCheck(List<AffiliationDO> affiliation)
+        {
+            foreach (var i in affiliation)
+            {
+                if (i.GroupCd != "00")
+                {
+                    return i.GroupNm;
+                }
+                if (i.BrunchCd != "00")
+                {
+                    return i.BrunchNm;
+                }
+                return i.ManagementEmployeeId;
+            }
+            return affiliation[0].ManagementEmployeeId;
+        }
+
     }
 }

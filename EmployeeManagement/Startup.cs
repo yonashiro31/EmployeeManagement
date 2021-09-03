@@ -32,8 +32,8 @@ namespace EmployeeManagement
             //Logic
 
             //DataAccessservice
-            services.AddTransient<IDateAccess, DateAccess>();
-
+            services.AddTransient<IEV8002Logic, EV8002Logic>();
+            services.AddTransient<IEV8003Logic, EV8003Logic>();
             services.AddControllersWithViews();
 
         }

@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Judge;
 using EmployeeManagement.Session;
+using EmployeeManagement.Session.Interface;
 using EmployeeManagement.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,14 @@ namespace EmployeeManagement.Helper
     /// </remarks>
     public class EV0002Helper : IEV0002Helper
     {
+        private readonly IEV8002Logic _ev8002Logic = null;
+        private readonly IEV8003Logic _ev8003Logic = null;
+        public EV0002Helper(IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
+        {
+            _ev8002Logic = ev8002Logic;
+            _ev8003Logic = ev8003Logic;
+        }
+
         /// <summary>
         /// 初期表示時メソッド
         /// </summary>
@@ -24,21 +33,23 @@ namespace EmployeeManagement.Helper
         public SCRN0002ViewModel Init()
         {
             ErrorMessageModel errorMessageModel = new ErrorMessageModel();
-            SCRN0002ViewModel SCRN0002ViewModelInstance = new SCRN0002ViewModel();
+            SCRN0002ViewModel sCRN002ViewModel = new SCRN0002ViewModel();
+            var AffiliationValues = _ev8002Logic.FindAll();
 
-            SCRN0002ViewModelInstance.AffiriationList = new List<AffiriationInfo>()
+             sCRN002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
             {
-                new AffiriationInfo(){ AffiriationNm = "部署名", AffiriationCd = "部署コード" },
-                new AffiriationInfo(){ AffiriationNm = "部署名", AffiriationCd = "部署コード" },
-            };
+                AffiliationCd = item.AffiliationCd,
+                AffiliationNm = item.ManagementNm,
+            }).ToList();
 
-            SCRN0002ViewModelInstance.PositionList = new List<PositionInfo>()
+            var PositionValues = _ev8003Logic.FindAll();
+            sCRN002ViewModel.PositionList = PositionValues.Select(item => new PositionInfo
             {
-                new PositionInfo(){ PositionNm = "役職名", PositionCd = "部署コード" },
-                new PositionInfo(){ PositionNm = "部署名", PositionCd = "部署コード" },
-            };
+                PositionCd = item.PositionCd,
+                PositionNm = item.ManagementNm,
+            }).ToList();
 
-            return SCRN0002ViewModelInstance;
+            return sCRN002ViewModel;
         }
 
 

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using EmployeeManagement.SessionModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.Session.Interface
 {
-    public interface IDateAccess
+    public interface IEV8002Logic
     {
-        public List<string> DateSelect();
+        public List<AffiliationDO> FindAll();
     }
 }

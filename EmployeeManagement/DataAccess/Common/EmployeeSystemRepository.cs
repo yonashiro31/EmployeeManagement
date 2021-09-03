@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -36,6 +36,8 @@ namespace EmployeeManagementWebUI.DataAccess
         }
 
         #endregion
+
+        #region === DBの開閉とリソースの開放 ===
 
         /// <summary>
         /// DBの接続を開く
@@ -74,5 +76,60 @@ namespace EmployeeManagementWebUI.DataAccess
 
             _connection.Dispose();
         }
+
+        #endregion
+
+        #region === DB実行(取得結果返却あり) ===
+
+        /// <summary>
+        /// SQL実行
+        /// </summary>
+        /// <remarks>
+        /// SQL実行後に実行結果を返却あり
+        /// </remarks>
+        /// <param name="selectQuery">SelectQuery</param>
+        /// <param name="parametarKeyAndValue">SQLのパラメータ名と値</param>
+        /// <returns>実行結果</returns>
+        public SqlDataReader ExcuteQuery(string selectQuery, Dictionary<string, object> parametarKeyAndValue = null)
+        {
+            SqlCommand selectCommand = new SqlCommand(selectQuery, _connection);
+            if (parametarKeyAndValue != null)
+            {
+                foreach (var info in parametarKeyAndValue)
+                {
+                    selectCommand.Parameters.AddWithValue(info.Key, info.Value);
+                }
+            }
+
+            return selectCommand.ExecuteReader();
+        }
+
+        #endregion
+
+        #region === DB実行(取得結果返却なし) ===
+
+        /// <summary>
+        /// SQL実行
+        /// </summary>
+        /// <remarks>
+        /// SQL実行後に実行結果を返却なし
+        /// </remarks>
+        /// <param name="query"></param>
+        /// <param name="parametarKeyAndValue"></param>
+        public void ExcuteNonQuery(string query, Dictionary<string, object> parametarKeyAndValue = null)
+        {
+            SqlCommand selectCommand = new SqlCommand(query, _connection);
+            if (parametarKeyAndValue != null)
+            {
+                foreach (var info in parametarKeyAndValue)
+                {
+                    selectCommand.Parameters.AddWithValue(info.Key, info.Value);
+                }
+            }
+
+            selectCommand.ExecuteNonQuery();
+        }
+
+        #endregion
     }
 }

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Session
 {
-    public class AffiriationInfo
+    public class AffiLiationInfo
     {
    
 
-        public string AffiriationCd { get; set; }
-        public string AffiriationNm { get; set; }   
+        public string AffiliationCd { get; set; }
+        public string AffiliationNm { get; set; }   
     }
 }
