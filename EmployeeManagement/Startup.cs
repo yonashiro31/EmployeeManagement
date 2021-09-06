@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EmployeeManagement.Session.Interface;
 using EmployeeManagement.Session;
+using EmployeeManagement.Logic.Interface;
+using EmployeeManagement.Logic;
 
 namespace EmployeeManagement
 {
@@ -32,6 +34,7 @@ namespace EmployeeManagement
             //Logic
 
             //DataAccessservice
+            services.AddTransient<IEV8001Logic, EV8001Logic>();
             services.AddTransient<IEV8002Logic, EV8002Logic>();
             services.AddTransient<IEV8003Logic, EV8003Logic>();
             services.AddControllersWithViews();

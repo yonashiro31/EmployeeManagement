@@ -15,12 +15,12 @@
 <div>
     @*エラーメッセージ（ラベル）*@
 
-        <label>
-            @foreach (var displayItem in Model.ErrorMessageList)
-            {
-                @Html.Label(displayItem.DisplayForMessage) <br />
-            }
-        </label>
+    <label>
+        @foreach (var displayItem in Model.ErrorMessageList)
+        {
+            @Html.Label(displayItem.DisplayForMessage) <br />
+        }
+    </label>
 
     @*社員ID入力欄*@
     <table>

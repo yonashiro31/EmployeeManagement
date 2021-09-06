@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Judge;
+using EmployeeManagement.Logic.Interface;
 using EmployeeManagement.Session;
 using EmployeeManagement.Session.Interface;
 using EmployeeManagement.ViewModel;
@@ -16,10 +17,18 @@ namespace EmployeeManagement.Helper
     /// </remarks>
     public class EV0002Helper : IEV0002Helper
     {
+        private readonly IEV8001Logic _ev8001Logic = null;
         private readonly IEV8002Logic _ev8002Logic = null;
         private readonly IEV8003Logic _ev8003Logic = null;
-        public EV0002Helper(IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ev8001Logic"></param>
+        /// <param name="ev8002Logic"></param>
+        /// <param name="ev8003Logic"></param>
+        public EV0002Helper(IEV8001Logic ev8001Logic,IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
         {
+            _ev8001Logic = ev8001Logic;
             _ev8002Logic = ev8002Logic;
             _ev8003Logic = ev8003Logic;
         }
@@ -33,23 +42,23 @@ namespace EmployeeManagement.Helper
         public SCRN0002ViewModel Init()
         {
             DisplayDinoteErrMessage errorMessageModel = new DisplayDinoteErrMessage();
-            SCRN0002ViewModel sCRN002ViewModel = new SCRN0002ViewModel();
+            SCRN0002ViewModel sCRN0002ViewModel = new SCRN0002ViewModel();
             var AffiliationValues = _ev8002Logic.FindAll();
 
-             sCRN002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
+             sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
             {
                 AffiliationCd = item.AffiliationCd,
                 AffiliationNm = item.ManagementNm,
             }).ToList();
-
+            
             var PositionValues = _ev8003Logic.FindAll();
-            sCRN002ViewModel.PositionList = PositionValues.Select(item => new PositionInfo
+            sCRN0002ViewModel.PositionList = PositionValues.Select(item => new PositionInfo
             {
                 PositionCd = item.PositionCd,
                 PositionNm = item.PositionNm,
             }).ToList();
 
-            return sCRN002ViewModel;
+            return sCRN0002ViewModel;
         }
 
 
@@ -63,11 +72,30 @@ namespace EmployeeManagement.Helper
         {
             List<NullJudgeListModel> nullJudegeListModel = NullValueCheckSet(sCRN0002ViewModel);
             List<LengthJudgeListModel> lengthJudgeListModel = LengthValueCheckSet(sCRN0002ViewModel);
+
+            var AffiliationValues = _ev8002Logic.FindAll();
+
+            sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
+            {
+                AffiliationCd = item.AffiliationCd,
+                AffiliationNm = item.ManagementNm,
+            }).ToList();
+
+            var PositionValues = _ev8003Logic.FindAll();
+            sCRN0002ViewModel.PositionList = PositionValues.Select(item => new PositionInfo
+            {
+                PositionCd = item.PositionCd,
+                PositionNm = item.PositionNm,
+            }).ToList();
+
+
             // メソッドの戻り値であるエラーメッセージリストを結合する
-            var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).ToList();
+            var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).Concat(CorrelationCheck(sCRN0002ViewModel)).ToList();
 
             return new SCRN0002ViewModel()
             {
+                AffiliationList = sCRN0002ViewModel.AffiliationList,
+                PositionList = sCRN0002ViewModel.PositionList,
                 ErrorMessageList = errorMessageList
             };
         }
@@ -80,7 +108,7 @@ namespace EmployeeManagement.Helper
         public List<NullJudgeListModel> NullValueCheckSet(SCRN0002ViewModel request)
         {
             // ToDo部署なども追加
-            var test = new List<NullJudgeListModel>
+            var viewMessages = new List<NullJudgeListModel>
             {
             new NullJudgeListModel(request.EmployeeID),
             new NullJudgeListModel(request.AffiliationCd),
@@ -89,7 +117,7 @@ namespace EmployeeManagement.Helper
            new NullJudgeListModel(request.BaseSalary)
         };
 
-            return test;
+            return viewMessages;
         }
 
         public List<LengthJudgeListModel> LengthValueCheckSet(SCRN0002ViewModel request)
@@ -146,10 +174,9 @@ namespace EmployeeManagement.Helper
         {
             ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayDinoteErrMessage>();
-            ErrorMessages errorMessage = new ErrorMessages();
-
-            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MinJudgedigit, item.MaxJudgedigit));
             ErrorMessages errorMessages = new ErrorMessages();
+            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MinJudgedigit, item.MaxJudgedigit));
+            
             int countNum = 0;
             foreach (var i in judgeResult)
             {
@@ -167,6 +194,25 @@ namespace EmployeeManagement.Helper
                         });
                 }
                 countNum++;
+            }
+            return errorMessageList;
+        }
+
+        private List<DisplayDinoteErrMessage> CorrelationCheck(SCRN0002ViewModel sCRN0002ViewModel)
+        {
+            CorrelationJudge correlationJudge = new CorrelationJudge();
+
+            var errorMessageList = new List<DisplayDinoteErrMessage>();
+            ErrorMessages errorMessages = new ErrorMessages();
+            var List = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
+           if(true == correlationJudge.CorrelationIdJudge(List))
+            {
+                errorMessageList.Add(
+                      new DisplayDinoteErrMessage()
+                      {
+                          MessageID = "COMMSG0001",
+                          DisplayForMessage = errorMessages.correlationList[0]
+                      });
             }
             return errorMessageList;
         }

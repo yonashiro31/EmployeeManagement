@@ -25,12 +25,17 @@ namespace EmployeeManagement.ViewModel
             instructionMessageList = new List<string>();
             instructionMessageList.Add(NullMessage);
             instructionMessageList.Add(LengthMessage);
+
+            correlationList = new List<string>();
+            correlationList.Add(EmpIdDuplication);
+
         }
         DisplayDinoteErrMessage errorMessage = new DisplayDinoteErrMessage();
         
         public string Message ;
         public List<string> itemNameMessageList { get; set; }
         public List<string> instructionMessageList { get; set; }
+        public List<string> correlationList { get; set; } 
         public const string IdMessage = "社員ID";
         public const string NameMessage = "氏名";
         public const string BirthDayMessage = "生年月日";
