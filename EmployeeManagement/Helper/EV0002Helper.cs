@@ -87,11 +87,14 @@ namespace EmployeeManagement.Helper
                 PositionCd = item.PositionCd,
                 PositionNm = item.PositionNm,
             }).ToList();
-
-
+         
             // メソッドの戻り値であるエラーメッセージリストを結合する
-            var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).Concat(CorrelationCheck(sCRN0002ViewModel)).ToList();
-
+            var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).ToList();
+            if (sCRN0002ViewModel.EmployeeID != null) 
+            {
+                errorMessageList = errorMessageList.Concat(CorrelationCheck(sCRN0002ViewModel)).ToList(); 
+            }
+           
             return new SCRN0002ViewModel()
             {
                 AffiliationList = sCRN0002ViewModel.AffiliationList,

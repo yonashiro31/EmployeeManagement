@@ -27,7 +27,7 @@ namespace EmployeeManagement.Logic
             repository.Open();
 
             // ②SQLの生成
-            
+
             var selectquery = "SELECT employee_id FROM employee_db.employee Where employee_id = @enteredId";
 
             // ③SQLのパラメータ設定
@@ -40,7 +40,7 @@ namespace EmployeeManagement.Logic
             };
 
 
-            var selectResult = repository.ExcuteQuery(selectquery,parametorNameAndValueDic);
+            var selectResult = repository.ExcuteQuery(selectquery, parametorNameAndValueDic);
             var EmpList = new List<EmployeeInfoDAO>();
             // ToDo　修正箇所 
             while (selectResult.Read())
@@ -66,7 +66,18 @@ namespace EmployeeManagement.Logic
         }
         public void Register()
         {
-          
+
+            using var repository = new EmployeeSystemRepository();
+            // ①DB接続の開始
+            repository.Open();
+
+            // ②SQLの生成
+
+            var selectquery = @"Insert Into employee_db.m_affiliation
+                              (affiliation_cd,management_cd,management_nm,insert_user,insert_time,update_user,update_time)
+                               Values (1,1,'総務','teruki','2019-10-04 15:25:07','teruki','2019-10-04 15:25:07')";
+
+            SqlCommand selectcommand = new SqlCommand(selectquery);
         }
     }
 }
