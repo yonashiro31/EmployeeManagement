@@ -7,7 +7,6 @@ namespace EmployeeManagement.SessionModel
 {
     public class AffiliationDAO
     {
-        public List<AffiliationDAO> List { get; set; }
         public string AffiliationCd { get; set; }
         public string ManagementCd { get; set; }
         public string BrunchCd { get; set; }

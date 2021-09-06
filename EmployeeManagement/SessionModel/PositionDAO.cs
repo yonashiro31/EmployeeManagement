@@ -7,7 +7,6 @@ namespace EmployeeManagement.SessionModel
 {
     public class PositionDAO
     {
-        public List<PositionDAO> List { get; set; }
         public string PositionCd { get; set; }
         public string GradeCd { get; set; }
         public string RankCd { get; set; }
