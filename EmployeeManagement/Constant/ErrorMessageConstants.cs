@@ -1,12 +1,13 @@
 ﻿using EmployeeManagement.Helper;
+using EmployeeManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeManagement.ViewModel
+namespace EmployeeManagement.Constants
 {
-    public class ErrorMessages
+    public class ErrorMessageConstants
     {
         /// <summary>
         /// エラーメッセージを格納するリストを用意するコンストラクタ
@@ -14,7 +15,7 @@ namespace EmployeeManagement.ViewModel
         /// <remarks>
         /// 
         /// </remarks>
-        public ErrorMessages(){
+        public ErrorMessageConstants(){
             itemNameMessageList = new List<string>();
             itemNameMessageList.Add(IdMessage);
             itemNameMessageList.Add(NameMessage);

@@ -1,8 +1,12 @@
-﻿using EmployeeManagement.Judge;
+﻿using EmployeeManagement.Constant;
+using EmployeeManagement.Constants;
+using EmployeeManagement.Judge;
 using EmployeeManagement.Logic.Interface;
+using EmployeeManagement.LogicDTO;
 using EmployeeManagement.Session;
 using EmployeeManagement.Session.Interface;
 using EmployeeManagement.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +30,7 @@ namespace EmployeeManagement.Helper
         /// <param name="ev8001Logic"></param>
         /// <param name="ev8002Logic"></param>
         /// <param name="ev8003Logic"></param>
-        public EV0002Helper(IEV8001Logic ev8001Logic,IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
+        public EV0002Helper(IEV8001Logic ev8001Logic, IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
         {
             _ev8001Logic = ev8001Logic;
             _ev8002Logic = ev8002Logic;
@@ -45,12 +49,12 @@ namespace EmployeeManagement.Helper
             SCRN0002ViewModel sCRN0002ViewModel = new SCRN0002ViewModel();
             var AffiliationValues = _ev8002Logic.FindAll();
 
-             sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
+            sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
             {
                 AffiliationCd = item.AffiliationCd,
                 AffiliationNm = item.ManagementNm,
             }).ToList();
-            
+
             var PositionValues = _ev8003Logic.FindAll();
             sCRN0002ViewModel.PositionList = PositionValues.Select(item => new PositionInfo
             {
@@ -87,19 +91,44 @@ namespace EmployeeManagement.Helper
                 PositionCd = item.PositionCd,
                 PositionNm = item.PositionNm,
             }).ToList();
-         
+
             // メソッドの戻り値であるエラーメッセージリストを結合する
-            var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).ToList();
-            if (sCRN0002ViewModel.EmployeeID != null) 
+            /*var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).ToList();
+            if (sCRN0002ViewModel.EmployeeID != null)
             {
-                errorMessageList = errorMessageList.Concat(CorrelationCheck(sCRN0002ViewModel)).ToList(); 
-            }
-           
+                errorMessageList = errorMessageList.Concat(CorrelationCheck(sCRN0002ViewModel)).ToList();
+            }*/
+
+            // ToDo別メソッドに分ける
+
+            List<EmployeeInfoDAO> entryList = new List<EmployeeInfoDAO>();        
+            entryList.Add(new EmployeeInfoDAO()
+            {
+                EmployeeID = sCRN0002ViewModel.EmployeeID,
+                AffiliationCd = sCRN0002ViewModel.AffiliationCd,
+                PositionCd = sCRN0002ViewModel.PositionCd,
+                EmployeeNm = sCRN0002ViewModel.EmployeeName,
+                Gender = sCRN0002ViewModel.Gender,
+                BirthDay = Convert.ToDateTime(sCRN0002ViewModel.BirthDay),
+                ForeignNationality = sCRN0002ViewModel.ForeignNationality,
+                BaseSalary = Convert.ToDecimal(sCRN0002ViewModel.BaseSalary),
+                Memo = sCRN0002ViewModel.Memo,
+                insertUser = CommonConstants.MOD_USER_ID,
+                insertTime = DateTime.Now,
+                updateUser = CommonConstants.MOD_USER_ID,
+                updateTime = DateTime.Now
+            });
+            //if (errorMessageList == null)
+            
+                _ev8001Logic.Register(entryList);
+            
+
+
             return new SCRN0002ViewModel()
             {
                 AffiliationList = sCRN0002ViewModel.AffiliationList,
                 PositionList = sCRN0002ViewModel.PositionList,
-                ErrorMessageList = errorMessageList
+                //ErrorMessageList = errorMessageList
             };
         }
 
@@ -149,7 +178,7 @@ namespace EmployeeManagement.Helper
             ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayDinoteErrMessage>();
             var judgeResult = entryJudgeListModel.Select(item => valueJudge.EnteredNullJudge(item.EmployeeDate));
-            ErrorMessages errorMessages = new ErrorMessages();
+            ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             int countNum = 0;
             foreach (var i in judgeResult)
             {
@@ -177,9 +206,9 @@ namespace EmployeeManagement.Helper
         {
             ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayDinoteErrMessage>();
-            ErrorMessages errorMessages = new ErrorMessages();
+            ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MinJudgedigit, item.MaxJudgedigit));
-            
+
             int countNum = 0;
             foreach (var i in judgeResult)
             {
@@ -206,9 +235,9 @@ namespace EmployeeManagement.Helper
             CorrelationJudge correlationJudge = new CorrelationJudge();
 
             var errorMessageList = new List<DisplayDinoteErrMessage>();
-            ErrorMessages errorMessages = new ErrorMessages();
+            ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             var List = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
-           if(true == correlationJudge.CorrelationIdJudge(List))
+            if (true == correlationJudge.CorrelationIdJudge(List))
             {
                 errorMessageList.Add(
                       new DisplayDinoteErrMessage()

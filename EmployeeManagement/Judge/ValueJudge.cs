@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.SessionModel;
+﻿using EmployeeManagement.Constants;
+using EmployeeManagement.LogicDTO;
 using EmployeeManagement.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -111,21 +112,21 @@ namespace EmployeeManagement.Judge
         /// <returns></returns>
         public (List<string>, bool) ValueCheck(int min, int max)
         {
-            ErrorMessages errorMessages = new ErrorMessages();
+            ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             bool result = true;
             switch (min, max)
             {
                 case (8, 8):
-                    errorMessages.itemNameMessageList.Add(ErrorMessages.IdMessage);
+                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.IdMessage);
                     break;
                 case (1, 32):
-                    errorMessages.itemNameMessageList.Add(ErrorMessages.NameMessage);
+                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.NameMessage);
                     break;
                 case (9, 9):
-                    errorMessages.itemNameMessageList.Add(ErrorMessages.BirthDayMessage);
+                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.BirthDayMessage);
                     break;
                 case (1, 8):
-                    errorMessages.itemNameMessageList.Add(ErrorMessages.BaseSalaryMessage);
+                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
 
                     break;
                 default: result = false;

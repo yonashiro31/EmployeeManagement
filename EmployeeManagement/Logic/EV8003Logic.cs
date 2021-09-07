@@ -1,5 +1,5 @@
 ﻿using EmployeeManagement.Session.Interface;
-using EmployeeManagement.SessionModel;
+using EmployeeManagement.LogicDTO;
 using EmployeeManagement.ViewModel;
 using EmployeeManagementWebUI.DataAccess;
 using Microsoft.Data.SqlClient;
@@ -26,15 +26,10 @@ namespace EmployeeManagement.Session
         {
             using var repository = new EmployeeSystemRepository();
 
-            // ①DB接続の開始
+            // DB接続の開始
             repository.Open();
 
-            // ②SQLの生成
-
             var selectquery = "SELECT * FROM employee_db.m_affiliation";
-
-            // ③SQLのパラメータ設定
-            SqlCommand selectcommand = new SqlCommand(selectquery);
 
             var selectResult = repository.ExcuteQuery(selectquery);
             var PositionList = new List<PositionDAO>();

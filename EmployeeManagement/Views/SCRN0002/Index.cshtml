@@ -12,7 +12,7 @@
 
 </head>
 <p1>新規社員登録</p1>
-<div>
+<div class="error">
     @*エラーメッセージ（ラベル）*@
 
     <label>
@@ -21,7 +21,8 @@
             @Html.Label(displayItem.DisplayForMessage) <br />
         }
     </label>
-
+    </div>
+<div>
     @*社員ID入力欄*@
     <table>
 
@@ -106,6 +107,13 @@
                         @Html.TextBoxFor(model => model.BaseSalary, new { size = 31, minlength = 1, maxlength = 8 })
                     </td>
                 </tr>
+
+                <tr>
+                    <td>メモ</td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Memo, new { size = 31, minlength = 1, maxlength = 8 })
+                    </td>
+                </tr>
                 @*新規登録ボタン*@
                 <button> 新規登録 </button>
 
@@ -116,5 +124,5 @@
             {
                 <button>戻る</button>
             }
-    </table>
+</table>
 </div>

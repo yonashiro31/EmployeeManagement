@@ -37,5 +37,6 @@ namespace EmployeeManagement.ViewModel
         public string BirthDay { get; set; }
         public bool ForeignNationality { get; set; }
         public string BaseSalary { get; set; }
+        public string Memo { get; set; }
     }
 }

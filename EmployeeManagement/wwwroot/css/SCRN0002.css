@@ -8,9 +8,10 @@ body {
 div {
     text-align: center;
 }
-label {    
-    display:block;
+label {
+    display: block;
     width: 200px;
+    text-align: center;
     background-color: orangered;
 }
 
@@ -21,7 +22,9 @@ table {
 }
 
 /*エラー表示背景設定*/
-
+.error {
+    text-align: center;
+}
 /*ボタン設定*/
 button {
     margin-top: 20px;

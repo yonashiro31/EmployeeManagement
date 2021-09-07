@@ -1,4 +1,4 @@
-﻿using EmployeeManagement.SessionModel;
+﻿using EmployeeManagement.LogicDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
