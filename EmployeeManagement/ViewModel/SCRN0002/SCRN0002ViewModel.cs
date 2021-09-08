@@ -1,8 +1,5 @@
 ﻿using EmployeeManagement.Session;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.ViewModel
 {
@@ -23,12 +20,12 @@ namespace EmployeeManagement.ViewModel
         public SCRN0002ViewModel()
         {
             ErrorMessageList = new List<DisplayDinoteErrMessage>();
-            AffiliationList = new List<AffiLiationInfo>();
+            AffiliationList = new List<AffiliationInfo>();
             PositionList = new List<PositionInfo>();
         }
         public string EmployeeID { set; get; }
-        public IList<DisplayDinoteErrMessage> ErrorMessageList { get; set; }   
-        public IList<AffiLiationInfo> AffiliationList { get; set; }
+        public IList<DisplayDinoteErrMessage> ErrorMessageList { get; set; }
+        public IList<AffiliationInfo> AffiliationList { get; set; }
         public IList<PositionInfo> PositionList { get; set; }
         public string AffiliationCd { get; set; }
         public string PositionCd { get; set; }

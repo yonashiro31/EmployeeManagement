@@ -20,8 +20,9 @@ namespace EmployeeManagement.Session
     public class EV8003Logic : IEV8003Logic
     {
         /// <summary>
-        /// 
+        /// 部署情報の取得を行うクラス
         /// </summary>
+        /// <remarks>SQL接続を行う</remarks>
         public List<PositionDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();

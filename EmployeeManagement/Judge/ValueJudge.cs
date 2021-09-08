@@ -1,9 +1,6 @@
 ﻿using EmployeeManagement.Constants;
 using EmployeeManagement.LogicDTO;
-using EmployeeManagement.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace EmployeeManagement.Judge
 {
@@ -21,10 +18,10 @@ namespace EmployeeManagement.Judge
         /// <remarks>
         /// 入力値が未入力かどうか判定する
         /// </remarks>
-        /// <param name="checkedValue">入力した値</param>
-        public bool EnteredNullJudge(string checkedValue)
+        /// <param name="targetValue">入力した値</param>
+        public bool EnteredNullJudge(string targetValue)
         {
-            if (!string.IsNullOrEmpty(checkedValue))
+            if (!string.IsNullOrEmpty(targetValue))
             {
                 return true;
             }
@@ -35,7 +32,7 @@ namespace EmployeeManagement.Judge
         }
 
         // 桁数は引数に入れてしまう
-        public bool EnteredValueLengthJudge(string targetValue, int MinDigit, int maxDigit)
+        public bool EnteredValueLengthJudge(string targetValue, int maxDigit)
         {
 
             if (string.IsNullOrEmpty(targetValue))
@@ -44,7 +41,7 @@ namespace EmployeeManagement.Judge
             }
             // ここで未入力の引数を受け取ると例外発生するため、
             // 上のコードで未入力時は処理が発生しないようにする
-            if (targetValue.Length >= MinDigit && targetValue.Length <= maxDigit)
+            if (targetValue.Length <= maxDigit)
             {
                 return true;
             }
@@ -55,65 +52,16 @@ namespace EmployeeManagement.Judge
         }
 
         /// <summary>
-        /// 入力部署相関チェック
-        /// </summary>
-        /// <param name="Cd"></param>
-        /// <param name="nm"></param>
-        /// <returns></returns>
-        public bool AfiriattionCorrelation(string Cd, string nm)
-        {
-            // SQL文で結果を格納し
-            if (Cd == "検索結果" && nm == "検索結果")
-            {
-                return true;
-            }
-            else　
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 入力役職
-        /// </summary>
-        /// <param name="Cd"></param>
-        /// <param name="Nm"></param>
-        /// <returns></returns>
-        public bool PositionCorrelation(string Cd, string Nm)
-        {
-            if (Cd == "test" && Nm == "test")
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
-        }
-        /// <summary>
-        /// 社員Idの相関チェック
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public bool EmployeeCorrelationCheck(string Id)
-        {
-            // SQL文で検索結果と
-            if (Id == "検索結果")
-            {
-                return false;
-            }
-            return true;
-        }
-        /// <summary>
         /// 入力値の種別を判別するメソッド
         /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
+        /// <param name="min">最大許容桁数</param>
+        /// <param name="max">最小許容桁数</param>
         /// <returns></returns>
         public (List<string>, bool) ValueCheck(int min, int max)
         {
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             bool result = true;
+
             switch (min, max)
             {
                 case (8, 8):
@@ -129,26 +77,32 @@ namespace EmployeeManagement.Judge
                     errorMessages.itemNameMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
 
                     break;
-                default: result = false;
+                default:
+                    result = false;
                     break;
             }
-            return (errorMessages.itemNameMessageList,result);
+            return (errorMessages.itemNameMessageList, result);
         }
 
+        /// <summary>
+        /// 部署情報のチェックを行うメソッド
+        /// </summary>
+        /// <param name="affiliation">部署情報</param>
+        /// <returns>判定に応じて必要値を格納する</returns>
         public string AffiliationNmCheck(AffiliationDAO affiliation)
         {
-                if (affiliation.BrunchCd != "00")
-                {
-                    return affiliation.BrunchNm;
-                }
-                if (affiliation.GroupCd != "00")
-                {
-                    return affiliation.GroupNm;
-                }
-                else { 
+            if (affiliation.BrunchCd != "00")
+            {
+                return affiliation.BrunchNm;
+            }
+            if (affiliation.GroupCd != "00")
+            {
+                return affiliation.GroupNm;
+            }
+            else
+            {
                 return affiliation.ManagementNm;
             }
         }
-
     }
 }

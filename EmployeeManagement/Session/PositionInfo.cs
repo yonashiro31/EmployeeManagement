@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeeManagement.Session
+﻿namespace EmployeeManagement.Session
 {
+    /// <summary>
+    /// 役職情報を保持するクラス
+    /// </summary>
     public class PositionInfo
     {
         public string PositionCd { get; set; }

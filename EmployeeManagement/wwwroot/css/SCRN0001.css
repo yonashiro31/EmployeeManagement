@@ -10,8 +10,9 @@ p1 {
     font-size: 40px;
 }
 /*エラー表示背景設定*/
-div{
-    background-color:orangered
+div {
+    text-align: center;
+    background-color: orangered
 }
 /*ボタン設定*/
 button {
@@ -25,7 +26,6 @@ button {
 }
 /*社員ID表示設定*/
 p3 {
-    margin-right:200px;
+    margin-right: 200px;
     font-size: 24px;
-    
 }

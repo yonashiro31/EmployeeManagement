@@ -1,12 +1,8 @@
 ﻿using EmployeeManagement.Logic.Interface;
 using EmployeeManagement.LogicDTO;
-using EmployeeManagement.ViewModel;
 using EmployeeManagementWebUI.DataAccess;
-using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Logic
 {
@@ -19,17 +15,15 @@ namespace EmployeeManagement.Logic
     public class EV8001Logic : IEV8001Logic
     {
         /// <summary>
-        /// 
+        /// 社員情報取得メソッド
         /// </summary>
         public List<EmployeeInfoDAO> FindByPrimaryKey(string enteredId)
         {
             using var repository = new EmployeeSystemRepository();
-            // ①DB接続の開始
+            // DB接続の開始
             repository.Open();
 
             var selectquery = "SELECT * FROM employee_db.employee Where employee_id = @enteredId";
-
-            // ③SQLのパラメータ設定
 
             var parametorNameAndValueDic = new Dictionary<string, object>()
             {
@@ -37,7 +31,6 @@ namespace EmployeeManagement.Logic
                 { "@enteredId",  enteredId }
             };
 
-            
             var selectResult = repository.ExcuteQuery(selectquery, parametorNameAndValueDic);
             var EmpList = new List<EmployeeInfoDAO>();
             // ToDo　修正箇所 
@@ -54,7 +47,7 @@ namespace EmployeeManagement.Logic
                     ForeignNationality = Convert.ToBoolean(selectResult[6]),
                     BaseSalary = Convert.ToDecimal(selectResult[7]),
                     Memo = selectResult[8].ToString(),
-                }) ;
+                });
             }
 
             selectResult.Close();
@@ -62,36 +55,45 @@ namespace EmployeeManagement.Logic
             repository.Clone();
             return EmpList;
         }
-        public void Register(List<EmployeeInfoDAO> entryValues)
+        /// <summary>
+        /// SQL登録クラス
+        /// </summary>
+        /// <param name="entryValues">登録用入力値</param>
+        public void Register(EmployeeInfoDAO entryValues)
         {
-
             using var repository = new EmployeeSystemRepository();
-            // ①DB接続の開始
+            // DB接続の開始
             repository.Open();
 
-            var selectquery = @"Insert Into employee_db.employee
-                               Values ('employeeId','affiliationCd','positionCd','employeeNm','gender','birthday','foreignNationality',
-                              'baseSalary','memo','insertUser','insertTime','updateUser','updateTime')";
-            
+            if (entryValues.Memo == null)
+            {
+                entryValues.Memo = "";
+            }
+
+            var insertQuery = @"Insert Into employee_db.employee
+                               Values (@employeeId,@affiliationCd,@positionCd,@employeeNm,@gender,@birthday,@foreignNationality,"
+                               + "@baseSalary,@memo,@insertUser,@insertTime,@updateUser,@updateTime)";
+
             var parametorNameAndValueDic = new Dictionary<string, object>()
             {
                 // { SQLに指定した変数名, 変数に入れたい値 }
-                { "@employeeId", entryValues[0].EmployeeID  },
-                { "@affiliationCd", entryValues[0].AffiliationCd  },
-                { "@positionCd", entryValues[0].PositionCd  },
-                { "@employeeNm", entryValues[0].EmployeeNm },
-                { "@gender", entryValues[0].Gender },
-                { "@birthday", entryValues[0].BirthDay  },
-                { "@foreignNationality", entryValues[0].ForeignNationality  },
-                { "@baseSalary", entryValues[0].BaseSalary },
-                { "@memo", entryValues[0].Memo },
-                { "@insertUser", entryValues[0].insertUser },
-                { "@insertTime", entryValues[0].insertTime },
-                { "@updateUser", entryValues[0].updateUser },
-                { "@updateTime", entryValues[0].updateTime }
+                { "@employeeId", entryValues.EmployeeID  },
+                { "@affiliationCd", entryValues.AffiliationCd  },
+                { "@positionCd", entryValues.PositionCd  },
+                { "@employeeNm", entryValues.EmployeeNm },
+                { "@gender", entryValues.Gender },
+                { "@birthday", entryValues.BirthDay  },
+                { "@foreignNationality", entryValues.ForeignNationality  },
+                { "@baseSalary", entryValues.BaseSalary },
+                { "@memo", entryValues.Memo },
+                { "@insertUser", entryValues.insertUser },
+                { "@insertTime", entryValues.insertTime },
+                { "@updateUser", entryValues.updateUser },
+                { "@updateTime", entryValues.updateTime }
             };
 
-            SqlCommand selectcommand = new SqlCommand(selectquery);
+            repository.ExcuteNonQuery(insertQuery, parametorNameAndValueDic);
+            repository.Clone();
         }
     }
 }

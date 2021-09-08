@@ -1,14 +1,8 @@
 ﻿using EmployeeManagement.Judge;
 using EmployeeManagement.Session.Interface;
 using EmployeeManagement.LogicDTO;
-using EmployeeManagement.ViewModel;
 using EmployeeManagementWebUI.DataAccess;
-using Microsoft.Data.SqlClient;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EmployeeManagement.Session
 {
@@ -16,26 +10,27 @@ namespace EmployeeManagement.Session
     /// SLQから部署情報を取得するクラス
     /// </summary>
     /// <remarks>
-    /// SQL接続し、
+    /// 部署情報を取得する
     /// </remarks>
     public class EV8002Logic : IEV8002Logic
     {
         /// <summary>
-        /// 
+        /// SQL接続と社員情報取得を行う
         /// </summary>
+        /// <remarks>SQL接続と社員情報取得を行う</remarks>
         public List<AffiliationDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
             ValueJudge valueJudge = new ValueJudge();
-            // ①DB接続の開始
+            // DB接続の開始
             repository.Open();
 
-            // ②SQLの生成
+            // SQLの生成
             var selectquery = "SELECT * FROM employee_db.m_affiliation";
 
             var selectResult = repository.ExcuteQuery(selectquery); 
             var AffiliationList = new List<AffiliationDAO>();
-            // ToDo　修正箇所 
+           
             while (selectResult.Read())
             {
                 AffiliationList.Add(new AffiliationDAO()

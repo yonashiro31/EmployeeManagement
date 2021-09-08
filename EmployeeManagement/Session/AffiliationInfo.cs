@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeeManagement.Session
+﻿namespace EmployeeManagement.Session
 {
-    public class AffiLiationInfo
+    /// <summary>
+    /// 部署情報クラス
+    /// </summary>
+    /// <remarks>
+    /// 部署情報を保持する
+    /// </remarks>
+    public class AffiliationInfo
     {
         public string AffiliationCd { get; set; }
         public string AffiliationNm { get; set; }   

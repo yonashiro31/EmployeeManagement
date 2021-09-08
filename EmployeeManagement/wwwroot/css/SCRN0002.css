@@ -5,20 +5,25 @@
 body {
     text-align: center;
 }
+
 div {
     text-align: center;
 }
-label {
+
+p {
+    margin: auto;
     display: block;
-    width: 200px;
     text-align: center;
-    background-color: orangered;
+    width: 200px;
+    background-color: red;
+}
+
+table, th, td {
+    border: 1px solid;
 }
 
 table {
-    border: 4px solid #ddd;
     margin: auto;
-   
 }
 
 /*エラー表示背景設定*/
@@ -31,8 +36,11 @@ button {
     margin-bottom: 20px;
     width: 250px;
     font-size: 24px;
-    padding-right: 30px;
-    padding-left: 30px;
-    background-color: darkgray;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: white;
 }
-/*社員ID表示設定*/
+/*ボタン表示位置設定*/
+.insert-btn-Area {
+    margin: auto;
+}

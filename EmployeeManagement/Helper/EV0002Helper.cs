@@ -9,7 +9,6 @@ using EmployeeManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Helper
 {
@@ -25,11 +24,11 @@ namespace EmployeeManagement.Helper
         private readonly IEV8002Logic _ev8002Logic = null;
         private readonly IEV8003Logic _ev8003Logic = null;
         /// <summary>
-        /// 
+        /// インターフェースの用意
         /// </summary>
-        /// <param name="ev8001Logic"></param>
-        /// <param name="ev8002Logic"></param>
-        /// <param name="ev8003Logic"></param>
+        /// <param name="ev8001Logic">社員情報取得ヘルパー</param>
+        /// <param name="ev8002Logic">部署取得ヘルパー</param>
+        /// <param name="ev8003Logic">役職取得ヘルパー</param>
         public EV0002Helper(IEV8001Logic ev8001Logic, IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
         {
             _ev8001Logic = ev8001Logic;
@@ -49,7 +48,7 @@ namespace EmployeeManagement.Helper
             SCRN0002ViewModel sCRN0002ViewModel = new SCRN0002ViewModel();
             var AffiliationValues = _ev8002Logic.FindAll();
 
-            sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
+            sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiliationInfo
             {
                 AffiliationCd = item.AffiliationCd,
                 AffiliationNm = item.ManagementNm,
@@ -61,10 +60,9 @@ namespace EmployeeManagement.Helper
                 PositionCd = item.PositionCd,
                 PositionNm = item.PositionNm,
             }).ToList();
-
+            sCRN0002ViewModel.Gender = 1;
             return sCRN0002ViewModel;
         }
-
 
         /// <summary>
         /// 新規登録時メソッド
@@ -79,7 +77,7 @@ namespace EmployeeManagement.Helper
 
             var AffiliationValues = _ev8002Logic.FindAll();
 
-            sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiLiationInfo
+            sCRN0002ViewModel.AffiliationList = AffiliationValues.Select(item => new AffiliationInfo
             {
                 AffiliationCd = item.AffiliationCd,
                 AffiliationNm = item.ManagementNm,
@@ -93,42 +91,42 @@ namespace EmployeeManagement.Helper
             }).ToList();
 
             // メソッドの戻り値であるエラーメッセージリストを結合する
-            /*var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).ToList();
+            var errorMessageList = EnteredValueNullCheck(nullJudegeListModel).Concat(EnteredValueLengthCheck(lengthJudgeListModel)).ToList();
             if (sCRN0002ViewModel.EmployeeID != null)
             {
                 errorMessageList = errorMessageList.Concat(CorrelationCheck(sCRN0002ViewModel)).ToList();
-            }*/
+            }
 
             // ToDo別メソッドに分ける
-
-            List<EmployeeInfoDAO> entryList = new List<EmployeeInfoDAO>();        
-            entryList.Add(new EmployeeInfoDAO()
+            if (errorMessageList == null)
             {
-                EmployeeID = sCRN0002ViewModel.EmployeeID,
-                AffiliationCd = sCRN0002ViewModel.AffiliationCd,
-                PositionCd = sCRN0002ViewModel.PositionCd,
-                EmployeeNm = sCRN0002ViewModel.EmployeeName,
-                Gender = sCRN0002ViewModel.Gender,
-                BirthDay = Convert.ToDateTime(sCRN0002ViewModel.BirthDay),
-                ForeignNationality = sCRN0002ViewModel.ForeignNationality,
-                BaseSalary = Convert.ToDecimal(sCRN0002ViewModel.BaseSalary),
-                Memo = sCRN0002ViewModel.Memo,
-                insertUser = CommonConstants.MOD_USER_ID,
-                insertTime = DateTime.Now,
-                updateUser = CommonConstants.MOD_USER_ID,
-                updateTime = DateTime.Now
-            });
-            //if (errorMessageList == null)
-            
-                _ev8001Logic.Register(entryList);
-            
+                EmployeeInfoDAO entryValues = new EmployeeInfoDAO();
 
+                entryValues.EmployeeID = sCRN0002ViewModel.EmployeeID;
+                entryValues.AffiliationCd = sCRN0002ViewModel.AffiliationCd;
+                entryValues.PositionCd = sCRN0002ViewModel.PositionCd;
+                entryValues.EmployeeNm = sCRN0002ViewModel.EmployeeName;
+                entryValues.Gender = sCRN0002ViewModel.Gender;
+                entryValues.BirthDay = Convert.ToDateTime(sCRN0002ViewModel.BirthDay);
+                entryValues.ForeignNationality = sCRN0002ViewModel.ForeignNationality;
+                entryValues.BaseSalary = Convert.ToDecimal(sCRN0002ViewModel.BaseSalary);
+                entryValues.Memo = null;
+                entryValues.Memo = sCRN0002ViewModel.Memo;
+                entryValues.insertUser = CommonConstants.MOD_USER_ID;
+                entryValues.insertTime = DateTime.Now;
+                entryValues.updateUser = CommonConstants.MOD_USER_ID;
+                entryValues.updateTime = DateTime.Now;
 
+                if (errorMessageList == null)
+                {
+                    _ev8001Logic.Register(entryValues);
+                }
+            }
             return new SCRN0002ViewModel()
             {
                 AffiliationList = sCRN0002ViewModel.AffiliationList,
                 PositionList = sCRN0002ViewModel.PositionList,
-                //ErrorMessageList = errorMessageList
+                ErrorMessageList = errorMessageList
             };
         }
 
@@ -140,39 +138,40 @@ namespace EmployeeManagement.Helper
         public List<NullJudgeListModel> NullValueCheckSet(SCRN0002ViewModel request)
         {
             // ToDo部署なども追加
-            var viewMessages = new List<NullJudgeListModel>
+            var NullTargetModels = new List<NullJudgeListModel>
             {
             new NullJudgeListModel(request.EmployeeID),
             new NullJudgeListModel(request.AffiliationCd),
             new NullJudgeListModel(request.PositionCd),
             new NullJudgeListModel(request.EmployeeName),
-           new NullJudgeListModel(request.BaseSalary)
-        };
-
-            return viewMessages;
+            new NullJudgeListModel(request.Gender.ToString()),
+            new NullJudgeListModel(request.BirthDay),
+            new NullJudgeListModel(request.BaseSalary)
+            };
+            return NullTargetModels;
         }
 
         public List<LengthJudgeListModel> LengthValueCheckSet(SCRN0002ViewModel request)
         {
             // ToDo部署なども追加
-            var test = new List<LengthJudgeListModel>
+            var LengthTargetModels = new List<LengthJudgeListModel>
             {
-            new LengthJudgeListModel(request.EmployeeID,1,8),
-            new LengthJudgeListModel(request.AffiliationCd,6,6),
-            new LengthJudgeListModel(request.PositionCd,4,4),
-            new LengthJudgeListModel(request.EmployeeName,1,32),
-            new LengthJudgeListModel(request.BirthDay,9,9),
-            new LengthJudgeListModel(request.BaseSalary,1,8)
-        };
-
-            return test;
+            new LengthJudgeListModel(request.EmployeeID,8),
+            new LengthJudgeListModel(request.AffiliationCd,6),
+            new LengthJudgeListModel(request.PositionCd,4),
+            new LengthJudgeListModel(request.EmployeeName,32),
+            new LengthJudgeListModel(request.Gender.ToString(),1),
+            new LengthJudgeListModel(request.BirthDay,10),
+            new LengthJudgeListModel(request.BaseSalary,8)
+            };
+            return LengthTargetModels;
         }
 
         /// <summary>
         /// 入力判定時単項目チェックを呼び出すメソッド
         /// </summary>
         /// <param name="entryJudgeListModel">未入力チェック対象</param>
-        /// <returns></returns>
+        /// <returns>未入力チェックとエラーメッセージ格納を行う</returns>
         private List<DisplayDinoteErrMessage> EnteredValueNullCheck(List<NullJudgeListModel> entryJudgeListModel)
         {
             ValueJudge valueJudge = new ValueJudge();
@@ -200,29 +199,28 @@ namespace EmployeeManagement.Helper
         /// <summary>
         /// 桁数判定単項目チェックを呼び出すメソッド
         /// </summary>
-        /// <param name="checkTargetList">未入力チェック対象</param>
-        /// <returns></returns>
+        /// <param name="checkTargetList">桁数チェック対象</param>
+        /// <returns>桁数判定メソッド呼び出しとエラーメッセージ格納を行う</returns>
         private List<DisplayDinoteErrMessage> EnteredValueLengthCheck(List<LengthJudgeListModel> checkTargetList)
         {
             ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayDinoteErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MinJudgedigit, item.MaxJudgedigit));
+            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit));
 
             int countNum = 0;
             foreach (var i in judgeResult)
             {
                 (List<string> valueResult, bool valueResultBool) = valueJudge.ValueCheck(checkTargetList[countNum].MinJudgedigit, checkTargetList[countNum].MaxJudgedigit);
                 // 社員IDの入力値チェック
-                if (i == false && valueResultBool == true)
+                if (i == false)
                 {
 
                     errorMessageList.Add(
                         new DisplayDinoteErrMessage()
                         {
                             MessageID = "COMMSG0001",
-                            DisplayForMessage = valueResult + errorMessages.instructionMessageList[1]
-
+                            DisplayForMessage = errorMessages.itemNameMessageList[countNum] + errorMessages.instructionMessageList[1]
                         });
                 }
                 countNum++;
@@ -230,14 +228,19 @@ namespace EmployeeManagement.Helper
             return errorMessageList;
         }
 
+        /// <summary>
+        /// 相関チェックメソッド
+        /// </summary>
+        /// <param name="sCRN0002ViewModel">登録用入力値</param>
+        /// <returns>エラーメッセージ格納も行う</returns>
         private List<DisplayDinoteErrMessage> CorrelationCheck(SCRN0002ViewModel sCRN0002ViewModel)
         {
             CorrelationJudge correlationJudge = new CorrelationJudge();
 
             var errorMessageList = new List<DisplayDinoteErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            var List = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
-            if (true == correlationJudge.CorrelationIdJudge(List))
+            var SqlList = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
+            if (true == correlationJudge.IdCorrelationIdJudge(SqlList))
             {
                 errorMessageList.Add(
                       new DisplayDinoteErrMessage()
@@ -245,9 +248,27 @@ namespace EmployeeManagement.Helper
                           MessageID = "COMMSG0001",
                           DisplayForMessage = errorMessages.correlationList[0]
                       });
+
+            if (false == correlationJudge.AfCorrelationJudge(SqlList, sCRN0002ViewModel))
+            {
+                errorMessageList.Add(
+                        new DisplayDinoteErrMessage()
+                        {
+                            MessageID = "DBMST00001",
+                            DisplayForMessage = "部署" + errorMessages.correlationList[1] + SqlList[0].AffiliationCd + errorMessages.correlationList[2]
+                        });
+            }
+            if (false == correlationJudge.PosiCorrelationJudge(SqlList, sCRN0002ViewModel))
+            {
+                errorMessageList.Add(
+                        new DisplayDinoteErrMessage()
+                        {
+                            MessageID = "DBMST00001",
+                            DisplayForMessage = "役職" + errorMessages.correlationList[1] + SqlList[0].PositionCd + errorMessages.correlationList[2]
+                        });
+                }
             }
             return errorMessageList;
         }
-
     }
 }
