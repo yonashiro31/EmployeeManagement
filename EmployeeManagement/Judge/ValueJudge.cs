@@ -31,7 +31,7 @@ namespace EmployeeManagement.Judge
             }
         }
 
-        public bool EnteredValueLengthJudge(string targetValue, int maxDigit)
+        public bool InputValueLengthJudge(string targetValue, int maxDigit)
         {
 
             if (string.IsNullOrEmpty(targetValue))

@@ -206,7 +206,7 @@ namespace EmployeeManagement.Helper
             ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayDinoteErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit));
+            var judgeResult = checkTargetList.Select(item => valueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit));
 
             int countNum = 0;
             foreach (var i in judgeResult)
