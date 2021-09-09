@@ -4,7 +4,7 @@
     /// 部署情報クラス
     /// </summary>
     /// <remarks>
-    /// 部署情報を保持する
+    /// 取得した部署情報を保持する
     /// </remarks>
     public class AffiliationInfo
     {

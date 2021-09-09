@@ -249,23 +249,23 @@ namespace EmployeeManagement.Helper
                           DisplayForMessage = errorMessages.correlationList[0]
                       });
 
-            if (false == correlationJudge.AfCorrelationJudge(SqlList, sCRN0002ViewModel))
-            {
-                errorMessageList.Add(
-                        new DisplayDinoteErrMessage()
-                        {
-                            MessageID = "DBMST00001",
-                            DisplayForMessage = "部署" + errorMessages.correlationList[1] + SqlList[0].AffiliationCd + errorMessages.correlationList[2]
-                        });
-            }
-            if (false == correlationJudge.PosiCorrelationJudge(SqlList, sCRN0002ViewModel))
-            {
-                errorMessageList.Add(
-                        new DisplayDinoteErrMessage()
-                        {
-                            MessageID = "DBMST00001",
-                            DisplayForMessage = "役職" + errorMessages.correlationList[1] + SqlList[0].PositionCd + errorMessages.correlationList[2]
-                        });
+                if (false == correlationJudge.AfCorrelationJudge(SqlList, sCRN0002ViewModel))
+                {
+                    errorMessageList.Add(
+                            new DisplayDinoteErrMessage()
+                            {
+                                MessageID = "DBMST00001",
+                                DisplayForMessage = "部署" + errorMessages.correlationList[1] + SqlList[0].AffiliationCd + errorMessages.correlationList[2]
+                            });
+                }
+                if (false == correlationJudge.PosiCorrelationJudge(SqlList, sCRN0002ViewModel))
+                {
+                    errorMessageList.Add(
+                            new DisplayDinoteErrMessage()
+                            {
+                                MessageID = "DBMST00001",
+                                DisplayForMessage = "役職" + errorMessages.correlationList[1] + SqlList[0].PositionCd + errorMessages.correlationList[2]
+                            });
                 }
             }
             return errorMessageList;

@@ -2,10 +2,6 @@
 using EmployeeManagement.Session.Interface;
 using EmployeeManagement.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers.SCRN0002
 {
@@ -24,15 +20,15 @@ namespace EmployeeManagement.Controllers.SCRN0002
         private readonly IEV8002Logic _ev8002Logic = null;
         private readonly IEV8003Logic _ev8003Logic = null;
         /// <summary>
-        /// コンストラクタ
+        /// インターフェース準備
         /// </summary>    
         /// <remarks>
-        /// 社員管理システムメニュー画面のDI実施
+        /// 社員管理登録画面のDI実施
         /// </remarks>
-        /// <param name="ev0001Helper">社員メニュー画面のHelper</param>
-        public SCRN0002Controller(IEV0002Helper ev0001Helper,IEV8002Logic ev8002Logic,IEV8003Logic ev8003Logic)
+        /// <param name="ev0002Helper">社員登録画面のHelper</param>
+        public SCRN0002Controller(IEV0002Helper ev0002Helper, IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
         {
-            _ev0002Helper = ev0001Helper;
+            _ev0002Helper = ev0002Helper;
             _ev8002Logic = ev8002Logic;
             _ev8003Logic = ev8003Logic;
         }
@@ -47,7 +43,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpPost]
         public IActionResult Index()
         {
-            _ev8002Logic.FindAll(); 
+            _ev8002Logic.FindAll();
             var messageToHtml = _ev0002Helper.Init();
             return View(messageToHtml);
         }
@@ -62,8 +58,8 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpPost]
         public IActionResult Excute(SCRN0002ViewModel sCRN0002ViewModel)
         {
-            var messageToHtml = _ev0002Helper.Entry(sCRN0002ViewModel);        
-            return View("Index",messageToHtml);
+            var messageToHtml = _ev0002Helper.Entry(sCRN0002ViewModel);
+            return View("Index", messageToHtml);
         }
 
         /// <summary>

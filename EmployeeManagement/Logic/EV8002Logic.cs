@@ -28,9 +28,9 @@ namespace EmployeeManagement.Session
             // SQLの生成
             var selectquery = "SELECT * FROM employee_db.m_affiliation";
 
-            var selectResult = repository.ExcuteQuery(selectquery); 
+            var selectResult = repository.ExcuteQuery(selectquery);
             var AffiliationList = new List<AffiliationDAO>();
-           
+
             while (selectResult.Read())
             {
                 AffiliationList.Add(new AffiliationDAO()
@@ -50,7 +50,7 @@ namespace EmployeeManagement.Session
             repository.Clone();
 
             AffiliationList.ForEach(item => item.AffiliationNm = valueJudge.AffiliationNmCheck(item));
-                    
+
             return AffiliationList;
         }
     }

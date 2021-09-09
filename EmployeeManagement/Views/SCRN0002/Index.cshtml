@@ -53,14 +53,15 @@ new SelectList(Model.PositionList, "PositionCd", "PositionNm"))
         </tr>
 
         <tr>
+            @*氏名*@
             <td>氏名</td>
             <td>
                 @Html.TextBoxFor(model => model.EmployeeName, new { size = 31, maxlength = 32 })
             </td>
         </tr>
         <tr>
+            @*性別*@
             <td>性別</td>
-
             <td>
                 @Html.RadioButtonFor(
                 model => model.Gender,
@@ -80,6 +81,7 @@ new SelectList(Model.PositionList, "PositionCd", "PositionNm"))
         </tr>
 
         <tr>
+            @*生年月日*@
             <td>生年月日</td>
             <td>
                 @Html.TextBoxFor(model => model.BirthDay, "{0:yyyy/MM/dd}", new
@@ -91,6 +93,7 @@ new SelectList(Model.PositionList, "PositionCd", "PositionNm"))
         </tr>
 
         <tr>
+            @*基本給*@
             <td>基本給</td>
             <td>
                 @Html.TextBoxFor(model => model.BaseSalary, new { size = 31, minlength = 1, maxlength = 8 })
@@ -99,18 +102,21 @@ new SelectList(Model.PositionList, "PositionCd", "PositionNm"))
         </tr>
 
         <tr>
+            @*メモ*@
             <td>メモ</td>
             <td>
-                @Html.TextAreaFor(model => model.Memo , new { size = 31 })
+                @Html.TextAreaFor(model => model.Memo, new { size = (31,31) })
             </td>
         </tr>
     }
 </table>
 @using (Html.BeginForm("Back", "SCRN0002", FormMethod.Get, new { id = "form_employee_info" }))
-{ 
+{
 }
+@*ボタン*@
 <div class="insert-btn-Area">
     <button type="submit" form="form_employee_insert_info">新規登録</button>
+    <p1>　　　　　</p1>
     <button type="submit" form="form_employee_info">戻る</button>
 
 </div>

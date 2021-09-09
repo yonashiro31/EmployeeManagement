@@ -31,7 +31,6 @@ namespace EmployeeManagement.Judge
             }
         }
 
-        // 桁数は引数に入れてしまう
         public bool EnteredValueLengthJudge(string targetValue, int maxDigit)
         {
 
@@ -40,7 +39,7 @@ namespace EmployeeManagement.Judge
                 return true;
             }
             // ここで未入力の引数を受け取ると例外発生するため、
-            // 上のコードで未入力時は処理が発生しないようにする
+            // 上記コードで未入力時は処理が発生しないようにする
             if (targetValue.Length <= maxDigit)
             {
                 return true;
@@ -56,7 +55,7 @@ namespace EmployeeManagement.Judge
         /// </summary>
         /// <param name="min">最大許容桁数</param>
         /// <param name="max">最小許容桁数</param>
-        /// <returns></returns>
+        /// <returns>合否と該当エラーメッセージを返す</returns>
         public (List<string>, bool) ValueCheck(int min, int max)
         {
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();

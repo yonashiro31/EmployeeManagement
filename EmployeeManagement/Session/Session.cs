@@ -15,7 +15,7 @@ namespace EmployeeManagementWebUI.Common.Session
         /// セッションクラスコンストラクタ
         /// </summary>
         /// <remarks>
-        /// コンストラクタ
+        /// セッションクラスコンストラクタ
         /// </remarks>
         public Session()
         {

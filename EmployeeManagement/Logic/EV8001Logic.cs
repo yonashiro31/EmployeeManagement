@@ -10,7 +10,7 @@ namespace EmployeeManagement.Logic
     /// SLQから部署情報を取得するクラス
     /// </summary>
     /// <remarks>
-    /// SQL接続し、
+    /// SQL接続し、IDに該当する社員情報を取得する
     /// </remarks>
     public class EV8001Logic : IEV8001Logic
     {
@@ -33,7 +33,7 @@ namespace EmployeeManagement.Logic
 
             var selectResult = repository.ExcuteQuery(selectquery, parametorNameAndValueDic);
             var EmpList = new List<EmployeeInfoDAO>();
-            // ToDo　修正箇所 
+
             while (selectResult.Read())
             {
                 EmpList.Add(new EmployeeInfoDAO()
@@ -51,13 +51,14 @@ namespace EmployeeManagement.Logic
             }
 
             selectResult.Close();
-
             repository.Clone();
+
             return EmpList;
         }
         /// <summary>
         /// SQL登録クラス
         /// </summary>
+        /// <remarks>入力値をSQLに登録する</remarks>
         /// <param name="entryValues">登録用入力値</param>
         public void Register(EmployeeInfoDAO entryValues)
         {

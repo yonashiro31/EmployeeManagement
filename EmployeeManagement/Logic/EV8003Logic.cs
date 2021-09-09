@@ -1,13 +1,7 @@
 ﻿using EmployeeManagement.Session.Interface;
 using EmployeeManagement.LogicDTO;
-using EmployeeManagement.ViewModel;
 using EmployeeManagementWebUI.DataAccess;
-using Microsoft.Data.SqlClient;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EmployeeManagement.Session
 {
@@ -34,7 +28,7 @@ namespace EmployeeManagement.Session
 
             var selectResult = repository.ExcuteQuery(selectquery);
             var PositionList = new List<PositionDAO>();
-            // ToDo　修正箇所 
+            
             while (selectResult.Read())
             {
                 PositionList.Add(new PositionDAO()
@@ -47,8 +41,8 @@ namespace EmployeeManagement.Session
             }
 
             selectResult.Close();
-
             repository.Clone();
+
             return PositionList;
         }
     }

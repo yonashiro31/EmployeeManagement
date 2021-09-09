@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeeManagement.LogicDTO
+﻿namespace EmployeeManagement.LogicDTO
 {
+    /// <summary>
+    /// 役職情報DAO
+    /// </summary>
+    /// <remarks>SQLから取得した役職情報を保持する</remarks>
     public class PositionDAO
     {
         public string PositionCd { get; set; }

@@ -1,6 +1,10 @@
 ﻿
 @charset "UTF-8";
 
+
+title {
+    font-size: 24px;
+}
 /*背景設定*/
 body {
     text-align: center;
@@ -13,11 +17,11 @@ div {
 p {
     margin: auto;
     display: block;
-    text-align: center;
-    width: 200px;
+    text-align: left;
+    width: 360px;
     background-color: red;
 }
-
+/*テーブル設定*/
 table, th, td {
     border: 1px solid;
 }
@@ -34,12 +38,13 @@ table {
 button {
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 250px;
+    width: 140px;
     font-size: 24px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
     background-color: white;
 }
+
 /*ボタン表示位置設定*/
 .insert-btn-Area {
     margin: auto;

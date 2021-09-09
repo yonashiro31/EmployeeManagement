@@ -9,7 +9,17 @@ namespace EmployeeManagement.Logic.Interface
     /// <remarks>社員情報取得と登録メソッドのインターフェース</remarks>
     public interface IEV8001Logic
     {
+        /// <summary>
+        /// 社員情報取得メソッド
+        /// </summary>
+        /// <param name="enteredEmployeeId">社員ID</param>
+        /// <returns>SQLに接続しIDに対応する社員情報を取得する</returns>
         public List<EmployeeInfoDAO> FindByPrimaryKey(string enteredEmployeeId);
+        /// <summary>
+        /// SQL登録メソッド
+        /// </summary>
+        /// <param name="entryValues">入力値</param>
+        /// <remarks>入力情報をSQLに登録する</remarks>
         public void Register(EmployeeInfoDAO entryValues);
     }
 }
