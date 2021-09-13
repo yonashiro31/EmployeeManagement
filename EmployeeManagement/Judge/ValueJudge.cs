@@ -93,15 +93,14 @@ namespace EmployeeManagement.Judge
             if (affiliation.BrunchCd != "00")
             {
                 return affiliation.BrunchNm;
-            }
+            };
             if (affiliation.GroupCd != "00")
             {
                 return affiliation.GroupNm;
-            }
-            else
-            {
+            };
+           
                 return affiliation.ManagementNm;
-            }
+          
         }
     }
 }

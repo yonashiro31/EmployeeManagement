@@ -239,6 +239,7 @@ namespace EmployeeManagement.Helper
 
             var errorMessageList = new List<DisplayDinoteErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
+
             var SqlList = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
             if (true == correlationJudge.IdCorrelationIdJudge(SqlList))
             {

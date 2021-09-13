@@ -14,7 +14,7 @@ namespace EmployeeManagement.Judge
         /// <summary>
         /// 社員登録ID相関チェックメソッド
         /// </summary>
-        /// <param name="employeeInfoList"></param>
+        /// <param name="employeeInfoList">社員情報リスト</param>
         /// <returns></returns>
         public bool IdCorrelationIdJudge(List<EmployeeInfoDAO> employeeInfoList)
         {

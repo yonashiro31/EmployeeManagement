@@ -90,8 +90,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 部署情報のチェッククラステスト
         /// </summary>
         /// <remarks>ブランチネーム返却時</remarks>
-        [TestCase("00","00")]
-        [TestCase("00", "01")]
+        [TestCase("01","00")]
+        [TestCase("01", "01")]
         public void AffiliationNmCheckTest(string brunchCd,string groupCd)
         {
             var affiliationDAOMock = new AffiliationDAOMock
@@ -115,7 +115,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 部署情報のチェッククラステスト
         /// </summary>
         /// <remarks>グループネーム返却時</remarks>
-        [TestCase("01", "00")]
+        [TestCase("00", "01")]
         public void AffiliationNmCheckTest2(string brunchCd, string groupCd)
         {
             var affiliationDAOMock = new AffiliationDAOMock
@@ -139,7 +139,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 部署情報のチェッククラステスト
         /// </summary>
         /// <remarks>マネージメントネーム返却時</remarks>
-        [TestCase("01", "01")]
+        [TestCase("00", "00")]
         public void AffiliationNmCheckTest3(string brunchCd, string groupCd)
         {
             var affiliationDAOMock = new AffiliationDAOMock
@@ -156,7 +156,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
             var testTarget = new ValueJudge();
             var testResult = testTarget.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
-            Assert.AreEqual("ManegementNm", testResult);
+            Assert.AreEqual("ManagementNm", testResult);
         }
     }
 }
