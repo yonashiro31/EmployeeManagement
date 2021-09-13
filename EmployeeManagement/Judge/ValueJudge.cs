@@ -59,6 +59,7 @@ namespace EmployeeManagement.Judge
         public (List<string>, bool) ValueCheck(int min, int max)
         {
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
+            errorMessages.itemNameMessageList = new List<string>();
             bool result = true;
 
             switch (min, max)
@@ -77,6 +78,7 @@ namespace EmployeeManagement.Judge
 
                     break;
                 default:
+
                     result = false;
                     break;
             }

@@ -18,18 +18,20 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// </summary>
         /// <remarks>結果True時</remarks>
         /// <param name="value">社員ID</param>
-        [TestCase(null)]
+        [TestCase("")]
         public void IdCorrelationIdJudgeTrueTest(string value)
         {
             var employeeInfoDAOMock = new EmployeeInfoDAOMock();
             var testTarget = new CorrelationJudge();
-            employeeInfoDAOMock.EmployeeInfoListMock = new List<EmployeeInfoDAO>();
+            var List = new List<EmployeeInfoDAO>
+            {
+                new EmployeeInfoDAO() {PositionCd = value }
+            };
 
-            employeeInfoDAOMock.EmployeeInfoListMock.ForEach(item => item.EmployeeID = value);
 
-　          var testResult = testTarget.IdCorrelationIdJudge(employeeInfoDAOMock.EmployeeInfoListMock);
+　          var testResult = testTarget.IdCorrelationIdJudge(List);
 
-            Assert.AreEqual(true, testResult);
+            Assert.AreEqual(false, testResult);
         }
 
         /// <summary>
@@ -42,13 +44,14 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var employeeInfoDAOMock = new EmployeeInfoDAOMock();
             var testTarget = new CorrelationJudge();
-            employeeInfoDAOMock.EmployeeInfoListMock = new List<EmployeeInfoDAO>();
+            var List = new List<EmployeeInfoDAO>
+            {
+                new EmployeeInfoDAO() {EmployeeID = value }
+            };
 
-            employeeInfoDAOMock.EmployeeInfoListMock.ForEach(item => item.EmployeeID = value);
+            var testResult = testTarget.IdCorrelationIdJudge(List);
 
-            var testResult = testTarget.IdCorrelationIdJudge(employeeInfoDAOMock.EmployeeInfoListMock);
-
-            Assert.AreEqual(false, testResult);
+            Assert.AreEqual(true, testResult);
         }
 
         /// <summary>
@@ -62,7 +65,10 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var employeeInfoDAOMock = new EmployeeInfoDAOMock();
             var testTarget = new CorrelationJudge();
-            employeeInfoDAOMock.EmployeeInfoListMock = new List<EmployeeInfoDAO>();
+            var List = new List<EmployeeInfoDAO>
+            {
+                new EmployeeInfoDAO() {AffiliationCd =sqlValue }
+            };
 
             var sCRN0002ViewModelMock = new SCRN0002ViewModelMock()
             {
@@ -72,7 +78,6 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 }
             };
 
-            employeeInfoDAOMock.EmployeeInfoListMock.ForEach(item => item.AffiliationCd = sqlValue);
             var testResult = testTarget.AfCorrelationJudge(List,sCRN0002ViewModelMock.SCRN2ViewModelMock);
            
             Assert.AreEqual(true, testResult);
