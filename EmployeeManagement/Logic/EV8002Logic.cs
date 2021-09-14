@@ -10,14 +10,14 @@ namespace EmployeeManagement.Session
     /// SLQから部署情報を取得するクラス
     /// </summary>
     /// <remarks>
-    /// 部署情報を取得する
+    /// ドロップダウンリスト用の部署情報の取得を行う
     /// </remarks>
     public class EV8002Logic : IEV8002Logic
     {
         /// <summary>
-        /// SQL接続と社員情報取得を行う
+        /// SQL接続と部署情報取得を行うメソッド
         /// </summary>
-        /// <remarks>SQL接続と社員情報取得を行う</remarks>
+        /// <remarks>部署情報をリストに格納し返す</remarks>
         public List<AffiliationDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();

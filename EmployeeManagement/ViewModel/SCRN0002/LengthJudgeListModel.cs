@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeeManagement.ViewModel
+﻿namespace EmployeeManagement.ViewModel
 {
     /// <summary>
-    /// 桁数チェック時用に要素を抜き出すリストクラス
+    /// 桁数チェック時用リストクラス
     /// </summary>
     /// <remarks>
-    /// 桁数チェック時用に要素を抜き出す
+    /// 桁数チェック時用に抜き出した要素を格納するプロパティを宣言する
     /// </remarks>
     public class LengthJudgeListModel
     {
         /// <summary>
-        /// 桁数チェック時用コンストラクタ
+        /// LengthJudgeListModelコンストラクタ
         /// </summary>
         /// <remarks>
-        /// 桁数チェックに必要な情報と最大桁数を詰める
+        /// 桁数チェックに必要な情報と最大桁数を格納する
         /// </remarks>
         public LengthJudgeListModel(string employeeDate, int maxJudgedigit)
         {

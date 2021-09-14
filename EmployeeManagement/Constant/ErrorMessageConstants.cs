@@ -7,41 +7,41 @@ namespace EmployeeManagement.Constants
     /// エラーメッセージ定数クラス
     /// </summary>
     /// <remarks>
-    /// エラーメッセージに利用する文字列を宣言する
+    /// エラーメッセージ用の定数を宣言し、リストに格納する
     /// </remarks>
     public class ErrorMessageConstants
     {
         /// <summary>
-        /// エラーメッセージを格納するリストを用意するコンストラクタ
+        /// ErrorMessageConstantsのコンストラクタ
         /// </summary>
         /// <remarks>
-        /// エラーメッセージを格納するリストを用意する
+        /// エラーメッセージを格納するリストの宣言と格納を行う
         /// </remarks>
         public ErrorMessageConstants()
         {
-            itemNameMessageList = new List<string>();
-            itemNameMessageList.Add(IdMessage);
-            itemNameMessageList.Add(AfMessage);
-            itemNameMessageList.Add(PosiMessage);
-            itemNameMessageList.Add(NameMessage);
-            itemNameMessageList.Add(GenderMessage);
-            itemNameMessageList.Add(BirthDayMessage);
-            itemNameMessageList.Add(BaseSalaryMessage);
+            ItemNameMessageList = new List<string>();
+            ItemNameMessageList.Add(IdMessage);
+            ItemNameMessageList.Add(AfMessage);
+            ItemNameMessageList.Add(PosiMessage);
+            ItemNameMessageList.Add(NameMessage);
+            ItemNameMessageList.Add(GenderMessage);
+            ItemNameMessageList.Add(BirthDayMessage);
+            ItemNameMessageList.Add(BaseSalaryMessage);
 
-            instructionMessageList = new List<string>();
-            instructionMessageList.Add(NullMessage);
-            instructionMessageList.Add(LengthMessage);
+            InstructionMessageList = new List<string>();
+            InstructionMessageList.Add(NullMessage);
+            InstructionMessageList.Add(LengthMessage);
 
-            correlationList = new List<string>();
-            correlationList.Add(EmpIdDuplication);
-            correlationList.Add(MastaCorrelation);
-            correlationList.Add(MastaCorrelation2);
+            CorrelationList = new List<string>();
+            CorrelationList.Add(EmpIdDuplication);
+            CorrelationList.Add(MastaCorrelation);
+            CorrelationList.Add(MastaCorrelation2);
         }
-        DisplayDinoteErrMessage errorMessage = new DisplayDinoteErrMessage();
-
-        public List<string> itemNameMessageList { get; set; }
-        public List<string> instructionMessageList { get; set; }
-        public List<string> correlationList { get; set; }
+        DisplayViewErrMessage errorMessage = new DisplayViewErrMessage();
+        
+        public List<string> ItemNameMessageList { get; set; }
+        public List<string> InstructionMessageList { get; set; }
+        public List<string> CorrelationList { get; set; }
         public const string IdMessage = "社員ID";
         public const string AfMessage = "部署";
         public const string PosiMessage = "役職";

@@ -3,7 +3,7 @@
     /// <summary>
     /// 役職情報DAO
     /// </summary>
-    /// <remarks>SQLから取得した役職情報を保持する</remarks>
+    /// <remarks>役職情報用のプロパティを宣言する</remarks>
     public class PositionDAO
     {
         public string PositionCd { get; set; }

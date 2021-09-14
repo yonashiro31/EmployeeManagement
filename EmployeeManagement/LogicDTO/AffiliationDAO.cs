@@ -3,7 +3,7 @@
     /// <summary>
     /// 部署情報のDAO
     /// </summary>
-    /// <remarks>SQLから取得した部署情報を保持する</remarks>
+    /// <remarks>部署情報用プロパティを宣言する</remarks>
     public class AffiliationDAO
     {
         public string AffiliationCd { get; set; }

@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.Constants;
+﻿using EmployeeManagement.Constant;
+using EmployeeManagement.Constants;
 using EmployeeManagement.LogicDTO;
 using System.Collections.Generic;
 
@@ -8,17 +9,17 @@ namespace EmployeeManagement.Judge
     /// 入力値の判定を行うクラス
     /// </summary>
     /// <remarks>
-    /// 入力値の判定を行う
+    /// 未入力、桁数、種別、部署情報の判定を行う
     /// </remarks>
     public class ValueJudge
     {
         /// <summary>
-        /// 入力値の判定を行う
+        /// 入力値が未入力か判定するメソッド
         /// </summary>
         /// <remarks>
-        /// 入力値が未入力かどうか判定する
+        /// 真偽値を返す
         /// </remarks>
-        /// <param name="targetValue">入力した値</param>
+        /// <param name="targetValue">入力値</param>
         public bool EnteredNullJudge(string targetValue)
         {
             if (!string.IsNullOrEmpty(targetValue))
@@ -31,9 +32,14 @@ namespace EmployeeManagement.Judge
             }
         }
 
+        /// <summary>
+        /// 入力値の桁数を判定するメソッド
+        /// </summary>
+        /// <param name="targetValue">入力値</param>
+        /// <param name="maxDigit">最大許容桁数</param>
+        /// <returns></returns>
         public bool InputValueLengthJudge(string targetValue, int maxDigit)
         {
-
             if (string.IsNullOrEmpty(targetValue))
             {
                 return true;
@@ -55,26 +61,26 @@ namespace EmployeeManagement.Judge
         /// </summary>
         /// <param name="min">最大許容桁数</param>
         /// <param name="max">最小許容桁数</param>
-        /// <returns>合否と該当エラーメッセージを返す</returns>
+        /// <returns>真偽値と該当エラーメッセージを返す</returns>
         public (List<string>, bool) ValueCheck(int min, int max)
         {
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            errorMessages.itemNameMessageList = new List<string>();
+            errorMessages.ItemNameMessageList = new List<string>();
             bool result = true;
 
             switch (min, max)
             {
-                case (8, 8):
-                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.IdMessage);
+                case (CommonConstants.Eight, CommonConstants.Eight):
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.IdMessage);
                     break;
-                case (1, 32):
-                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.NameMessage);
+                case (CommonConstants.One, CommonConstants.ThirtyTwo):
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.NameMessage);
                     break;
-                case (9, 9):
-                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.BirthDayMessage);
+                case (CommonConstants.One, CommonConstants.Nine):
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.BirthDayMessage);
                     break;
-                case (1, 8):
-                    errorMessages.itemNameMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
+                case (CommonConstants.One, CommonConstants.Eight):
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
 
                     break;
                 default:
@@ -82,7 +88,7 @@ namespace EmployeeManagement.Judge
                     result = false;
                     break;
             }
-            return (errorMessages.itemNameMessageList, result);
+            return (errorMessages.ItemNameMessageList, result);
         }
 
         /// <summary>
@@ -92,17 +98,15 @@ namespace EmployeeManagement.Judge
         /// <returns>判定に応じて必要値を格納する</returns>
         public string AffiliationNmCheck(AffiliationDAO affiliation)
         {
-            if (affiliation.BrunchCd != "00")
+            if (affiliation.BrunchCd != CommonConstants.Zero)
             {
                 return affiliation.BrunchNm;
             };
-            if (affiliation.GroupCd != "00")
+            if (affiliation.GroupCd != CommonConstants.Zero)
             {
                 return affiliation.GroupNm;
             };
-           
-                return affiliation.ManagementNm;
-          
+            return affiliation.ManagementNm;
         }
     }
 }

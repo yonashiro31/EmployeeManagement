@@ -16,21 +16,16 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <summary>社員管理登録画面のヘルパー</summary>
         /// <remarks>社員管理登録画面のヘルパー</remarks>
         private readonly IEV0002Helper _ev0002Helper = null;
-
-        private readonly IEV8002Logic _ev8002Logic = null;
-        private readonly IEV8003Logic _ev8003Logic = null;
         /// <summary>
-        /// インターフェース準備
+        /// SCRN0002Controllerコンストラクタ
         /// </summary>    
         /// <remarks>
         /// 社員管理登録画面のDI実施
         /// </remarks>
-        /// <param name="ev0002Helper">社員登録画面のHelper</param>
-        public SCRN0002Controller(IEV0002Helper ev0002Helper, IEV8002Logic ev8002Logic, IEV8003Logic ev8003Logic)
+        /// <param name="ev0002Helper">社員登録画面のヘルパー</param>
+        public SCRN0002Controller(IEV0002Helper ev0002Helper)
         {
             _ev0002Helper = ev0002Helper;
-            _ev8002Logic = ev8002Logic;
-            _ev8003Logic = ev8003Logic;
         }
 
         /// <summary>
@@ -43,7 +38,6 @@ namespace EmployeeManagement.Controllers.SCRN0002
         [HttpPost]
         public IActionResult Index()
         {
-            _ev8002Logic.FindAll();
             var messageToHtml = _ev0002Helper.Init();
             return View(messageToHtml);
         }
@@ -54,11 +48,17 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <returns>
         /// 登録時必要な情報をViewに渡す
         /// </returns>
+        /// <param name="sCRN0002ViewModel">SCRN0002ViewModelのインスタンス</param>
         [Route("employee/entry/excute")]
         [HttpPost]
         public IActionResult Excute(SCRN0002ViewModel sCRN0002ViewModel)
         {
             var messageToHtml = _ev0002Helper.Entry(sCRN0002ViewModel);
+
+            if(messageToHtml.ErrorMessageList.Count == 0)
+            {
+                return RedirectToAction("Index", "SCRN0004");
+            }
             return View("Index", messageToHtml);
         }
 

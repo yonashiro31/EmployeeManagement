@@ -5,7 +5,7 @@ namespace EmployeeManagement.LogicDTO
     /// <summary>
     /// 社員情報のDAO
     /// </summary>
-    /// <remarks>SQLから取得した社員情報を保持する</remarks>
+    /// <remarks>登録用社員情報用のプロパティを宣言する</remarks>
     public class EmployeeInfoDAO
     {
         public string EmployeeID { set; get; }

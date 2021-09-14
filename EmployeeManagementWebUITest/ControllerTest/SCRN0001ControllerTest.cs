@@ -30,7 +30,7 @@ namespace EmployeeManagementWebUITest.ControllerTest
                 ViewModel = new SCRN0001ViewModel()
                 {
                     EmployeeID = string.Empty,
-                    ErrorMessageList = new List<DisplayDinoteErrMessage>(),
+                    ErrorMessageList = new List<DisplayViewErrMessage>(),
                 }
             };
 

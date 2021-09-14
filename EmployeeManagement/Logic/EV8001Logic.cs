@@ -7,16 +7,17 @@ using System.Collections.Generic;
 namespace EmployeeManagement.Logic
 {
     /// <summary>
-    /// SLQから部署情報を取得するクラス
+    /// SLQ接続クラス
     /// </summary>
     /// <remarks>
-    /// SQL接続し、IDに該当する社員情報を取得する
+    /// 社員情報を取得と登録を行うメソッドを宣言する
     /// </remarks>
     public class EV8001Logic : IEV8001Logic
     {
         /// <summary>
         /// 社員情報取得メソッド
         /// </summary>
+        /// <remarks>入力IDに対応した社員情報を取得する</remarks>
         public List<EmployeeInfoDAO> FindByPrimaryKey(string enteredId)
         {
             using var repository = new EmployeeSystemRepository();
@@ -27,7 +28,6 @@ namespace EmployeeManagement.Logic
 
             var parametorNameAndValueDic = new Dictionary<string, object>()
             {
-                // { SQLに指定した変数名, 変数に入れたい値 }
                 { "@enteredId",  enteredId }
             };
 
@@ -56,9 +56,9 @@ namespace EmployeeManagement.Logic
             return EmpList;
         }
         /// <summary>
-        /// SQL登録クラス
+        /// 新規登録メソッド
         /// </summary>
-        /// <remarks>入力値をSQLに登録する</remarks>
+        /// <remarks>登録用の値をSQLに登録する</remarks>
         /// <param name="entryValues">登録用入力値</param>
         public void Register(EmployeeInfoDAO entryValues)
         {

@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace EmployeeManagement.Session
 {
     /// <summary>
-    /// SLQから部署情報を取得するクラス
+    /// SLQから役職情報を取得するクラス
     /// </summary>
     /// <remarks>
-    /// SQL接続し、
+    /// ドロップダウンリスト用の役職情報の取得を行う
     /// </remarks>
     public class EV8003Logic : IEV8003Logic
     {
         /// <summary>
-        /// 部署情報の取得を行うクラス
+        /// 役職情報の取得を行うメソッド
         /// </summary>
-        /// <remarks>SQL接続を行う</remarks>
+        /// <remarks>役職情報をリストに格納し返却する</remarks>
         public List<PositionDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
@@ -27,11 +27,11 @@ namespace EmployeeManagement.Session
             var selectquery = "SELECT * FROM employee_db.m_affiliation";
 
             var selectResult = repository.ExcuteQuery(selectquery);
-            var PositionList = new List<PositionDAO>();
+            var positionList = new List<PositionDAO>();
             
             while (selectResult.Read())
             {
-                PositionList.Add(new PositionDAO()
+                positionList.Add(new PositionDAO()
                 {
                     PositionCd = selectResult[0].ToString(),
                     GradeCd = selectResult[1].ToString(),
@@ -43,7 +43,7 @@ namespace EmployeeManagement.Session
             selectResult.Close();
             repository.Clone();
 
-            return PositionList;
+            return positionList;
         }
     }
 }

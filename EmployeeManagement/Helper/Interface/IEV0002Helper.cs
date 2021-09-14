@@ -1,8 +1,4 @@
 ﻿using EmployeeManagement.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Helper
 {
@@ -18,17 +14,17 @@ namespace EmployeeManagement.Helper
         /// 初期表示メソッド
         /// </summary>
         /// <remarks>
-        /// 初期表示メソッド
+        /// 初期表示に必要な処理を行う
         /// </remarks>
         public SCRN0002ViewModel Init();
 
         /// <summary>
         /// 新規登録メソッド
-        /// </summary>
-        /// <param name="entry">新規登録時情報</param>
+        /// </summary>       
         /// <returns>
-        /// 新規登録メソッド
+        /// 新規登録に必要な処理を行う
         /// </returns>
+        /// <param name="entry">新規登録用入力情報</param>
         public SCRN0002ViewModel Entry(SCRN0002ViewModel entry);
     }
 }

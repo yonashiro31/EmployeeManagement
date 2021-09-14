@@ -7,7 +7,7 @@ namespace EmployeeManagement.ViewModel
     /// 登録画面のViewModel
     /// </summary>
     /// <remarks>
-    /// 登録画面処理に利用するViewModel
+    /// 入力した値を受け取るプロパティを宣言する
     /// </remarks>
     public class SCRN0002ViewModel
     {
@@ -19,12 +19,12 @@ namespace EmployeeManagement.ViewModel
         /// </remarks>
         public SCRN0002ViewModel()
         {
-            ErrorMessageList = new List<DisplayDinoteErrMessage>();
+            ErrorMessageList = new List<DisplayViewErrMessage>();
             AffiliationList = new List<AffiliationInfo>();
             PositionList = new List<PositionInfo>();
         }
         public string EmployeeID { set; get; }
-        public IList<DisplayDinoteErrMessage> ErrorMessageList { get; set; }
+        public IList<DisplayViewErrMessage> ErrorMessageList { get; set; }
         public IList<AffiliationInfo> AffiliationList { get; set; }
         public IList<PositionInfo> PositionList { get; set; }
         public string AffiliationCd { get; set; }
