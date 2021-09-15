@@ -11,6 +11,43 @@ namespace EmployeeManagement.Constants
     /// </remarks>
     public class ErrorMessageConstants
     {
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>社員ID</remarks>
+        public const string IdMessage = "社員ID";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>部署</remarks>
+        public const string AfMessage = "部署";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>役職</remarks>
+        public const string PosiMessage = "役職";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>氏名</remarks>
+        public const string NameMessage = "氏名";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>性別</remarks>
+        public const string GenderMessage = "性別";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>生年月日</remarks>
+        public const string BirthDayMessage = "生年月日";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>基本給料</remarks>
+        public const string BaseSalaryMessage = "基本給料";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>必須項目メッセージ</remarks>
+        public const string NullMessage = "は必須です";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>指定桁数メッセージ</remarks>
+        public const string LengthMessage = "は指定桁数で入力してください。";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>登録済みメッセージ</remarks>
+        public const string EmpIdDuplication = "既に登録済みの社員IDです。";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>マスタエラーメッセージ</remarks>
+        public const string MastaCorrelation = "マスタに存在しない";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>指定エラーメッセージ</remarks>
+        public const string MastaCorrelation2 = "を指定しています。";
+
         /// <summary>
         /// ErrorMessageConstantsのコンストラクタ
         /// </summary>
@@ -19,40 +56,41 @@ namespace EmployeeManagement.Constants
         /// </remarks>
         public ErrorMessageConstants()
         {
-            ItemNameMessageList = new List<string>();
-            ItemNameMessageList.Add(IdMessage);
-            ItemNameMessageList.Add(AfMessage);
-            ItemNameMessageList.Add(PosiMessage);
-            ItemNameMessageList.Add(NameMessage);
-            ItemNameMessageList.Add(GenderMessage);
-            ItemNameMessageList.Add(BirthDayMessage);
-            ItemNameMessageList.Add(BaseSalaryMessage);
+            ItemNameMessageList = new List<string>
+            {
+                IdMessage,
+                AfMessage,
+                PosiMessage,
+                NameMessage,
+                GenderMessage,
+                BirthDayMessage,
+                BaseSalaryMessage
+            };
 
-            InstructionMessageList = new List<string>();
-            InstructionMessageList.Add(NullMessage);
-            InstructionMessageList.Add(LengthMessage);
+            InstructionMessageList = new List<string>
+            {
+                NullMessage,
+                LengthMessage
+            };
 
-            CorrelationList = new List<string>();
-            CorrelationList.Add(EmpIdDuplication);
-            CorrelationList.Add(MastaCorrelation);
-            CorrelationList.Add(MastaCorrelation2);
+            CorrelationErrorList = new List<string>
+            {
+                EmpIdDuplication,
+                MastaCorrelation,
+                MastaCorrelation2
+            };
         }
-        DisplayViewErrMessage errorMessage = new DisplayViewErrMessage();
-        
+        /// <summary>相関チェックエラーメッセージリストプロパティ</summary>
+        /// <remarks>相関チェック用エラーメッセージを格納する</remarks>
+        /// <value>相関チェックエラーメッセージリストプロパティ</value>
+        public List<string> CorrelationErrorList { get; set; }
+        /// <summary>エラーメッセージリストプロパティ</summary>
+        /// <remarks>エラーメッセージ項目表示部分を格納する</remarks>
+        /// <value>エラーメッセージリストプロパティ</value>
         public List<string> ItemNameMessageList { get; set; }
-        public List<string> InstructionMessageList { get; set; }
-        public List<string> CorrelationList { get; set; }
-        public const string IdMessage = "社員ID";
-        public const string AfMessage = "部署";
-        public const string PosiMessage = "役職";
-        public const string NameMessage = "氏名";
-        public const string GenderMessage = "性別";
-        public const string BirthDayMessage = "生年月日";
-        public const string BaseSalaryMessage = "基本給料";
-        public const string NullMessage = "は必須です";
-        public const string LengthMessage = "は指定桁数で入力してください。";
-        public const string EmpIdDuplication = "既に登録済みの社員IDです。";
-        public const string MastaCorrelation = "マスタに存在しない";
-        public const string MastaCorrelation2 = "を指定しています。";
+        /// <summary>エラーメッセージリストプロパティ</summary>
+        /// <remarks>エラーメッセージ種別表示部分を格納する</remarks>
+        /// <value>エラーメッセージリストプロパティ</value>
+        public List<string> InstructionMessageList { get; set; }       
     }
 }

@@ -12,7 +12,8 @@ namespace EmployeeManagement.Session.Interface
         /// <summary>
         /// 役職情報の取得を行うメソッド
         /// </summary>
-        /// <returns>SQLに接続し役職情報の全取得を行う</returns>
+        /// <remarks>SQLに接続し役職情報の全取得を行う</remarks>
+        /// <returns>取得した役職情報を返す</returns>
         public List<PositionDAO> FindAll();
     }
 }

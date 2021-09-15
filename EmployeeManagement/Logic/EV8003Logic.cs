@@ -16,7 +16,8 @@ namespace EmployeeManagement.Session
         /// <summary>
         /// 役職情報の取得を行うメソッド
         /// </summary>
-        /// <remarks>役職情報をリストに格納し返却する</remarks>
+        /// <remarks>SQLに接続し役職情報を取得する</remarks>
+        /// <returns>役職情報をリストに格納し返却する</returns>
         public List<PositionDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
@@ -24,9 +25,9 @@ namespace EmployeeManagement.Session
             // DB接続の開始
             repository.Open();
 
-            var selectquery = "SELECT * FROM employee_db.m_affiliation";
+            var selectQuery = "SELECT * FROM employee_db.m_affiliation";
 
-            var selectResult = repository.ExcuteQuery(selectquery);
+            var selectResult = repository.ExcuteQuery(selectQuery);
             var positionList = new List<PositionDAO>();
             
             while (selectResult.Read())

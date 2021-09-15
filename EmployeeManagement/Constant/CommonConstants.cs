@@ -6,11 +6,38 @@
     /// <remarks>定数の宣言を行う</remarks>
     public static class CommonConstants
     {
+        /// <summary>更新ユーザーID</summary>
+        /// <remarks>更新ユーザID</remarks>
         public const string MOD_USER_ID = "user1";
-        public const string Zero = "00";
-        public const int One = 1;
-        public const int Eight = 8;
-        public const int Nine = 9;
-        public const int ThirtyTwo = 32;
+        /// <summary></summary>
+        /// <remarks></remarks>
+        public const string AFFILIATION_CHECK_VALUE = "00";
+        /// <summary>桁数定数</summary>
+        /// <remarks>氏名の最小許容桁数</remarks>
+        public const int NAME_MIN_DIGITS = 1;
+        /// <summary>桁数定数</summary>
+        /// <remarks>氏名の最大許容桁数</remarks>
+        public const int NAME_MAX_DIGITS = 32;
+        /// <summary>桁数定数</summary>
+        ///   /// <remarks>社員IDの最小許容桁数</remarks>
+        public const int ID_MIN_DIGITS = 8;
+        /// <summary>桁数定数</summary>  
+        /// <remarks>社員IDの最大許容桁数</remarks>
+        public const int ID_MAX_DIGITS = 8;
+        /// <summary>桁数定数</summary>
+        /// <remarks>生年月日の最小許容桁数</remarks>
+        public const int BIRTH_DAY_MIN_DIGITS = 1;
+        /// <summary>桁数定数</summary>
+        /// <remarks>生年月日の最大許容桁数</remarks>
+        public const int BIRTH_DAY_MAX_DIGITS = 9;
+        /// <summary>桁数定数</summary>
+        /// <remarks>基本給料の最小許容桁数</remarks>
+        public const int SALARY_MIN_DIGITS = 1;
+        /// <summary>桁数定数</summary>
+        /// <remarks>基本給料の最大許容桁数</remarks>
+        public const int SALARY_MAX_DIGITS = 8;
+        /// <summary>性別定数</summary>
+        /// <remarks>性別の初期値（男）</remarks>
+        public const int GENDER_MEN = 1;
     }
 }

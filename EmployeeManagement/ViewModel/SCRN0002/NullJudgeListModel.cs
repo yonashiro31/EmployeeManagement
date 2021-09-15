@@ -17,6 +17,9 @@
         {
             EmployeeDate = employeeDate;
         }
+        /// <summary>社員情報プロパティ</summary>
+        /// <remarks>未入力判定用の社員情報</remarks>
+        /// <value>社員情報プロパティ</value>
         public string EmployeeDate { get; set; }
     }
 }

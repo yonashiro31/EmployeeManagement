@@ -12,8 +12,9 @@ namespace EmployeeManagement.Logic.Interface
         /// <summary>
         /// 社員情報取得メソッド
         /// </summary>
+        /// <remarks>SQLに接続し入力したIDに対応する社員情報を取得する</remarks>
         /// <param name="enteredEmployeeId">社員ID</param>
-        /// <returns>SQLに接続し入力したIDに対応する社員情報を取得する</returns>
+        /// <returns>取得した社員情報を返す</returns>
         public List<EmployeeInfoDAO> FindByPrimaryKey(string enteredEmployeeId);
         /// <summary>
         /// SQL登録メソッド

@@ -12,7 +12,8 @@ namespace EmployeeManagement.Session.Interface
         /// <summary>
         /// 部署情報取得メソッド
         /// </summary>
-        /// <returns>入力値に応じた社員情報を取得する</returns>
+        /// <remarks>入力値に応じた社員情報を取得する</remarks>
+        /// <returns>取得した社員情報を返す</returns>
         public List<AffiliationDAO> FindAll();
     }
 }

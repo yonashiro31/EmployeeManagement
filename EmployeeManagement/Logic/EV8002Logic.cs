@@ -7,17 +7,18 @@ using System.Collections.Generic;
 namespace EmployeeManagement.Session
 {
     /// <summary>
-    /// SLQから部署情報を取得するクラス
+    /// 部署情報取得クラス
     /// </summary>
     /// <remarks>
-    /// ドロップダウンリスト用の部署情報の取得を行う
+    /// SLQから部署情報を取得するクラス
     /// </remarks>
     public class EV8002Logic : IEV8002Logic
     {
         /// <summary>
-        /// SQL接続と部署情報取得を行うメソッド
+        /// 部署情報取得を行うメソッド
         /// </summary>
-        /// <remarks>部署情報をリストに格納し返す</remarks>
+        /// <remarks>SQL接続し、部署情報の取得を行う</remarks>
+        /// <returns>部署情報をリストに格納し返す</returns>
         public List<AffiliationDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
@@ -26,14 +27,14 @@ namespace EmployeeManagement.Session
             repository.Open();
 
             // SQLの生成
-            var selectquery = "SELECT * FROM employee_db.m_affiliation";
+            var selectQuery = "SELECT * FROM employee_db.m_affiliation";
 
-            var selectResult = repository.ExcuteQuery(selectquery);
-            var AffiliationList = new List<AffiliationDAO>();
+            var selectResult = repository.ExcuteQuery(selectQuery);
+            var affiliationList = new List<AffiliationDAO>();
 
             while (selectResult.Read())
             {
-                AffiliationList.Add(new AffiliationDAO()
+                affiliationList.Add(new AffiliationDAO()
                 {
                     AffiliationCd = selectResult[0].ToString(),
                     ManagementCd = selectResult[1].ToString(),
@@ -49,9 +50,9 @@ namespace EmployeeManagement.Session
             selectResult.Close();
             repository.Clone();
 
-            AffiliationList.ForEach(item => item.AffiliationNm = valueJudge.AffiliationNmCheck(item));
+            affiliationList.ForEach(item => item.AffiliationNm = valueJudge.AffiliationNmCheck(item));
 
-            return AffiliationList;
+            return affiliationList;
         }
     }
 }

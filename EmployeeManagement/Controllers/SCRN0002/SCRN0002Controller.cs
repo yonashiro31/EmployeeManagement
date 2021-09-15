@@ -1,7 +1,7 @@
 ﻿using EmployeeManagement.Helper;
-using EmployeeManagement.Session.Interface;
 using EmployeeManagement.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace EmployeeManagement.Controllers.SCRN0002
 {
@@ -31,44 +31,45 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <summary>
         /// 画面表示時メソッド
         /// </summary>
-        /// <returns>
+        /// <remarks>
         /// 画面表示に必要なデータを渡す
-        /// </returns>
+        /// </remarks>
         [Route("employee/entry")]
         [HttpPost]
         public IActionResult Index()
         {
-            var messageToHtml = _ev0002Helper.Init();
-            return View(messageToHtml);
+            var indexViewValues = _ev0002Helper.Init();
+            return View(indexViewValues);
         }
 
         /// <summary>
         /// 登録時メソッド
         /// </summary>
-        /// <returns>
+        /// <remarks>
         /// 登録時必要な情報をViewに渡す
-        /// </returns>
+        /// </remarks>
         /// <param name="sCRN0002ViewModel">SCRN0002ViewModelのインスタンス</param>
+
         [Route("employee/entry/excute")]
         [HttpPost]
         public IActionResult Excute(SCRN0002ViewModel sCRN0002ViewModel)
         {
-            var messageToHtml = _ev0002Helper.Entry(sCRN0002ViewModel);
+            var entryValues = _ev0002Helper.Entry(sCRN0002ViewModel);
 
-            if(messageToHtml.ErrorMessageList.Count == 0)
+            if(!entryValues.ErrorMessageList.Any())
             {
                 return RedirectToAction("Index", "SCRN0004");
             }
-            return View("Index", messageToHtml);
+            return View("Index", entryValues);
         }
 
         /// <summary>
         /// 戻るボタン押下時メソッド
-        /// </summary>
+        /// </remarks>
         /// <returns>
         /// 戻るボタン押下時の必要処理
-        /// </returns>
-        [Route("employee/entry/Back")]
+        /// </remarks>
+        [Route("employee/entry/menu")]
         [HttpGet]
         public IActionResult Back()
         {

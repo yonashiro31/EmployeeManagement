@@ -3,7 +3,7 @@
 namespace EmployeeManagement.Helper
 {
     /// <summary>
-    /// EV0001Helperインターフェース
+    /// EV0002Helperインターフェース
     /// </summary>
     /// <remarks>
     /// Controllerの補助を行う
@@ -21,10 +21,11 @@ namespace EmployeeManagement.Helper
         /// <summary>
         /// 新規登録メソッド
         /// </summary>       
-        /// <returns>
+        /// <remarks>
         /// 新規登録に必要な処理を行う
-        /// </returns>
-        /// <param name="entry">新規登録用入力情報</param>
-        public SCRN0002ViewModel Entry(SCRN0002ViewModel entry);
+        /// </remarks>
+        /// <param name="inputEntryValues">新規登録用入力情報</param>
+        /// <returns>DB登録する値を返却する</returns>
+        public SCRN0002ViewModel Entry(SCRN0002ViewModel inputEntryValues);
     }
 }

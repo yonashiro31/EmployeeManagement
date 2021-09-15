@@ -73,7 +73,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 }
             };
 
-            var testResult = CorrelationJudge.AfCorrelationJudge(List,sCRN0002ViewModelMock.SCRN2ViewModelMock);
+            var testResult = CorrelationJudge.AfCorrelationJudge(List,sCRN0002ViewModelMock.SCRN2ViewModelMock.AffiliationCd);
            
             Assert.AreEqual(true, testResult);
         }
@@ -101,7 +101,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 }
             };
 
-            var testResult = CorrelationJudge.AfCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock);
+            var testResult = CorrelationJudge.AfCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock.AffiliationCd);
            
             Assert.AreEqual(false, testResult);
         }
@@ -130,7 +130,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 }
             };
             // それぞれの値をテスト対象メソッドに渡す
-            var testResult = CorrelationJudge.PosiCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock);
+            var testResult = CorrelationJudge.PosiCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock.PositionCd);
            
             Assert.AreEqual(true, testResult);
         }
@@ -158,7 +158,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 }
             };
            
-            var testResult = CorrelationJudge.PosiCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock);
+            var testResult = CorrelationJudge.PosiCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock.PositionCd);
             
             Assert.AreEqual(false, testResult);
         }

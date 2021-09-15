@@ -18,6 +18,8 @@ namespace EmployeeManagement.Logic
         /// 社員情報取得メソッド
         /// </summary>
         /// <remarks>入力IDに対応した社員情報を取得する</remarks>
+        /// <param name="enteredId">入力した社員ID</param>
+        /// <returns>IDに紐づいた社員情報を返却する</returns>
         public List<EmployeeInfoDAO> FindByPrimaryKey(string enteredId)
         {
             using var repository = new EmployeeSystemRepository();
@@ -66,9 +68,9 @@ namespace EmployeeManagement.Logic
             // DB接続の開始
             repository.Open();
 
-            if (entryValues.Memo == null)
+            if (string.IsNullOrEmpty(entryValues.Memo))
             {
-                entryValues.Memo = "";
+                entryValues.Memo = string.Empty;
             }
 
             var insertQuery = @"Insert Into employee_db.employee
@@ -87,10 +89,10 @@ namespace EmployeeManagement.Logic
                 { "@foreignNationality", entryValues.ForeignNationality  },
                 { "@baseSalary", entryValues.BaseSalary },
                 { "@memo", entryValues.Memo },
-                { "@insertUser", entryValues.insertUser },
-                { "@insertTime", entryValues.insertTime },
-                { "@updateUser", entryValues.updateUser },
-                { "@updateTime", entryValues.updateTime }
+                { "@insertUser", entryValues.InsertUser },
+                { "@insertTime", entryValues.InsertTime },
+                { "@updateUser", entryValues.UpdateUser },
+                { "@updateTime", entryValues.UpdateTime }
             };
 
             repository.ExcuteNonQuery(insertQuery, parametorNameAndValueDic);
