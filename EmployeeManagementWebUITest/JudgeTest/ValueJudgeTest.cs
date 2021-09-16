@@ -84,8 +84,10 @@ namespace EmployeeManagementWebUITest.JudgeTest
         public void ValueCheckIDTest(int min, int max)
         {
             ValueJudge testTarget = new ValueJudge();
-            var testMessageList = new List<string>();
-            testMessageList.Add(ErrorMessageConstants.IdMessage);
+            var testMessageList = new List<string>
+            {
+                ErrorMessageConstants.IdMessage
+            };
 
             (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
             Assert.AreEqual(testMessageList,testResultList);
@@ -102,8 +104,10 @@ namespace EmployeeManagementWebUITest.JudgeTest
         public void ValueCheckNameTest(int min, int max)
         {
             ValueJudge testTarget = new ValueJudge();
-            var testMessageList = new List<string>();
-            testMessageList.Add(ErrorMessageConstants.NameMessage);
+            var testMessageList = new List<string>
+            {
+                ErrorMessageConstants.NameMessage
+            };
 
             (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
@@ -116,12 +120,14 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 氏名が入力された場合
         /// <param name="min">入力値の最少許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
-        [TestCase(9,9 )]
+        [TestCase(9,9)]
         public void ValueCheckBirthTest(int min, int max)
         {
             ValueJudge testTarget = new ValueJudge();
-            var testMessageList = new List<string>();
-            testMessageList.Add(ErrorMessageConstants.BirthDayMessage);
+            var testMessageList = new List<string>
+            {
+                ErrorMessageConstants.BirthDayMessage
+            };
             (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
             Assert.True(testResult);
@@ -137,8 +143,10 @@ namespace EmployeeManagementWebUITest.JudgeTest
         public void ValueCheckSaralyTest(int min, int max)
         {
             ValueJudge testTarget = new ValueJudge();
-            var testMessageList = new List<string>();
-            testMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
+            var testMessageList = new List<string>
+            {
+                ErrorMessageConstants.BaseSalaryMessage
+            };
 
             (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
@@ -155,8 +163,10 @@ namespace EmployeeManagementWebUITest.JudgeTest
         public void ValueCheckFalseTest(int min, int max)
         {
             ValueJudge testTarget = new ValueJudge();
-            var testMessageList = new List<string>();
-            testMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
+            var testMessageList = new List<string>
+            {
+                ErrorMessageConstants.BaseSalaryMessage
+            };
 
             (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
             

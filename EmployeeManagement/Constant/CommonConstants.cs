@@ -26,7 +26,7 @@
         public const int ID_MAX_DIGITS = 8;
         /// <summary>桁数定数</summary>
         /// <remarks>生年月日の最小許容桁数</remarks>
-        public const int BIRTH_DAY_MIN_DIGITS = 1;
+        public const int BIRTH_DAY_MIN_DIGITS = 9;
         /// <summary>桁数定数</summary>
         /// <remarks>生年月日の最大許容桁数</remarks>
         public const int BIRTH_DAY_MAX_DIGITS = 9;

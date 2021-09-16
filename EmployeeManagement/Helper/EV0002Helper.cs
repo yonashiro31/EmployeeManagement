@@ -214,8 +214,7 @@ namespace EmployeeManagement.Helper
             var sqlList = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
             var affiliationValues = _ev8002Logic.FindAll();
             var positionValues = _ev8003Logic.FindAll();
-
-            if (CorrelationJudge.IdCorrelationIdJudge(sqlList))
+            if (CorrelationJudge.IdCorrelationIdJudge(sqlList,sCRN0002ViewModel.EmployeeID))
             {
                 errorMessageList.Add(
                       new DisplayViewErrMessage()

@@ -16,9 +16,9 @@ namespace EmployeeManagement.Judge
         /// <remarks>入力した社員IDがSQLに存在するかの判定処理を行う</remarks>
         /// <param name="employeeInfoList">入力した社員IDに対応する社員情報リスト</param>
         /// <returns>真偽値を返す</returns>
-        public static bool IdCorrelationIdJudge(List<EmployeeInfoDAO> employeeInfoList)
+        public static bool IdCorrelationIdJudge(List<EmployeeInfoDAO> employeeInfoList,string inputEmpId)
         {
-            return employeeInfoList.Any(item => item.EmployeeID != null);
+            return employeeInfoList.Any(item => item.EmployeeID.Equals(inputEmpId));
         }
         /// <summary>
         /// 部署コードチェック
