@@ -24,7 +24,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
             };
 
 
-　          var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
+　          var testResult = CorrelationJudge.IdCorrelationIdJudge(List,value);
 
             Assert.AreEqual(false, testResult);
         }
@@ -42,7 +42,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 new EmployeeInfoDAO() {EmployeeID = value }
             };
 
-            var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
+            var testResult = CorrelationJudge.IdCorrelationIdJudge(List,value);
 
             Assert.AreEqual(true, testResult);
         }
