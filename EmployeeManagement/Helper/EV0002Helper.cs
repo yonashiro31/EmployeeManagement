@@ -48,8 +48,11 @@ namespace EmployeeManagement.Helper
         /// <summary>
         /// 初期表示時メソッド
         /// </summary>
-        /// <returns>
+        /// <remarks>
         /// 初期表示時に実行する処理
+        /// </remarks>
+        /// <returns>
+        /// 初期表示用ViewModel
         /// </returns>
         public SCRN0002ViewModel Init()
         {
@@ -65,10 +68,13 @@ namespace EmployeeManagement.Helper
         /// <summary>
         /// 新規登録時メソッド
         /// </summary>
-        /// <returns>
+        /// <remarks>
         /// 入力値チェックメソッドを実行する
-        /// </returns>
+        /// </remarks>
         /// <param name="sCRN0002ViewModel">入力値</param>
+        /// <returns>
+        /// 登録値を返却する
+        /// </returns>
         public SCRN0002ViewModel Entry(SCRN0002ViewModel sCRN0002ViewModel)
         {
             List<NullJudgeListModel> nullJudegeTargetList = SetNullCeckTarget(sCRN0002ViewModel);
@@ -107,13 +113,13 @@ namespace EmployeeManagement.Helper
         {
             var nullTargetList = new List<NullJudgeListModel>
             {
-            new NullJudgeListModel(request.EmployeeID),
-            new NullJudgeListModel(request.AffiliationCd),
-            new NullJudgeListModel(request.PositionCd),
-            new NullJudgeListModel(request.EmployeeName),
-            new NullJudgeListModel(request.Gender.ToString()),
-            new NullJudgeListModel(request.BirthDay),
-            new NullJudgeListModel(request.BaseSalary)
+                new NullJudgeListModel(request.EmployeeID),
+                new NullJudgeListModel(request.AffiliationCd),
+                new NullJudgeListModel(request.PositionCd),
+                new NullJudgeListModel(request.EmployeeName),
+                new NullJudgeListModel(request.Gender.ToString()),
+                new NullJudgeListModel(request.BirthDay),
+                new NullJudgeListModel(request.BaseSalary)
             };
             return nullTargetList;
         }
@@ -147,15 +153,14 @@ namespace EmployeeManagement.Helper
         /// <returns>未入力チェックの結果リストとエラーメッセージリストを返す</returns>
         private List<DisplayViewErrMessage> EnteredValueNullCheck(List<NullJudgeListModel> checkTargetList)
         {
-            ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayViewErrMessage>();
-            var judgeResult = checkTargetList.Select(item => valueJudge.EnteredNullJudge(item.EmployeeDate));
+            var judgeResult = checkTargetList.Select(item => ValueJudge.EnteredNullJudge(item.EmployeeDate));
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             int countNum = 0;
-            foreach (var i in judgeResult)
+            foreach (var item in judgeResult)
             {
                 // 社員IDの入力値チェック
-                if (i == false)
+                if (!item)
                 {
                     errorMessageList.Add(
                         new DisplayViewErrMessage()
@@ -177,15 +182,14 @@ namespace EmployeeManagement.Helper
         /// <returns>桁数チェックの結果リストとエラーメッセージリストを返す</returns>
         private List<DisplayViewErrMessage> EnteredValueLengthCheck(List<LengthJudgeListModel> checkTargetList)
         {
-            ValueJudge valueJudge = new ValueJudge();
             var errorMessageList = new List<DisplayViewErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            var judgeResult = checkTargetList.Select(item => valueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit));
+            var judgeResult = checkTargetList.Select(item => ValueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit));
 
             int countNum = 0;
             foreach (var item in judgeResult)
             {
-                (List<string> valueResult, bool valueResultBool) = valueJudge.ValueCheck(checkTargetList[countNum].MinJudgedigit, checkTargetList[countNum].MaxJudgedigit);
+                (List<string> valueResult, bool valueResultBool) = ValueJudge.ValueCheck(checkTargetList[countNum].MinJudgedigit, checkTargetList[countNum].MaxJudgedigit);
                 // 社員IDの入力値チェック
                 if (!item)
                 {
@@ -214,7 +218,7 @@ namespace EmployeeManagement.Helper
             var sqlList = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
             var affiliationValues = _ev8002Logic.FindAll();
             var positionValues = _ev8003Logic.FindAll();
-            if (CorrelationJudge.IdCorrelationIdJudge(sqlList,sCRN0002ViewModel.EmployeeID))
+            if (CorrelationJudge.IdCorrelationIdJudge(sqlList))
             {
                 errorMessageList.Add(
                       new DisplayViewErrMessage()

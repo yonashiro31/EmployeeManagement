@@ -30,8 +30,10 @@ namespace EmployeeManagement.Controllers.SCRN0003
         [HttpPost]
         public IActionResult Index(string employeeId)
         {
-            SCRN0001ViewModel test = new SCRN0001ViewModel();
-            test.EmployeeID = employeeId;
+            SCRN0001ViewModel test = new SCRN0001ViewModel
+            {
+                EmployeeID = employeeId
+            };
             var viewValues = _ev0003Helper.Init(employeeId);
             return View();
         }

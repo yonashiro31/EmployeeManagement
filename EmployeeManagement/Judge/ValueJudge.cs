@@ -11,7 +11,7 @@ namespace EmployeeManagement.Judge
     /// <remarks>
     /// 未入力、桁数、種別、部署情報の判定を行う
     /// </remarks>
-    public class ValueJudge
+    public static class ValueJudge
     {
         /// <summary>
         /// 入力値が未入力か判定するメソッド
@@ -21,7 +21,7 @@ namespace EmployeeManagement.Judge
         /// </remarks>
         /// <param name="targetValue">入力値</param>
         /// <returns>真偽値を返す</returns>
-        public bool EnteredNullJudge(string targetValue)
+        public static bool EnteredNullJudge(string targetValue)
         {
             if (!string.IsNullOrEmpty(targetValue))
             {
@@ -42,7 +42,7 @@ namespace EmployeeManagement.Judge
         /// <param name="targetValue">入力値</param>
         /// <param name="maxDigit">最大許容桁数</param>
         /// <returns>真偽値を返却する</returns>
-        public bool InputValueLengthJudge(string targetValue, int maxDigit)
+        public static bool InputValueLengthJudge(string targetValue, int maxDigit)
         {
             if (string.IsNullOrEmpty(targetValue))
             {
@@ -67,7 +67,7 @@ namespace EmployeeManagement.Judge
         /// <param name="min">最大許容桁数</param>
         /// <param name="max">最小許容桁数</param>
         /// <returns>真偽値とstringリストを返す</returns>
-        public (List<string>, bool) ValueCheck(int min, int max)
+        public static (List<string>, bool) ValueCheck(int min, int max)
         {
             ErrorMessageConstants errorMessages = new ErrorMessageConstants
             {
@@ -102,7 +102,7 @@ namespace EmployeeManagement.Judge
         /// <remarks>該当cdが00かどうかで条件分岐する</remarks>
         /// <param name="affiliation">部署情報</param>
         /// <returns>判定に応じて必要値を格納する</returns>
-        public string AffiliationNmCheck(AffiliationDAO affiliation)
+        public static string AffiliationNmCheck(AffiliationDAO affiliation)
         {
             if (affiliation.BrunchCd != CommonConstants.AFFILIATION_CHECK_VALUE)
             {

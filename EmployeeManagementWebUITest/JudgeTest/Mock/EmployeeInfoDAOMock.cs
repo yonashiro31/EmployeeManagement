@@ -1,7 +1,4 @@
 ﻿using EmployeeManagement.LogicDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeManagementWebUITest.ControllerTest.Mock
 {
@@ -11,6 +8,9 @@ namespace EmployeeManagementWebUITest.ControllerTest.Mock
     /// <remarks>相関チェックテストクラス用</remarks>
     class EmployeeInfoDAOMock
     {
+        /// <summary>社員情報プロパティ</summary>
+        /// <remarks>Mock用の社員情報</remarks>
+        /// <value>社員情報プロパティ</value>
         public EmployeeInfoDAO EmployeeInfoListMock{get;set;}
     }
 }

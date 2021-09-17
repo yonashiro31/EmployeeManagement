@@ -11,8 +11,8 @@
         /// <value>所属コードプロパティ</value>
         public string AffiliationCd { get; set; }
         /// <summary>部門管理コードプロパティ</summary>
-        /// <remarks>DAO用の部門管理コードコード</remarks>
-        /// <value>部門管理コードコードプロパティ</value>
+        /// <remarks>DAO用の部門管理コード</remarks>
+        /// <value>部門管理コードプロパティ</value>
         public string ManagementCd { get; set; }
         /// <summary>部門コードプロパティ</summary>
         /// <remarks>DAO用の部門コード</remarks>

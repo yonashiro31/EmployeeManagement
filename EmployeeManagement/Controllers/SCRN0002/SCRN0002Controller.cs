@@ -34,6 +34,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <remarks>
         /// 画面表示に必要なデータを渡す
         /// </remarks>
+        /// <returns>初期表示に必要なデータを返却する</returns>
         [Route("employee/entry")]
         [HttpPost]
         public IActionResult Index()
@@ -49,6 +50,7 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// 登録時必要な情報をViewに渡す
         /// </remarks>
         /// <param name="sCRN0002ViewModel">SCRN0002ViewModelのインスタンス</param>
+        /// <returns>登録情報を返却する</returns>
 
         [Route("employee/entry/excute")]
         [HttpPost]
@@ -69,7 +71,8 @@ namespace EmployeeManagement.Controllers.SCRN0002
         /// <returns>
         /// 戻るボタン押下時の必要処理
         /// </remarks>
-        [Route("employee/entry/menu")]
+        /// <returns>初期表示画面に処理を返却する</returns>
+        [Route("employee/entry/back")]
         [HttpGet]
         public IActionResult Back()
         {

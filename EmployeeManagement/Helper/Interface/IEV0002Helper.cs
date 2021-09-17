@@ -16,6 +16,9 @@ namespace EmployeeManagement.Helper
         /// <remarks>
         /// 初期表示に必要な処理を行う
         /// </remarks>
+        /// <returns>
+        /// 初期表示用ViewModelを返却する
+        /// </returns>
         public SCRN0002ViewModel Init();
 
         /// <summary>

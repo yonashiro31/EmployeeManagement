@@ -33,33 +33,33 @@ namespace EmployeeManagementWebUITest.JudgeTest
             {
                 new EmployeeInfoDAO
                 {
-                EmployeeID = "10000000",
-                AffiliationCd = "1",
-                PositionCd = "1",
-                EmployeeNm = "テスト氏名",
-                Gender = 1,
-                BirthDay = new DateTime(2017, 7, 20),
-                BaseSalary = 100.00m,
-                ForeignNationality = true,
-                Memo = "テストメモ",
-                InsertUser = CommonConstants.MOD_USER_ID,
-                InsertTime = new DateTime(2017, 7, 20),
-                UpdateUser = CommonConstants.MOD_USER_ID,
-                UpdateTime = new DateTime(2017, 7, 20),
+                    EmployeeID = "10000000",
+                    AffiliationCd = "1",
+                    PositionCd = "1",
+                    EmployeeNm = "テスト氏名",
+                    Gender = 1,
+                    BirthDay = new DateTime(2017, 7, 20),
+                    BaseSalary = 100.00m,
+                    ForeignNationality = true,
+                    Memo = "テストメモ",
+                    InsertUser = CommonConstants.MOD_USER_ID,
+                    InsertTime = new DateTime(2017, 7, 20),
+                    UpdateUser = CommonConstants.MOD_USER_ID,
+                    UpdateTime = new DateTime(2017, 7, 20),
                 }
             };
 
             // テスト用登録値格納
             list.ForEach(item => test.Register(item));
             // 取得
-            var selectquery = "SELECT * FROM employee_db.employee Where employee_id = @enteredId";
+            var selectQuery = "SELECT * FROM employee_db.employee Where employee_id = @enteredId";
 
             var parametorNameAndValueDic = new Dictionary<string, object>()
             {
                 { "@enteredId",  "10000000" }
             };
 
-            var selectResult = repository.ExcuteQuery(selectquery, parametorNameAndValueDic);
+            var selectResult = repository.ExcuteQuery(selectQuery, parametorNameAndValueDic);
             var empList = new List<EmployeeInfoDAO>();
 
             while (selectResult.Read())
@@ -86,77 +86,18 @@ namespace EmployeeManagementWebUITest.JudgeTest
 
             var result = list.Any(item => empList.Any(item2 => item2.EmployeeID == item.EmployeeID));
             Assert.AreEqual(true, result);
-
             repository.Clone();
-        }
-        [Test]
-        public void RegisterNullTest()
-        {
-            using var repository = new EmployeeSystemRepository();
-            // DB接続の開始
+            // 登録情報削除
             repository.Open();
-            var test = new EV8001Logic();
+            var deleteQuery = "DELETE FROM employee_db.employee Where employee_id = @enteredId";
 
-            // Arrange
-            var list = new List<EmployeeInfoDAO>()
-            {
-                new EmployeeInfoDAO
-                {
-                EmployeeID = "10000000",
-                AffiliationCd = "1",
-                PositionCd = "1",
-                EmployeeNm = "テスト氏名",
-                Gender = 1,
-                BirthDay = new DateTime(2017, 7, 20),
-                BaseSalary = 100.00m,
-                ForeignNationality = true,
-                Memo = "テストメモ",
-                InsertUser = CommonConstants.MOD_USER_ID,
-                InsertTime = new DateTime(2017, 7, 20),
-                UpdateUser = CommonConstants.MOD_USER_ID,
-                UpdateTime = new DateTime(2017, 7, 20),
-                }
-            };
-
-            // テスト用登録値格納
-            list.ForEach(item => test.Register(item));
-            // 取得
-            var selectquery = "SELECT * FROM employee_db.employee Where employee_id = @enteredId";
-
-            var parametorNameAndValueDic = new Dictionary<string, object>()
+            var deleteParametorNameAndValueDic = new Dictionary<string, object>()
             {
                 { "@enteredId",  "10000000" }
             };
 
-            var selectResult = repository.ExcuteQuery(selectquery, parametorNameAndValueDic);
-            var empList = new List<EmployeeInfoDAO>();
-
-            while (selectResult.Read())
-            {
-                empList = new List<EmployeeInfoDAO>()
-                {
-                    new EmployeeInfoDAO{
-                    EmployeeID = selectResult[0].ToString(),
-                    AffiliationCd = selectResult[1].ToString(),
-                    PositionCd = selectResult[2].ToString(),
-                    EmployeeNm = selectResult[3].ToString(),
-                    Gender = Convert.ToInt32(selectResult[4]),
-                    BirthDay = Convert.ToDateTime(selectResult[5]),
-                    ForeignNationality = Convert.ToBoolean(selectResult[6]),
-                    BaseSalary = Convert.ToDecimal(selectResult[7]),
-                    Memo = selectResult[8].ToString(),
-                    InsertUser = selectResult[9].ToString(),
-                    InsertTime = Convert.ToDateTime(selectResult[10]),
-                    UpdateUser = selectResult[11].ToString(),
-                    UpdateTime = Convert.ToDateTime(selectResult[12]),
-                    }
-                };
-            }
-
-            var result = list.Any(item => empList.Any(item2 => item2.EmployeeID == item.EmployeeID));
-            Assert.AreEqual(true, result);
-
+            repository.ExcuteQuery(deleteQuery, deleteParametorNameAndValueDic);
             repository.Clone();
-        }
+        }      
     }
 }

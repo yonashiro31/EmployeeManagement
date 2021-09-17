@@ -15,18 +15,18 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// </summary>
         /// <remarks>結果True時</remarks>
         /// <param name="value">社員ID</param>
-        [TestCase("")]
-        public void IdCorrelationIdJudgeTrueTest(string value)
+        [TestCase("12345678")]
+        public void IdCorrelationIdJudgeTrueTest(string inputEmpId)
         {
             var List = new List<EmployeeInfoDAO>
             {
-                new EmployeeInfoDAO() {PositionCd = value }
+                new EmployeeInfoDAO() {EmployeeID = inputEmpId }
             };
 
 
-　          var testResult = CorrelationJudge.IdCorrelationIdJudge(List,value);
+　          var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
 
-            Assert.AreEqual(false, testResult);
+            Assert.AreEqual(true, testResult);
         }
 
         /// <summary>
@@ -34,17 +34,17 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// </summary>
         /// <remarks>結果False時</remarks>
         /// <param name="value">社員ID</param>
-        [TestCase("1")]
-        public void IdCorrelationIdJudgeFalseTest(string value)
+        [Test]
+        public void IdCorrelationIdJudgeFalseTest()
         {
             var List = new List<EmployeeInfoDAO>
             {
-                new EmployeeInfoDAO() {EmployeeID = value }
+                new EmployeeInfoDAO()
             };
 
-            var testResult = CorrelationJudge.IdCorrelationIdJudge(List,value);
+            var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
 
-            Assert.AreEqual(true, testResult);
+            Assert.AreEqual(false, testResult);
         }
 
         /// <summary>

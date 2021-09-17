@@ -23,8 +23,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase("test")]
         public void TrueNullJudgeTest(string inputValue)
         {
-            ValueJudge testTarget = new ValueJudge();
-            var testResult = testTarget.EnteredNullJudge(inputValue);
+            var testResult = ValueJudge.EnteredNullJudge(inputValue);
 
             Assert.AreEqual(true, testResult);
         }
@@ -36,8 +35,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase("")]
         public void FalseNullJudgeTest(string enteredValue)
         {
-            ValueJudge testTarget = new ValueJudge();
-            var testResult = testTarget.EnteredNullJudge(enteredValue);
+            var testResult = ValueJudge.EnteredNullJudge(enteredValue);
 
             Assert.AreEqual(false, testResult);
         }
@@ -52,8 +50,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase("", 0)]
         public void InputValueLengthJudgeTrueTest(string inputValue, int maxDigit)
         {
-            ValueJudge testTarget = new ValueJudge();
-            var testResult = testTarget.InputValueLengthJudge(inputValue, maxDigit);
+            var testResult = ValueJudge.InputValueLengthJudge(inputValue, maxDigit);
 
             Assert.True(testResult);
         }
@@ -68,8 +65,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         
         public void InputValueLengthJudgeFalseTest(string inputValue, int maxDigit)
         {
-            ValueJudge testTarget = new ValueJudge();
-            var testResult = testTarget.InputValueLengthJudge(inputValue, maxDigit);
+            var testResult = ValueJudge.InputValueLengthJudge(inputValue, maxDigit);
 
             Assert.False(testResult);
         }
@@ -83,13 +79,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase(8,8)]
         public void ValueCheckIDTest(int min, int max)
         {
-            ValueJudge testTarget = new ValueJudge();
             var testMessageList = new List<string>
             {
                 ErrorMessageConstants.IdMessage
             };
 
-            (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
+            (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
             Assert.AreEqual(testMessageList,testResultList);
             Assert.True(testResult);
         }
@@ -103,13 +98,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase(1, 32)]
         public void ValueCheckNameTest(int min, int max)
         {
-            ValueJudge testTarget = new ValueJudge();
             var testMessageList = new List<string>
             {
                 ErrorMessageConstants.NameMessage
             };
 
-            (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
+            (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
             Assert.True(testResult);
         }
@@ -123,12 +117,11 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase(9,9)]
         public void ValueCheckBirthTest(int min, int max)
         {
-            ValueJudge testTarget = new ValueJudge();
             var testMessageList = new List<string>
             {
                 ErrorMessageConstants.BirthDayMessage
             };
-            (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
+            (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
             Assert.True(testResult);
         }
@@ -142,13 +135,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase(1, 8)]
         public void ValueCheckSaralyTest(int min, int max)
         {
-            ValueJudge testTarget = new ValueJudge();
             var testMessageList = new List<string>
             {
                 ErrorMessageConstants.BaseSalaryMessage
             };
 
-            (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
+            (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
             Assert.True(testResult);
         }
@@ -162,13 +154,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         [TestCase(1, 1000)]
         public void ValueCheckFalseTest(int min, int max)
         {
-            ValueJudge testTarget = new ValueJudge();
             var testMessageList = new List<string>
             {
                 ErrorMessageConstants.BaseSalaryMessage
             };
 
-            (var testResultList, var testResult) = testTarget.ValueCheck(min, max);
+            (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
             
             Assert.False(testResult);
         }
@@ -194,8 +185,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     ManagementNm = "ManagementNm"
                 }
             };
-            var testTarget = new ValueJudge();
-            var testResult = testTarget.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
+            var testResult = ValueJudge.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
             Assert.AreEqual("BrunchNm", testResult);
         }
@@ -218,8 +208,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     ManagementNm = "ManagementNm"
                 }
             };
-            var testTarget = new ValueJudge();
-            var testResult = testTarget.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
+            var testResult = ValueJudge.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
             Assert.AreEqual("GroupNm", testResult);
         }
@@ -242,8 +231,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     ManagementNm = "ManagementNm"
                 }
             };
-            var testTarget = new ValueJudge();
-            var testResult = testTarget.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
+            var testResult = ValueJudge.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
             Assert.AreEqual("ManagementNm", testResult);
         }

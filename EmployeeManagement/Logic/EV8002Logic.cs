@@ -22,7 +22,6 @@ namespace EmployeeManagement.Session
         public List<AffiliationDAO> FindAll()
         {
             using var repository = new EmployeeSystemRepository();
-            ValueJudge valueJudge = new ValueJudge();
             // DB接続の開始
             repository.Open();
 
@@ -50,7 +49,7 @@ namespace EmployeeManagement.Session
             selectResult.Close();
             repository.Clone();
 
-            affiliationList.ForEach(item => item.AffiliationNm = valueJudge.AffiliationNmCheck(item));
+            affiliationList.ForEach(item => item.AffiliationNm = ValueJudge.AffiliationNmCheck(item));
 
             return affiliationList;
         }
