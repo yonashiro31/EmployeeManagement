@@ -4,9 +4,9 @@ namespace EmployeeManagementWebUITest.JudgeTest.Mock
 {
 
     /// <summary>
-    /// 
+    /// SCRN0002ViewModelMockクラス
     /// </summary>
-    /// <remarks></remarks>
+    /// <remarks>登録画面に関係するテストに利用する</remarks>
     class SCRN0002ViewModelMock
     {
         /// <summary>SCRN2ViewModelMockプロパティ</summary>

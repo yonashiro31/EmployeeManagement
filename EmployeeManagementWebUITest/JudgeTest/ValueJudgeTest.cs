@@ -3,9 +3,7 @@ using EmployeeManagement.Judge;
 using EmployeeManagement.LogicDTO;
 using EmployeeManagementWebUITest.ControllerTest.Mock;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EmployeeManagementWebUITest.JudgeTest
 {
@@ -151,16 +149,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 氏名が入力された場合
         /// <param name="min">入力値の最少許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
-        [TestCase(1, 1000)]
+        [TestCase(1, 1111)]
         public void ValueCheckFalseTest(int min, int max)
         {
-            var testMessageList = new List<string>
-            {
-                ErrorMessageConstants.BASE_SALARY_MESSAGE
-            };
-
             (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
-            
+            var result = testResultList.Count;
+            Assert.AreEqual(0,result);
             Assert.False(testResult);
         }
 
@@ -172,7 +166,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <remarks>ブランチネーム返却時</remarks>
         [TestCase("01", "00")]
         [TestCase("01", "01")]
-        public void AffiliationNmCheckTest(string brunchCd, string groupCd)
+        public void AffiliationAfNmCheckTest(string brunchCd, string groupCd)
         {
             var affiliationDAOMock = new AffiliationDAOMock
             {
@@ -195,7 +189,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// </summary>
         /// <remarks>グループネーム返却時</remarks>
         [TestCase("00", "01")]
-        public void AffiliationNmCheckTest2(string brunchCd, string groupCd)
+        public void AffiliationGoupNmCheckTest(string brunchCd, string groupCd)
         {
             var affiliationDAOMock = new AffiliationDAOMock
             {
@@ -218,7 +212,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// </summary>
         /// <remarks>マネージメントネーム返却時</remarks>
         [TestCase("00", "00")]
-        public void AffiliationNmCheckTest3(string brunchCd, string groupCd)
+        public void AffiliationMnNmCheckTest(string brunchCd, string groupCd)
         {
             var affiliationDAOMock = new AffiliationDAOMock
             {
