@@ -50,7 +50,7 @@ namespace EmployeeManagement.Helper
         /// <remarks>相関チェックを呼び出す</remarks>
         /// <param name="employeeId">入力した社員ID</param>
         /// <returns>画面に表示する値をaリストで返す</returns>
-        public List<EmployeeInfoDAO> Init(string employeeId)
+        public SCRN0003ViewModel Init(string employeeId)
         {
             SCRN0003ViewModel sCRN0003ViewModel = new SCRN0003ViewModel();
 
