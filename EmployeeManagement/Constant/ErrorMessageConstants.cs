@@ -12,40 +12,40 @@ namespace EmployeeManagement.Constants
     {
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>社員ID</remarks>
-        public const string IdMessage = "社員ID";
+        public const string ID_MESSAGE = "社員ID";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>部署</remarks>
-        public const string AfMessage = "部署";
+        public const string AF_MESSAGE = "部署";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>役職</remarks>
-        public const string PosiMessage = "役職";
+        public const string POSI_MESSAGE = "役職";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>氏名</remarks>
-        public const string NameMessage = "氏名";
+        public const string NAME_MESSAGE = "氏名";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>性別</remarks>
-        public const string GenderMessage = "性別";
+        public const string GENDER_MESSAGE = "性別";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>生年月日</remarks>
-        public const string BirthDayMessage = "生年月日";
+        public const string BIRTHDAY_MESSAGE = "生年月日";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>基本給料</remarks>
-        public const string BaseSalaryMessage = "基本給料";
+        public const string BASE_SALARY_MESSAGE = "基本給料";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>必須項目メッセージ</remarks>
-        public const string NullMessage = "は必須です";
+        public const string NULL_MESSAGE = "は必須です";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>指定桁数メッセージ</remarks>
-        public const string LengthMessage = "は指定桁数で入力してください。";
+        public const string LENGTH_MESSAGE = "は指定桁数で入力してください。";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>登録済みメッセージ</remarks>
         public const string EmpIdDuplication = "既に登録済みの社員IDです。";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>マスタエラーメッセージ</remarks>
-        public const string MastaCorrelation = "マスタに存在しない";
+        public const string MASTA_CORRELATION_MESSAGE = "マスタに存在しない";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>指定エラーメッセージ</remarks>
-        public const string MastaCorrelation2 = "を指定しています。";
+        public const string MASTA_CORRELATION_MESSAGE_2 = "を指定しています。";
 
         /// <summary>
         /// ErrorMessageConstantsのコンストラクタ
@@ -57,26 +57,26 @@ namespace EmployeeManagement.Constants
         {
             ItemNameMessageList = new List<string>
             {
-                IdMessage,
-                AfMessage,
-                PosiMessage,
-                NameMessage,
-                GenderMessage,
-                BirthDayMessage,
-                BaseSalaryMessage
+                ID_MESSAGE,
+                AF_MESSAGE,
+                POSI_MESSAGE,
+                NAME_MESSAGE,
+                GENDER_MESSAGE,
+                BIRTHDAY_MESSAGE,
+                BASE_SALARY_MESSAGE
             };
 
             InstructionMessageList = new List<string>
             {
-                NullMessage,
-                LengthMessage
+                NULL_MESSAGE,
+                LENGTH_MESSAGE
             };
 
             CorrelationErrorList = new List<string>
             {
                 EmpIdDuplication,
-                MastaCorrelation,
-                MastaCorrelation2
+                MASTA_CORRELATION_MESSAGE,
+                MASTA_CORRELATION_MESSAGE_2
             };
         }
         /// <summary>相関チェックエラーメッセージリストプロパティ</summary>

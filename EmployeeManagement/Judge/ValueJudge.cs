@@ -78,16 +78,16 @@ namespace EmployeeManagement.Judge
             switch (min, max)
             {
                 case (CommonConstants.ID_MIN_DIGITS, CommonConstants.ID_MAX_DIGITS):
-                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.IdMessage);
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.ID_MESSAGE);
                     break;
                 case (CommonConstants.NAME_MIN_DIGITS, CommonConstants.NAME_MAX_DIGITS):
-                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.NameMessage);
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.NAME_MESSAGE);
                     break;
                 case (CommonConstants.BIRTH_DAY_MIN_DIGITS, CommonConstants.BIRTH_DAY_MAX_DIGITS):
-                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.BirthDayMessage);
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.BIRTHDAY_MESSAGE);
                     break;
                 case (CommonConstants.SALARY_MIN_DIGITS, CommonConstants.SALARY_MAX_DIGITS):
-                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.BaseSalaryMessage);
+                    errorMessages.ItemNameMessageList.Add(ErrorMessageConstants.BASE_SALARY_MESSAGE);
                     break;
                 default:
                     result = false;

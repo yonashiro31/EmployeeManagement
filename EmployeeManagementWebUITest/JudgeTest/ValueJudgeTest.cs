@@ -81,7 +81,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var testMessageList = new List<string>
             {
-                ErrorMessageConstants.IdMessage
+                ErrorMessageConstants.ID_MESSAGE
             };
 
             (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
@@ -100,7 +100,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var testMessageList = new List<string>
             {
-                ErrorMessageConstants.NameMessage
+                ErrorMessageConstants.NAME_MESSAGE
             };
 
             (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
@@ -119,7 +119,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var testMessageList = new List<string>
             {
-                ErrorMessageConstants.BirthDayMessage
+                ErrorMessageConstants.BIRTHDAY_MESSAGE
             };
             (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
             Assert.AreEqual(testMessageList, testResultList);
@@ -137,7 +137,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var testMessageList = new List<string>
             {
-                ErrorMessageConstants.BaseSalaryMessage
+                ErrorMessageConstants.BASE_SALARY_MESSAGE
             };
 
             (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
@@ -156,7 +156,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         {
             var testMessageList = new List<string>
             {
-                ErrorMessageConstants.BaseSalaryMessage
+                ErrorMessageConstants.BASE_SALARY_MESSAGE
             };
 
             (var testResultList, var testResult) = ValueJudge.ValueCheck(min, max);
