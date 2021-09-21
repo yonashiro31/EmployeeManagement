@@ -14,7 +14,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
     /// </summary>
     /// <remarks>登録した社員情報と、登録後取得した値を比較する</remarks>
     [TestFixture]
-    class EV8001LogicTest
+    public class EV8001LogicTest
     {
         /// <summary>
         /// DB情報取得メソッドテスト
@@ -106,12 +106,15 @@ namespace EmployeeManagementWebUITest.JudgeTest
             repository.ExcuteQuery(deleteQuery, deleteParametorNameAndValueDic);
             repository.Clone();
         }
+
         /// <summary>
         /// 登録メソッドテスト
         /// </summary>
-        /// <remarks>社員情報を登録後、同じプライマリーキーで取得した値と比較する</remarks>
-        [Test]
-        public void RegisterTrueTest()
+        /// <remarks>備考入力時未入力時の2パターンテストする</remarks>
+        /// <param name="memo">備考</param>
+        [TestCase("")]
+        [TestCase("テストメモ")]
+        public void RegisterTrueTest(string memo)
         {
             using var repository = new EmployeeSystemRepository();
             var eV8001Logic = new EV8001Logic();
@@ -124,7 +127,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     EmployeeID = "10000000",
                     AffiliationCd = "1",
                     PositionCd = "1",
-                    EmployeeNm = "テスト氏名",
+                    EmployeeNm = memo,
                     Gender = 1,
                     BirthDay = new DateTime(2017, 7, 20),
                     BaseSalary = 100.00m,
@@ -172,6 +175,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     }
                 };
             }
+
             selectResult.Close();
 
             Assert.AreEqual("10000000", getList[0].EmployeeID);
@@ -182,7 +186,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
             Assert.AreEqual(new DateTime(2017, 7, 20), getList[0].BirthDay);
             Assert.AreEqual(100.00m, getList[0].BaseSalary);
             Assert.AreEqual(true, getList[0].ForeignNationality);
-            Assert.AreEqual("テストメモ", getList[0].Memo);
+            Assert.AreEqual(memo, getList[0].Memo);
             Assert.AreEqual(CommonConstants.MOD_USER_ID, getList[0].InsertUser);
             Assert.AreEqual(new DateTime(2017, 7, 20), getList[0].InsertTime);
             Assert.AreEqual(CommonConstants.MOD_USER_ID, getList[0].UpdateUser);

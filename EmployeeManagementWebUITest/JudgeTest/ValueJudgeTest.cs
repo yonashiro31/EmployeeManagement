@@ -12,12 +12,13 @@ namespace EmployeeManagementWebUITest.JudgeTest
     /// </summary>
     /// <remarks>単項目チェックを行う</remarks>
     [TestFixture]
-    class ValueJudgeTest
+    public class ValueJudgeTest
     {
         /// <summary>
         /// 未入力メソッドテスト
         /// </summary>
         /// <remarks>結果True時</remarks>
+        /// <param name="inputValue">入力値</param>
         [TestCase("test")]
         public void TrueNullJudgeTest(string inputValue)
         {
@@ -30,10 +31,11 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 未入力メソッドテスト
         /// </summary>
         /// <remarks>結果False時</remarks>
+        /// <param name="inputValue">入力値</param>
         [TestCase("")]
-        public void FalseNullJudgeTest(string enteredValue)
+        public void FalseNullJudgeTest(string inputValue)
         {
-            var testResult = ValueJudge.EnteredNullJudge(enteredValue);
+            var testResult = ValueJudge.EnteredNullJudge(inputValue);
 
             Assert.AreEqual(false, testResult);
         }
@@ -71,8 +73,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <summary>
         /// 入力値の種別を判断するメソッド
         /// </summary>
-        /// IDが入力された場合
-        /// <param name="min">入力値の最少許容桁数</param>
+        /// <remarks>IDが入力された場合</remarks>
+        /// <param name="min">入力値の最小許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
         [TestCase(8,8)]
         public void ValueCheckIDTest(int min, int max)
@@ -90,8 +92,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <summary>
         /// 種別の氏名を判断するメソッド
         /// </summary>
-        /// 氏名が入力された場合
-        /// <param name="min">入力値の最少許容桁数</param>
+        /// <remarks>氏名が入力された場合</remarks>
+        /// <param name="min">入力値の最小許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
         [TestCase(1, 32)]
         public void ValueCheckNameTest(int min, int max)
@@ -109,8 +111,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <summary>
         /// 種別の生年月日を判断するメソッド
         /// </summary>
-        /// 氏名が入力された場合
-        /// <param name="min">入力値の最少許容桁数</param>
+        /// <remarks>生年月日が入力された場合</remarks>
+        /// <param name="min">入力値の最小許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
         [TestCase(9,9)]
         public void ValueCheckBirthTest(int min, int max)
@@ -127,8 +129,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <summary>
         /// 基本給項目を判断するメソッド
         /// </summary>
-        /// 氏名が入力された場合
-        /// <param name="min">入力値の最少許容桁数</param>
+        /// <remarks>基本給料が入力された場合</remarks>
+        /// <param name="min">入力値の最小許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
         [TestCase(1, 8)]
         public void ValueCheckSaralyTest(int min, int max)
@@ -146,8 +148,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <summary>
         /// 入力値を判断するメソッド
         /// </summary>
-        /// 氏名が入力された場合
-        /// <param name="min">入力値の最少許容桁数</param>
+        /// <remarks>どれにも当てはまらない場合</remarks>
+        /// <param name="min">入力値の最小許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
         [TestCase(1, 1111)]
         public void ValueCheckFalseTest(int min, int max)
@@ -158,12 +160,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
             Assert.False(testResult);
         }
 
-        // ToDo下記3メソッド名変更予定
-
         /// <summary>
         /// 部署情報のチェッククラステスト
         /// </summary>
         /// <remarks>ブランチネーム返却時</remarks>
+        /// <param name="brunchCd">部門コード</param>
+        /// <param name="groupCd">グループコード</param>
         [TestCase("01", "00")]
         [TestCase("01", "01")]
         public void AffiliationAfNmCheckTest(string brunchCd, string groupCd)
@@ -188,6 +190,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 部署情報のチェッククラステスト
         /// </summary>
         /// <remarks>グループネーム返却時</remarks>
+        /// <param name="brunchCd">部門コード</param>
+        /// <param name="groupCd">グループコード</param>
         [TestCase("00", "01")]
         public void AffiliationGoupNmCheckTest(string brunchCd, string groupCd)
         {
@@ -202,6 +206,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     ManagementNm = "ManagementNm"
                 }
             };
+
             var testResult = ValueJudge.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
             Assert.AreEqual("GroupNm", testResult);
@@ -211,6 +216,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 部署情報のチェッククラステスト
         /// </summary>
         /// <remarks>マネージメントネーム返却時</remarks>
+        /// <param name="brunchCd">部門コード</param>
+        /// <param name="groupCd">グループコード</param>
         [TestCase("00", "00")]
         public void AffiliationMnNmCheckTest(string brunchCd, string groupCd)
         {
@@ -225,6 +232,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
                     ManagementNm = "ManagementNm"
                 }
             };
+
             var testResult = ValueJudge.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
             Assert.AreEqual("ManagementNm", testResult);

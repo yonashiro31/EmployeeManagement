@@ -7,14 +7,18 @@ using System.Collections.Generic;
 
 namespace EmployeeManagementWebUITest.JudgeTest
 {
+    /// <summary>
+    /// 相関チェックメソッドテストクラス
+    /// </summary>
+    /// <remarks>相関チェックメソッドのテストを実行する</remarks>
     [TestFixture]
-    class CorrelationJudgeTest
+    public class CorrelationJudgeTest
     {
         /// <summary>
         /// 社員ID相関チェックメソッドテスト
         /// </summary>
         /// <remarks>結果True時</remarks>
-        /// <param name="value">社員ID</param>
+        /// <param name="inputEmpId">社員ID</param>
         [TestCase("12345678")]
         public void IdCorrelationIdJudgeTrueTest(string inputEmpId)
         {
@@ -23,9 +27,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 new EmployeeInfoDAO() {EmployeeID = inputEmpId }
             };
 
-
 　          var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
-
+          
             Assert.AreEqual(true, testResult);
         }
 
@@ -33,7 +36,6 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// 社員ID相関チェックメソッドテスト
         /// </summary>
         /// <remarks>結果False時</remarks>
-        /// <param name="value">社員ID</param>
         [Test]
         public void IdCorrelationIdJudgeFalseTest()
         {
@@ -43,7 +45,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
             };
 
             var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
-
+           
             Assert.AreEqual(false, testResult);
         }
 
@@ -152,8 +154,8 @@ namespace EmployeeManagementWebUITest.JudgeTest
                 }
             };
            
-            var testResult = CorrelationJudge.PosiCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock.PositionCd);
-            
+            var testResult = CorrelationJudge.PosiCorrelationJudge(List, sCRN0002ViewModelMock.SCRN2ViewModelMock.PositionCd);           
+           
             Assert.AreEqual(false, testResult);
         }
     }
