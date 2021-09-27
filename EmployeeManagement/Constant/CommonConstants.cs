@@ -24,9 +24,31 @@
         /// <summary>桁数定数</summary>  
         /// <remarks>社員IDの最大許容桁数</remarks>
         public const int ID_MAX_DIGITS = 8;
+
+        /// <summary>桁数定数</summary>
+        ///   /// <remarks>部署の最小許容桁数</remarks>
+        public const int AF_MIN_DIGITS = 1;
+        /// <summary>桁数定数</summary>  
+        /// <remarks>部署の最大許容桁数</remarks>
+        public const int AF_MAX_DIGITS = 6;
+
+        /// <remarks>役職の最小許容桁数</remarks>
+        public const int POSI_MIN_DIGITS = 1;
+        /// <summary>桁数定数</summary>  
+        /// <remarks>役職の最大許容桁数</remarks>
+        public const int POSI_MAX_DIGITS = 4;
+
+        /// <summary>桁数定数</summary>  
+        /// <remarks>社員IDの最大許容桁数</remarks>
+        public const int GENDER_MIN_DIGITS = 1;
+        /// <summary>桁数定数</summary>
+        ///   /// <remarks>部署役職の最小許容桁数</remarks>
+        public const int GENDER_MAX_DIGITS = 1;
+        /// <summary>桁数定数</summary>  
+
         /// <summary>桁数定数</summary>
         /// <remarks>生年月日の最小許容桁数</remarks>
-        public const int BIRTH_DAY_MIN_DIGITS = 9;
+        public const int BIRTH_DAY_MIN_DIGITS = 10;
         /// <summary>桁数定数</summary>
         /// <remarks>生年月日の最大許容桁数</remarks>
         public const int BIRTH_DAY_MAX_DIGITS = 9;

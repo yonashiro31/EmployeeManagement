@@ -42,7 +42,7 @@ namespace EmployeeManagement.Judge
         /// <param name="targetValue">入力値</param>
         /// <param name="maxDigit">最大許容桁数</param>
         /// <returns>真偽値を返却する</returns>
-        public static bool InputValueLengthJudge(string targetValue, int maxDigit)
+        public static bool InputValueLengthJudge(string targetValue, int maxDigit,int minDigit)
         {
             if (string.IsNullOrEmpty(targetValue))
             {
@@ -50,7 +50,7 @@ namespace EmployeeManagement.Judge
             }
             // ここで未入力の引数を受け取ると例外発生するため、
             // 上記コードで未入力時は処理が発生しないようにする
-            if (targetValue.Length <= maxDigit)
+            if (targetValue.Length <= maxDigit && minDigit <= targetValue.Length)
             {
                 return true;
             }
@@ -113,6 +113,22 @@ namespace EmployeeManagement.Judge
                 return affiliation.GroupNm;
             };
             return affiliation.ManagementNm;
+        }
+
+        /// <summary>
+        /// 値判別メソッド
+        /// </summary>
+        /// <remarks>入力された値が数値化文字列か判別する</remarks>
+        /// <param name="targetValue">入力値</param>
+        /// <returns>真偽値</returns>
+        public static bool numOrcharaJudge(string targetValue , bool nullPatternResult)
+        {
+            if(string.IsNullOrEmpty(targetValue))
+            {
+                return nullPatternResult;
+            }
+            int i = 0;
+            return int.TryParse(targetValue , out i);
         }
     }
 }

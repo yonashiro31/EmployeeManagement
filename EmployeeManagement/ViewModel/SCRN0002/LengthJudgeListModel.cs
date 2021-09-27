@@ -15,11 +15,13 @@
         /// 桁数チェックに必要な情報と最大桁数を格納する
         /// </remarks>
         /// <param name="employeeDate">社員情報</param>
-        /// <param name="maxJudgedigit">最大許容桁数</param>
-        public LengthJudgeListModel(string employeeDate, int maxJudgedigit)
+        /// <param name="maxJudgeDigit">最大許容桁数</param>
+        /// <param name="mixJudgeDigit">最大許容桁数</param>
+        public LengthJudgeListModel(string employeeDate, int maxJudgeDigit , int minJudgeDigit)
         {
             EmployeeDate = employeeDate;
-            MaxJudgedigit = maxJudgedigit;
+            MaxJudgedigit = maxJudgeDigit;
+            MinJudgedigit = minJudgeDigit;
         }
 
         /// <summary>社員情報プロパティ</summary>

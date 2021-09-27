@@ -77,14 +77,21 @@ namespace EmployeeManagement.Helper
         /// </returns>
         public SCRN0002ViewModel Entry(SCRN0002ViewModel sCRN0002ViewModel)
         {
+            // 各種チェック用の値セット
             List<NullJudgeListModel> nullJudegeTargetList = SetNullCeckTarget(sCRN0002ViewModel);
             List<LengthJudgeListModel> lengthJudgeList = SetLengthCheckTarget(sCRN0002ViewModel);
+            (var numberValueList, var characterValueList) = SetNumOrCharaCeckTarget(sCRN0002ViewModel);
 
             // ドロップダウンリストセット
             (sCRN0002ViewModel.AffiliationList, sCRN0002ViewModel.PositionList) = SetDropDownList();
 
             // メソッドの戻り値であるエラーメッセージリストを結合する
-            var errorMessageList = EnteredValueNullCheck(nullJudegeTargetList).Concat(EnteredValueLengthCheck(lengthJudgeList)).ToList();
+            var nullErrorMessageList = EnteredValueNullCheck(nullJudegeTargetList).ToList();
+            var lengthErrorList = EnteredValueLengthCheck(lengthJudgeList).ToList();
+            var numberErrorList = EnteredValueNumOrCharaCheck(numberValueList , characterValueList).ToList();
+
+            var errorMessageList = nullErrorMessageList.Concat(lengthErrorList).ToList();
+            errorMessageList = errorMessageList.Concat(numberErrorList).ToList();
             if (sCRN0002ViewModel.EmployeeID != null)
             {
                 errorMessageList = errorMessageList.Concat(CorrelationCheck(sCRN0002ViewModel)).ToList();
@@ -134,15 +141,90 @@ namespace EmployeeManagement.Helper
         {
             var lengthTargetList = new List<LengthJudgeListModel>
             {
-                new LengthJudgeListModel(request.EmployeeID,8),
-                new LengthJudgeListModel(request.AffiliationCd,6),
-                new LengthJudgeListModel(request.PositionCd,4),
-                new LengthJudgeListModel(request.EmployeeName,32),
-                new LengthJudgeListModel(request.Gender.ToString(),1),
-                new LengthJudgeListModel(request.BirthDay,10),
-                new LengthJudgeListModel(request.BaseSalary,8)
+                new LengthJudgeListModel(request.EmployeeID,CommonConstants.ID_MAX_DIGITS,CommonConstants.ID_MIN_DIGITS),
+                new LengthJudgeListModel(request.AffiliationCd,CommonConstants.AF_MAX_DIGITS,CommonConstants.AF_MIN_DIGITS),
+                new LengthJudgeListModel(request.PositionCd,CommonConstants.POSI_MAX_DIGITS,CommonConstants.POSI_MIN_DIGITS),
+                new LengthJudgeListModel(request.EmployeeName,CommonConstants.NAME_MAX_DIGITS,CommonConstants.NAME_MIN_DIGITS),
+                new LengthJudgeListModel(request.Gender.ToString(),CommonConstants.GENDER_MAX_DIGITS,CommonConstants.GENDER_MIN_DIGITS),
+                new LengthJudgeListModel(request.BirthDay,CommonConstants.BIRTH_DAY_MAX_DIGITS,CommonConstants.BIRTH_DAY_MIN_DIGITS),
+                new LengthJudgeListModel(request.BaseSalary,CommonConstants.SALARY_MAX_DIGITS,CommonConstants.SALARY_MIN_DIGITS)
             };
             return lengthTargetList;
+        }
+
+        /// <summary>
+        /// 数値判別判定入力値セットメソッド
+        /// </summary>
+        /// <remarks>未入力判定する項目を格納する</remarks>
+        /// <param name="request">入力値</param>
+        /// <returns>未入力判定する値を格納したlistを返却する</returns>
+        public (List<JudgeTargetList>, List<JudgeTargetList>) SetNumOrCharaCeckTarget(SCRN0002ViewModel request)
+        {
+            var numTargetList = new List<JudgeTargetList>
+            {
+                new JudgeTargetList(request.EmployeeID,ErrorMessageConstants.ID_MESSAGE),
+                new JudgeTargetList(request.AffiliationCd,ErrorMessageConstants.AF_MESSAGE),
+                new JudgeTargetList(request.PositionCd,ErrorMessageConstants.POSI_MESSAGE),
+                new JudgeTargetList(request.Gender.ToString(),ErrorMessageConstants.GENDER_MESSAGE),
+                new JudgeTargetList(request.BaseSalary,ErrorMessageConstants.BASE_SALARY_MESSAGE)
+            };
+
+            var charaTargetList = new List<JudgeTargetList>
+            {
+                new JudgeTargetList(request.EmployeeName,ErrorMessageConstants.NAME_MESSAGE),
+                new JudgeTargetList(request.BirthDay,ErrorMessageConstants.BIRTHDAY_MESSAGE),
+            };
+            return (numTargetList,charaTargetList);
+        }
+
+        /// <summary>
+        /// 数値判別単項目チェックを呼び出すメソッド
+        /// </summary>
+        /// <remarks>数値チェックとエラーメッセージ格納を行う</remarks>
+        /// <param name="numCheckTargetList">未入力チェック対象</param>
+        /// <returns>数値チェックの結果リストとエラーメッセージリストを返す</returns>
+        private List<DisplayViewErrMessage> EnteredValueNumOrCharaCheck(List<JudgeTargetList> numCheckTargetList,List<JudgeTargetList> charaCheckTargetList)
+        {
+            var errorMessageList = new List<DisplayViewErrMessage>();
+            var judgeResult = numCheckTargetList.Select(item => ValueJudge.numOrcharaJudge(item.EmployeeDate , true));
+            var numMessage = numCheckTargetList.Select(item => item.InputName).ToList();
+            var judgeResult2 = charaCheckTargetList.Select(item => ValueJudge.numOrcharaJudge(item.EmployeeDate , false));
+            var charaMessage = charaCheckTargetList.Select(item => item.InputName).ToList();
+            ErrorMessageConstants errorMessages = new ErrorMessageConstants();
+            int countNum = 0;
+            foreach (var item in judgeResult)
+            {
+                // 社員IDの入力値チェック
+                if (!item)
+                {
+                    errorMessageList.Add(
+                        new DisplayViewErrMessage()
+                        {
+                            MessageID = "COMMSG0001",
+                            DisplayForMessage = numMessage[countNum] + errorMessages.InstructionMessageList[2],
+                        });
+                }
+                countNum++;
+            }
+
+            countNum = 0;
+            foreach (var item in judgeResult2)
+            {
+                // 社員IDの入力値チェック
+                if (item)
+                {
+                    errorMessageList.Add(
+                        new DisplayViewErrMessage()
+                        {
+                            MessageID = "COMMSG0001",
+                            DisplayForMessage = charaMessage[countNum] + errorMessages.InstructionMessageList[3],
+                        });
+                }
+                countNum++;
+            }
+
+
+            return errorMessageList;
         }
 
         /// <summary>
@@ -184,7 +266,7 @@ namespace EmployeeManagement.Helper
         {
             var errorMessageList = new List<DisplayViewErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            var judgeResult = checkTargetList.Select(item => ValueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit));
+            var judgeResult = checkTargetList.Select(item => ValueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit ,item.MinJudgedigit));
 
             int countNum = 0;
             foreach (var item in judgeResult)
