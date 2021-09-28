@@ -44,10 +44,10 @@
         /// <summary>桁数定数</summary>  
         /// <summary>桁数定数</summary>
         /// <remarks>生年月日の最小許容桁数</remarks>
-        public const int BIRTH_DAY_MIN_DIGITS = 10;
+        public const int BIRTH_DAY_MIN_DIGITS = 9;
         /// <summary>桁数定数</summary>
         /// <remarks>生年月日の最大許容桁数</remarks>
-        public const int BIRTH_DAY_MAX_DIGITS = 9;
+        public const int BIRTH_DAY_MAX_DIGITS = 10;
         /// <summary>桁数定数</summary>
         /// <remarks>基本給料の最小許容桁数</remarks>
         public const int SALARY_MIN_DIGITS = 1;

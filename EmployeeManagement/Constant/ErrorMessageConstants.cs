@@ -40,11 +40,15 @@ namespace EmployeeManagement.Constants
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>登録済みメッセージ</remarks>
         public const string EmpIdDuplication = "既に登録済みの社員IDです。";
-
-
-        public const string NUM = "は数値で入力してください";
-
-        public const string CHARA = "は文字列で入力してください";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>数値判定メッセージ</remarks>
+        public const string NUMBER_MESSAGE = "は数値で入力してください";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>文字列判定メッセージ</remarks>
+        public const string CHARACTER_MESSAGE = "は文字列で入力してください";
+        /// <summary>エラーメッセージ用定数</summary>
+        /// <remarks>有効生年月日メッセージ</remarks>
+        public const string DATE_TIME_MESSAGE = "有効な生年月日を入力してください。";
         /// <summary>エラーメッセージ用定数</summary>
         /// <remarks>マスタエラーメッセージ</remarks>
         public const string MASTA_CORRELATION_MESSAGE = "マスタに存在しない";
@@ -75,8 +79,9 @@ namespace EmployeeManagement.Constants
             {
                 NULL_MESSAGE,
                 LENGTH_MESSAGE,
-                NUM,
-                CHARA
+                NUMBER_MESSAGE,
+                CHARACTER_MESSAGE,
+                DATE_TIME_MESSAGE
             };
 
             CorrelationErrorList = new List<string>

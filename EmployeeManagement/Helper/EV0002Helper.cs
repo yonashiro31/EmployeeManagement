@@ -29,6 +29,7 @@ namespace EmployeeManagement.Helper
         /// <summary>EV8003Logicのヘルパー</summary>
         /// <remarks>EV8003Logicのヘルパー</remarks>
         private readonly IEV8003Logic _ev8003Logic = null;
+
         /// <summary>
         /// EV0002Helperのコンストラクタ
         /// </summary>
@@ -81,22 +82,23 @@ namespace EmployeeManagement.Helper
             List<NullJudgeListModel> nullJudegeTargetList = SetNullCeckTarget(sCRN0002ViewModel);
             List<LengthJudgeListModel> lengthJudgeList = SetLengthCheckTarget(sCRN0002ViewModel);
             (var numberValueList, var characterValueList) = SetNumOrCharaCeckTarget(sCRN0002ViewModel);
-
+            
             // ドロップダウンリストセット
             (sCRN0002ViewModel.AffiliationList, sCRN0002ViewModel.PositionList) = SetDropDownList();
 
             // メソッドの戻り値であるエラーメッセージリストを結合する
             var nullErrorMessageList = EnteredValueNullCheck(nullJudegeTargetList).ToList();
             var lengthErrorList = EnteredValueLengthCheck(lengthJudgeList).ToList();
-            var numberErrorList = EnteredValueNumOrCharaCheck(numberValueList , characterValueList).ToList();
-
+            var numberErrorList = EnteredValueNumOrCharaCheck(numberValueList, characterValueList).ToList();
+            var dateTimeErrorList = EnteredDateTimeCheck(sCRN0002ViewModel.BirthDay).ToList();
             var errorMessageList = nullErrorMessageList.Concat(lengthErrorList).ToList();
+
             errorMessageList = errorMessageList.Concat(numberErrorList).ToList();
             if (sCRN0002ViewModel.EmployeeID != null)
             {
                 errorMessageList = errorMessageList.Concat(CorrelationCheck(sCRN0002ViewModel)).ToList();
             }
-
+            errorMessageList = errorMessageList.Concat(dateTimeErrorList).ToList();
             if (!errorMessageList.Any())
             {
                 _ev8001Logic.Register(SetEntryInfo(sCRN0002ViewModel));
@@ -166,15 +168,16 @@ namespace EmployeeManagement.Helper
                 new JudgeTargetList(request.AffiliationCd,ErrorMessageConstants.AF_MESSAGE),
                 new JudgeTargetList(request.PositionCd,ErrorMessageConstants.POSI_MESSAGE),
                 new JudgeTargetList(request.Gender.ToString(),ErrorMessageConstants.GENDER_MESSAGE),
+                new JudgeTargetList(request.BirthDay,ErrorMessageConstants.BIRTHDAY_MESSAGE),
                 new JudgeTargetList(request.BaseSalary,ErrorMessageConstants.BASE_SALARY_MESSAGE)
             };
 
             var charaTargetList = new List<JudgeTargetList>
             {
-                new JudgeTargetList(request.EmployeeName,ErrorMessageConstants.NAME_MESSAGE),
-                new JudgeTargetList(request.BirthDay,ErrorMessageConstants.BIRTHDAY_MESSAGE),
+                new JudgeTargetList(request.EmployeeName,ErrorMessageConstants.NAME_MESSAGE)             
             };
-            return (numTargetList,charaTargetList);
+
+            return (numTargetList, charaTargetList);
         }
 
         /// <summary>
@@ -183,12 +186,12 @@ namespace EmployeeManagement.Helper
         /// <remarks>数値チェックとエラーメッセージ格納を行う</remarks>
         /// <param name="numCheckTargetList">未入力チェック対象</param>
         /// <returns>数値チェックの結果リストとエラーメッセージリストを返す</returns>
-        private List<DisplayViewErrMessage> EnteredValueNumOrCharaCheck(List<JudgeTargetList> numCheckTargetList,List<JudgeTargetList> charaCheckTargetList)
+        private List<DisplayViewErrMessage> EnteredValueNumOrCharaCheck(List<JudgeTargetList> numCheckTargetList, List<JudgeTargetList> charaCheckTargetList)
         {
             var errorMessageList = new List<DisplayViewErrMessage>();
-            var judgeResult = numCheckTargetList.Select(item => ValueJudge.numOrcharaJudge(item.EmployeeDate , true));
+            var judgeResult = numCheckTargetList.Select(item => ValueJudge.NumOrCharaJudge(item.EmployeeDate, true));
             var numMessage = numCheckTargetList.Select(item => item.InputName).ToList();
-            var judgeResult2 = charaCheckTargetList.Select(item => ValueJudge.numOrcharaJudge(item.EmployeeDate , false));
+            var judgeResult2 = charaCheckTargetList.Select(item => ValueJudge.NumOrCharaJudge(item.EmployeeDate, false));
             var charaMessage = charaCheckTargetList.Select(item => item.InputName).ToList();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
             int countNum = 0;
@@ -222,7 +225,6 @@ namespace EmployeeManagement.Helper
                 }
                 countNum++;
             }
-
 
             return errorMessageList;
         }
@@ -266,7 +268,7 @@ namespace EmployeeManagement.Helper
         {
             var errorMessageList = new List<DisplayViewErrMessage>();
             ErrorMessageConstants errorMessages = new ErrorMessageConstants();
-            var judgeResult = checkTargetList.Select(item => ValueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit ,item.MinJudgedigit));
+            var judgeResult = checkTargetList.Select(item => ValueJudge.InputValueLengthJudge(item.EmployeeDate, item.MaxJudgedigit, item.MinJudgedigit));
 
             int countNum = 0;
             foreach (var item in judgeResult)
@@ -300,7 +302,7 @@ namespace EmployeeManagement.Helper
             var sqlList = _ev8001Logic.FindByPrimaryKey(sCRN0002ViewModel.EmployeeID);
             var affiliationValues = _ev8002Logic.FindAll();
             var positionValues = _ev8003Logic.FindAll();
-            if (CorrelationJudge.IdCorrelationIdJudge(sqlList))
+            if (!CorrelationJudge.IdCorrelationIdJudge(sqlList))
             {
                 errorMessageList.Add(
                       new DisplayViewErrMessage()
@@ -308,25 +310,49 @@ namespace EmployeeManagement.Helper
                           MessageID = "COMMSG0001",
                           DisplayForMessage = errorMessages.CorrelationErrorList[0]
                       });
+            }
+            if (!CorrelationJudge.AfCorrelationJudge(affiliationValues, sCRN0002ViewModel.AffiliationCd))
+            {
+                errorMessageList.Add(
+                        new DisplayViewErrMessage()
+                        {
+                            MessageID = "DBMST00001",
+                            DisplayForMessage = "部署" + errorMessages.CorrelationErrorList[1] + affiliationValues[0].AffiliationCd + errorMessages.CorrelationErrorList[2]
+                        });
+            }
+            if (!CorrelationJudge.PosiCorrelationJudge(positionValues, sCRN0002ViewModel.PositionCd))
+            {
+                errorMessageList.Add(
+                        new DisplayViewErrMessage()
+                        {
+                            MessageID = "DBMST00001",
+                            DisplayForMessage = "役職" + errorMessages.CorrelationErrorList[1] + positionValues[0].PositionCd + errorMessages.CorrelationErrorList[2]
+                        });
+            }
 
-                if (!CorrelationJudge.AfCorrelationJudge(affiliationValues, sCRN0002ViewModel.AffiliationCd))
-                {
-                    errorMessageList.Add(
-                            new DisplayViewErrMessage()
-                            {
-                                MessageID = "DBMST00001",
-                                DisplayForMessage = "部署" + errorMessages.CorrelationErrorList[1] + affiliationValues[0].AffiliationCd + errorMessages.CorrelationErrorList[2]
-                            });
-                }
-                if (!CorrelationJudge.PosiCorrelationJudge(positionValues, sCRN0002ViewModel.PositionCd))
-                {
-                    errorMessageList.Add(
-                            new DisplayViewErrMessage()
-                            {
-                                MessageID = "DBMST00001",
-                                DisplayForMessage = "役職" + errorMessages.CorrelationErrorList[1] + positionValues[0].PositionCd + errorMessages.CorrelationErrorList[2]
-                            });
-                }
+            return errorMessageList;
+        }
+
+        /// <summary>
+        /// 生年月日のチェックを行うメソッドを呼び出す
+        /// </summary>
+        /// <remarks>
+        /// 存在する生年月日か確認を行う
+        /// </remarks>
+        /// <param name="inputBirthDay">入力値</param>
+        /// <returns>エラーメッセージを返却する</returns>
+        private List<DisplayViewErrMessage> EnteredDateTimeCheck(string inputBirthDay)
+        {
+            ErrorMessageConstants errorMessages = new ErrorMessageConstants();
+            var errorMessageList = new List<DisplayViewErrMessage>();
+            if (!ValueJudge.DateTimeJudge(inputBirthDay))
+            {
+                errorMessageList.Add(
+                     new DisplayViewErrMessage()
+                     {
+                         MessageID = "DBMST00001",
+                         DisplayForMessage = errorMessages.InstructionMessageList[4]
+                     });
             }
             return errorMessageList;
         }

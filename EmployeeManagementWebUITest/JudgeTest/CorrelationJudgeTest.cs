@@ -17,10 +17,10 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <summary>
         /// 社員ID相関チェックメソッドテスト
         /// </summary>
-        /// <remarks>結果True時</remarks>
+        /// <remarks>結果False時</remarks>
         /// <param name="inputEmpId">社員ID</param>
         [TestCase("12345678")]
-        public void IdCorrelationIdJudgeTrueTest(string inputEmpId)
+        public void IdCorrelationIdJudgeFalseTest(string inputEmpId)
         {
             var List = new List<EmployeeInfoDAO>
             {
@@ -29,15 +29,15 @@ namespace EmployeeManagementWebUITest.JudgeTest
 
 　          var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
           
-            Assert.AreEqual(true, testResult);
+            Assert.AreEqual(false, testResult);
         }
 
         /// <summary>
         /// 社員ID相関チェックメソッドテスト
         /// </summary>
-        /// <remarks>結果False時</remarks>
+        /// <remarks>結果True時</remarks>
         [Test]
-        public void IdCorrelationIdJudgeFalseTest()
+        public void IdCorrelationIdJudgeTrueTest()
         {
             var List = new List<EmployeeInfoDAO>
             {
@@ -46,7 +46,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
 
             var testResult = CorrelationJudge.IdCorrelationIdJudge(List);
            
-            Assert.AreEqual(false, testResult);
+            Assert.AreEqual(true, testResult);
         }
 
         /// <summary>

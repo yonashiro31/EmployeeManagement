@@ -46,11 +46,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <remarks>入力値が桁数以内の場合</remarks>
         /// <param name="inputValue">入力値</param>
         /// <param name="maxDigit">最大桁数</param>
-        [TestCase("test", 4)]
-        [TestCase("", 0)]
-        public void InputValueLengthJudgeTrueTest(string inputValue, int maxDigit)
+        /// <param name="minDigit">最小桁数</param>
+        [TestCase("test", 4 , 4)]
+        [TestCase("", 0 , 0)]
+        public void InputValueLengthJudgeTrueTest(string inputValue, int maxDigit , int minDigit)
         {
-            var testResult = ValueJudge.InputValueLengthJudge(inputValue, maxDigit);
+            var testResult = ValueJudge.InputValueLengthJudge(inputValue, maxDigit , minDigit);
 
             Assert.True(testResult);
         }
@@ -61,11 +62,12 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <remarks>結果False時</remarks>
         /// <param name="inputValue">入力値</param>
         /// <param name="maxDigit">最大桁数</param>
-        [TestCase("test1", 4)]
-        
-        public void InputValueLengthJudgeFalseTest(string inputValue, int maxDigit)
+        /// <param name="minDigit">最小桁数</param>
+        [TestCase("test1", 4 , 1)]
+        [TestCase("test", 4, 5)]
+        public void InputValueLengthJudgeFalseTest(string inputValue, int maxDigit , int minDigit)
         {
-            var testResult = ValueJudge.InputValueLengthJudge(inputValue, maxDigit);
+            var testResult = ValueJudge.InputValueLengthJudge(inputValue, maxDigit , minDigit);
 
             Assert.False(testResult);
         }
@@ -114,7 +116,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         /// <remarks>生年月日が入力された場合</remarks>
         /// <param name="min">入力値の最小許容桁数</param>
         /// <param name="max">入力値の最大許容桁数</param>
-        [TestCase(9,9)]
+        [TestCase(9,10)]
         public void ValueCheckBirthTest(int min, int max)
         {
             var testMessageList = new List<string>
@@ -236,6 +238,60 @@ namespace EmployeeManagementWebUITest.JudgeTest
             var testResult = ValueJudge.AffiliationNmCheck(affiliationDAOMock.TestAffiliationDAO);
 
             Assert.AreEqual("ManagementNm", testResult);
+        }
+
+        /// <summary>
+        /// 数値化文字列か判別するメソッドテストクラス（True時）
+        /// </summary>
+        /// <remarks>数値を想定する場合第二引数にtrue文字列を想定する場合はfalseを入力する</remarks>
+        /// <param name="targetValue">入力値</param>
+        /// <param name="nullPatternResult">未入力時の返却値</param>
+        [TestCase("2000/01/01" , true)]
+        [TestCase("10.00", true)]
+        [TestCase("1", true)]
+        [TestCase("", true)]
+        public void NumOrCharaTrueJudge(string targetValue, bool nullPatternResult)
+        {
+            var testResult = ValueJudge.NumOrCharaJudge(targetValue , nullPatternResult);
+            Assert.IsTrue(testResult);
+        }
+
+        /// <summary>
+        /// 数値化文字列か判別するメソッドテストクラス（False時）
+        /// </summary>
+        /// <remarks>数値を想定する場合第二引数にtrue文字列を想定する場合はfalseを入力する</remarks>
+        /// <param name="targetValue">入力値</param>
+        /// <param name="nullPatternResult">未入力時の返却値</param>
+        [TestCase("", false)]
+        [TestCase("テスト", false)]
+        public void NumOrCharaFalseJudge(string targetValue, bool nullPatternResult)
+        {
+            var testResult = ValueJudge.NumOrCharaJudge(targetValue, nullPatternResult);
+            Assert.IsFalse(testResult);
+        }
+
+        /// <summary>
+        /// 生年月日が存在する値か判定するメソッドテストクラス（True時）
+        /// </summary>
+        /// <remarks>存在する場合Trueを返す</remarks>
+        [TestCase("2000/01/01")]
+        [TestCase("")]
+        public void DateTimeJudgeTrueTest(string targetDateTime)
+        {
+            var testResult = ValueJudge.DateTimeJudge(targetDateTime);
+            Assert.IsTrue(testResult);
+        }
+
+        /// <summary>
+        /// 生年月日が存在する値か判定するメソッドテストクラス（False時）
+        /// </summary>
+        /// <remarks>存在する場合Falseを返す</remarks>
+        [Test]
+        public void DateTimeJudgeFalseTest()
+        {
+            var targetDateTime = "9999/99/99";
+            var testResult = ValueJudge.DateTimeJudge(targetDateTime);
+            Assert.IsFalse(testResult);
         }
     }
 }

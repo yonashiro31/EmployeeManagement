@@ -18,7 +18,11 @@ namespace EmployeeManagement.Judge
         /// <returns>真偽値を返す</returns>
         public static bool IdCorrelationIdJudge(List<EmployeeInfoDAO> employeeInfoList)
         {
-            return employeeInfoList.Any(item => !string.IsNullOrEmpty(item.EmployeeID));
+            if(employeeInfoList.Any(item => int.TryParse(item.EmployeeID, out _)))
+            {
+                return employeeInfoList.Any(item => string.IsNullOrEmpty(item.EmployeeID));
+            }
+            return true;
         }
         /// <summary>
         /// 部署コードチェック

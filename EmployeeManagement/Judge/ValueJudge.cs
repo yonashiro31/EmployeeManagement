@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.Constant;
 using EmployeeManagement.Constants;
 using EmployeeManagement.LogicDTO;
+using System;
 using System.Collections.Generic;
 
 namespace EmployeeManagement.Judge
@@ -121,14 +122,37 @@ namespace EmployeeManagement.Judge
         /// <remarks>入力された値が数値化文字列か判別する</remarks>
         /// <param name="targetValue">入力値</param>
         /// <returns>真偽値</returns>
-        public static bool numOrcharaJudge(string targetValue , bool nullPatternResult)
+        public static bool NumOrCharaJudge(string targetValue , bool nullPatternResult)
         {
             if(string.IsNullOrEmpty(targetValue))
             {
                 return nullPatternResult;
             }
-            int i = 0;
-            return int.TryParse(targetValue , out i);
+
+            char[] removeChars = new char[] {'.','/'};
+            if (targetValue.Contains(".") || targetValue.Contains("/"))
+            {
+                foreach (char c in removeChars)
+                {
+                    targetValue = targetValue.Replace(c.ToString(), "");
+                }
+            }
+            return int.TryParse(targetValue , out _);
+        }
+
+        /// <summary>
+        /// 日時が存在するか判定するメソッド
+        /// </summary>
+        /// <remarks>生年月日の判定を行う</remarks>
+        /// <param name="targetTime">入力された生年月日</param>
+        /// <returns>真偽値を返す</returns>
+        public static bool DateTimeJudge(string targetTime)
+        {
+            if (string.IsNullOrEmpty(targetTime))
+            {
+                return true;
+            }
+            return DateTime.TryParse(targetTime, out _);
         }
     }
 }
