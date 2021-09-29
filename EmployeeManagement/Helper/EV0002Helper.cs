@@ -155,11 +155,11 @@ namespace EmployeeManagement.Helper
         }
 
         /// <summary>
-        /// 数値判別判定入力値セットメソッド
+        /// 数値文字列判別判定入力値セットメソッド
         /// </summary>
-        /// <remarks>未入力判定する項目を格納する</remarks>
+        /// <remarks>数値か文字列か判定する項目を格納する</remarks>
         /// <param name="request">入力値</param>
-        /// <returns>未入力判定する値を格納したlistを返却する</returns>
+        /// <returns>数値か文字列か判定する値を格納したlistを返却する</returns>
         public (List<JudgeTargetList>, List<JudgeTargetList>) SetNumOrCharaCeckTarget(SCRN0002ViewModel request)
         {
             var numTargetList = new List<JudgeTargetList>
@@ -181,7 +181,7 @@ namespace EmployeeManagement.Helper
         }
 
         /// <summary>
-        /// 数値判別単項目チェックを呼び出すメソッド
+        /// 数値文字列判別単項目チェックを呼び出すメソッド
         /// </summary>
         /// <remarks>数値チェックとエラーメッセージ格納を行う</remarks>
         /// <param name="numCheckTargetList">未入力チェック対象</param>

@@ -119,7 +119,7 @@ namespace EmployeeManagement.Judge
         /// <summary>
         /// 値判別メソッド
         /// </summary>
-        /// <remarks>入力された値が数値化文字列か判別する</remarks>
+        /// <remarks>入力された値が数値か文字列か判別する</remarks>
         /// <param name="targetValue">入力値</param>
         /// <returns>真偽値</returns>
         public static bool NumOrCharaJudge(string targetValue , bool nullPatternResult)

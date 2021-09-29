@@ -241,7 +241,7 @@ namespace EmployeeManagementWebUITest.JudgeTest
         }
 
         /// <summary>
-        /// 数値化文字列か判別するメソッドテストクラス（True時）
+        /// 数値か文字列か判別するメソッドテストクラス（True時）
         /// </summary>
         /// <remarks>数値を想定する場合第二引数にtrue文字列を想定する場合はfalseを入力する</remarks>
         /// <param name="targetValue">入力値</param>
